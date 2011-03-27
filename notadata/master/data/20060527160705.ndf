@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<id>20060527160705</id>
+		<date>2006/05/27 16:09:58</date>
+		<update>2006/09/08 04:06:54</update>
+		<version>2.0</version>
+		<title>%title%（カード）</title>
+		<author>admin</author>
+		<width>600</width>
+		<height>424</height>
+	</head>
+	<body>
+		<item id="200508241339040">
+			<tool>TEXT</tool>
+			<date>2005/08/24 13:39:04</date>
+			<update>2006/09/08 04:06:54</update>
+			<author>admin</author>
+			<x>47</x>
+			<y>43</y>
+			<width>524</width>
+			<height>45</height>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0">%title%（カード）</FONT></P>]]></text>
+		</item>
+	</body>
+</nota>

@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+	<!--NOTA META INFO-->
+	<title><!--NOTA TITLE--></title>
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.cgi">
+	<link href="styles/main.css" rel="stylesheet" media="screen">
+	<script language="javascript" src="nota_func.js"></script>
+	<script language="JavaScript">
+	<!--
+	function main(){
+		var editmode = "<!--NOTA EDITMODE-->";
+		if (editmode == "true"){
+			setEditMode("true","<!--NOTA USER-->","<!--NOTA POWER-->");
+		}
+	}
+	function setLang(lang) {
+		var expires = new Date();
+		expires.setTime(expires.getTime()+(30*24*60*60*1000));
+		document.cookie = "lang=" + lang + ";" + "expires=" + expires.toGMTString();
+	 	location.reload(true);
+	}
+	var current_tab = "list";
+	function clickTab(tabname,select,refresh){
+		//タブ切り替え
+		//デフォルトではselect = true（タブを切り替える）
+		//refresh = false（強制再読込）
+		//TabのURL
+		var url;
+		if (tabname == "list"){//一覧タブ
+			url = "<!--NOTA LIST-->";
+		}else if (tabname == "insert"){//貼るタブ
+			url = "<!--NOTA INSERT-->";
+		}else if (tabname == "option"){//管理タブ
+			url = "<!--NOTA OPTION-->";
+		}
+		//読み込み
+		if ((tabname != current_tab && select == true) || 
+			(tabname == current_tab && refresh == true))
+		{
+			window.list.location.href  = url;
+		}
+		//Tabの選択
+		if (tabname != current_tab && select == true){
+			selectTab(tabname);
+			current_tab = tabname;
+		}
+	}
+	function selectTab(tabname){
+		//Tabの選択状態を変える
+		var listTab   = document.getElementById("listTab");
+		var insertTab = document.getElementById("insertTab");
+		var optionTab  = document.getElementById("optionTab");
+		if (tabname == "list"){
+			//一覧タブ
+			listTab.className   = "fgTab";
+			insertTab.className = "bgTab";
+			optionTab.className  = "bgTab";
+		}else if (tabname == "insert"){
+			//貼るタブ
+			listTab.className   = "bgTab";
+			insertTab.className = "fgTab";
+			optionTab.className  = "bgTab";
+		}else if (tabname == "option"){
+			//管理タブ
+			listTab.className   = "bgTab";
+			insertTab.className = "bgTab";
+			optionTab.className  = "fgTab";
+		}
+	}
+	
+	function setEditMode(edit,user,power){
+		var listTab   = document.getElementById("listTab");
+		var insertTab = document.getElementById("insertTab");
+		var optionTab  = document.getElementById("optionTab");
+		if (edit == "true"){
+			//編集モード
+			listTab.style.display   = "block";
+			insertTab.style.display = "block";
+			optionTab.style.display  = "block";
+			
+			if (power == "admin"){
+				power = "Admin";
+			}else if (power == "member"){
+				power = "Member";
+			}else if (power == "guest"){
+				power = "Guest";
+			}
+			
+			//ログイン者のID
+			setNodeText("userinfo",user + "(" + power +") is Online");
+			
+		}else{
+			//閲覧モード
+			listTab.style.display   = "block";
+			insertTab.style.display = "none";
+			optionTab.style.display  = "none";
+			
+			//クッキーを上書き
+		 	document.cookie = "editmode=false&";
+			
+			//一覧タブに戻す
+			clickTab('list',true,false);
+
+			//ログイン者のID
+			setNodeText("userinfo","Welcome, Guest");
+		}
+	}
+	function onChangeFindstr(){
+		//検索ボックスのテキストが変更された
+		if (document.getElementById("findstr").value == ""){
+			//空白になった
+			document.getElementById("searchform").submit();
+			onSubmitFind();
+		}
+	}
+	function onSubmitFind(){
+		//検索フォームが送信された
+		clickTab('list',true,true); //一覧タブをアクティブに
+	}
+	function getNodeText(id)
+	{
+		// Attempt to retrieve it from the store
+		var element = document.getElementById(id);
+		if(element != null && element.firstChild != null)
+			return(element.firstChild.nodeValue);
+		else
+			return(null);
+	}
+	function setNodeText(id,text)
+	{
+		// Attempt to retrieve it from the store
+		var element = document.getElementById(id);
+		if(element != null){
+			if (element.firstChild != null){
+				element.removeChild(element.firstChild);
+			}
+			element.appendChild(document.createTextNode(text));
+		}
+	}
+	
+	// -->
+	</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="overflow:hidden" scroll="no" onLoad="main();">
+
+	<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	<td width="100%" valign="top">
+		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+			 codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+			 width="100%" height="100%" align="">
+			<param name="movie" value="<!--NOTA FLASH SRC-->">
+			<param name="FlashVars" value="<!--NOTA FLASHVARS-->">
+			<param name="quality" value="high"> 
+			<param name="scale" value="noscale">
+			<param name="menu" value="false">
+			<param name="wmode" value="">
+			<param name="bgcolor" value="#FFFFFF">
+			<param name="salign" value="LT">
+			<embed src="<!--NOTA FLASH SRC-->" FlashVars="<!--NOTA FLASHVARS-->"
+			 quality="high" bgcolor="#FFFFFF" wmode="" scale="noscale" salign="LT" menu="false"
+			 width="100%" height="100%" align="" type="application/x-shockwave-flash"
+			 pluginspage="http://www.macromedia.com/go/getflashplayer">
+			</embed>
+	  </object>
+	</td>
+	<td width="200">
+
+		<table width="200" height="100%"  border="0" cellpadding="0" cellspacing="0">
+		<tr height="50" valign="top">
+		<td>
+		<!--NOTA LOGO-->
+		<div class="header">
+		<div class="logoarea">
+			<a href="./" title="Home">
+			<img src="res/nota.png" border="0" alt="Home"></a>
+		</div>
+		<div id="userinfo">Welcome, Guest</div>
+		<a href="javascript:;" title="Share Nota" class="graybtn" onClick="openPopup(event,'<!--NOTA GOTO MAIL-->','','550','500')">Share Nota</a>
+		<a href="<!--NOTA GOTO HELP-->" title="Help" class="graybtn" target="_blank">Help</a>
+		<a href="<!--NOTA GOTO SCREEN-->"  title="FullScreen" class="graybtn">FullScreen</a>
+		<!-- <a href="<!--NOTA GOTO CONTACT-->"  title="Feedback" class="graybtn" target="_blank">Feedback</a>
+		-->
+		<a href="<!--NOTA GOTO HTML-->" title="Show HTML Version" class="greenbtn">HTML</a>
+		<a href="<!--NOTA GOTO RSS-->" title="Show RSS Feed" class="orangebtn">RSS</a>
+		<a href="javascript:setLang('ja');"  title="Japanese" class="graybtn">Japanese</a>
+		<iframe src="" name="link" id="link" width="5" height="5" frameborder="0" scrolling="no">
+		</iframe>
+		<form action="sidebar.cgi" method="post" enctype="application/x-www-form-urlencoded" name="searchform" target="list" id="searchform" onSubmit="onSubmitFind();">
+			<input name="page" type="hidden" id="page" />
+			<input name="findstr" type="text" id="findstr" onKeyUp="onChangeFindstr();"/>
+			<input type="submit" name="Submit" value="Search" />
+		</form>
+	
+		</div>
+		<div class="tabBox">
+		
+		<a href="javascript:;" onClick="clickTab('list',true,false);" id="listTab" class="fgTab">List&nbsp;</a>
+		<a href="javascript:;" onClick="clickTab('insert',true,false);" id="insertTab" class="bgTab">Insert&nbsp;</a>
+		<a href="javascript:;" onClick="clickTab('option',true,false);" id="optionTab" class="bgTab">Option&nbsp;</a>
+		</div>	
+		</td>
+		</tr>
+		<tr valign="top">
+		<td>
+		<!--SIDE LIST-->
+		<iframe src="<!--NOTA LIST-->" id="list" name="list" width="200" height="100%" frameborder="0">
+		</iframe>
+		</td>
+		</tr>
+		</table>
+	</td>
+	</tr>
+	</table>
+	<div class="embeddedtext">
+	<!--EMBEDDED TEXT-->
+	</div>
+</body>
+</html>

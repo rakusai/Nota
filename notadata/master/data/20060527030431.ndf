@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<date>2006/05/27 03:04:32</date>
+		<update>2006/09/08 05:30:05</update>
+		<author>admin</author>
+		<title>便せん</title>
+		<width>800</width>
+		<height>1131</height>
+		<version>2.0</version>
+		<id>20060527030431</id>
+	</head>
+	<body>
+		<item id="1148666701656">
+			<tool>FILE</tool>
+			<y>0</y>
+			<edit>locked</edit>
+			<fname>bluesky.swf</fname>
+			<date>2006/05/27 03:05:02</date>
+			<update>2006/05/27 03:05:07</update>
+			<height>1131</height>
+			<x>0</x>
+			<width>800</width>
+			<rotation>0</rotation>
+			<author>admin</author>
+			<shape></shape>
+			<transparent>0</transparent>
+			<scale>100:100</scale>
+		</item>
+		<item id="1148666715562">
+			<rotation>0</rotation>
+			<y>1017</y>
+			<tool>FILE</tool>
+			<height>79</height>
+			<width>71</width>
+			<date>2006/05/27 03:05:16</date>
+			<update>2006/05/27 03:05:21</update>
+			<fname>yacht.swf</fname>
+			<shape></shape>
+			<transparent>0</transparent>
+			<x>654</x>
+			<author>admin</author>
+			<scale>100:100</scale>
+		</item>
+		<item id="1148666726468">
+			<fname>dolphin.swf</fname>
+			<transparent>0</transparent>
+			<width>161</width>
+			<rotation>0</rotation>
+			<height>65</height>
+			<author>admin</author>
+			<tool>FILE</tool>
+			<x>87</x>
+			<y>1020</y>
+			<date>2006/05/27 03:05:27</date>
+			<update>2006/05/27 03:06:17</update>
+			<shape></shape>
+			<scale>100:100</scale>
+		</item>
+		<item id="1148666737390">
+			<tool>FILE</tool>
+			<author>admin</author>
+			<shape></shape>
+			<y>30</y>
+			<date>2006/05/27 03:05:38</date>
+			<update>2006/05/27 03:09:34</update>
+			<fname>seagull.swf</fname>
+			<transparent>0</transparent>
+			<width>193</width>
+			<rotation>0</rotation>
+			<height>85</height>
+			<x>80</x>
+			<scale>100:100</scale>
+		</item>
+		<item id="1148666793218">
+			<width>643</width>
+			<tool>TEXT</tool>
+			<height>363</height>
+			<x>77</x>
+			<rotation>0</rotation>
+			<author>admin</author>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<date>2006/05/27 03:06:33</date>
+			<update>2006/09/08 05:30:05</update>
+			<y>89</y>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="18" COLOR="#000000" LETTERSPACING="0" KERNING="0">洛西 能太 様<FONT SIZE="16"></FONT></FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□</FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">%today%   %author%</FONT></P>]]></text>
+		</item>
+		<item id="200605270304320">
+			<x>17</x>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<rotation>0</rotation>
+			<author>admin</author>
+			<y>19</y>
+			<date>2006/05/27 03:06:43</date>
+			<update>2006/05/27 03:37:33</update>
+			<width>110</width>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="12" COLOR="#FFFFFF" LETTERSPACING="0" KERNING="0">便せん</FONT></P>]]></text>
+			<tool>TEXT</tool>
+			<height>21</height>
+		</item>
+		<item id="1148666826609">
+			<author>admin</author>
+			<y>909</y>
+			<rotation>0</rotation>
+			<x>599</x>
+			<tool>TEXT</tool>
+			<width>130</width>
+			<date>2006/05/27 03:07:06</date>
+			<update>2006/05/27 03:07:15</update>
+			<height>46</height>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">2006年8月8日</FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">農田 書子</FONT></P>]]></text>
+		</item>
+	</body>
+</nota>

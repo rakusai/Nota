@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<id>20060527160214</id>
+		<date>2006/05/27 16:05:07</date>
+		<update>2006/09/08 05:29:40</update>
+		<version>2.0</version>
+		<title>プレゼンテーション</title>
+		<author>admin</author>
+		<width>800</width>
+		<height>566</height>
+	</head>
+	<body>
+		<item id="200508241339040">
+			<tool>TEXT</tool>
+			<date>2005/08/24 13:39:04</date>
+			<update>2006/08/22 05:50:28</update>
+			<author>admin</author>
+			<x>47</x>
+			<y>43</y>
+			<width>647</width>
+			<height>121</height>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="48" COLOR="#000000" LETTERSPACING="0" KERNING="0">プレゼンテーション<FONT SIZE="36"></FONT></FONT></P>]]></text>
+		</item>
+		<item id="1148627095218">
+			<y>0</y>
+			<date>2006/05/27 16:05:33</date>
+			<update>2006/08/22 05:56:15</update>
+			<bgcolor>0x116784</bgcolor>
+			<shape>rectangle</shape>
+			<tool>SHAPE</tool>
+			<width>800</width>
+			<author>admin</author>
+			<x>0</x>
+			<rotation>0</rotation>
+			<height>29</height>
+		</item>
+		<item id="1148627082609">
+			<author>admin</author>
+			<rotation>0</rotation>
+			<shape>rectangle</shape>
+			<height>88</height>
+			<y>29</y>
+			<x>1</x>
+			<tool>SHAPE</tool>
+			<bgcolor>0xd8fcd8</bgcolor>
+			<date>2006/05/27 16:05:34</date>
+			<update>2006/08/22 05:56:18</update>
+			<width>799</width>
+		</item>
+		<item id="1148670289843">
+			<date>2006/05/27 16:05:36</date>
+			<update>2006/08/22 05:57:40</update>
+			<y>141</y>
+			<width>621</width>
+			<author>admin</author>
+			<height>202</height>
+			<rotation>0</rotation>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<tool>TEXT</tool>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□</FONT></P><P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□</FONT></P><P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+			<x>31</x>
+		</item>
+		<item id="1157660675687">
+			<tool>TEXT</tool>
+			<height>86</height>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0">%today%</FONT></P><P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0">%author%</FONT></P>]]></text>
+			<rotation>0</rotation>
+			<date>2006/09/08 05:24:36</date>
+			<update>2006/09/08 05:29:40</update>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<author>admin</author>
+			<x>31</x>
+			<width>300</width>
+			<y>402</y>
+		</item>
+	</body>
+</nota>

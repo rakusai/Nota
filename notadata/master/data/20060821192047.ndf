@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<date>2006/08/21 19:20:47</date>
+		<update>2006/08/21 19:30:03</update>
+		<author>admin</author>
+		<title>すごろく</title>
+		<width>800</width>
+		<height>566</height>
+		<version>2.0</version>
+		<id>20060821192047</id>
+		<bgcolor>0xd0f79d</bgcolor>
+	</head>
+	<body>
+		<item id="1156155665687">
+			<x>5</x>
+			<shape></shape>
+			<date>2006/08/21 19:21:06</date>
+			<update>2006/08/21 19:22:17</update>
+			<y>2</y>
+			<tool>FILE</tool>
+			<transparent>0</transparent>
+			<author>admin</author>
+			<rotation>0</rotation>
+			<width>790</width>
+			<height>557</height>
+			<fname>sugoroku.swf</fname>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155681046">
+			<author>admin</author>
+			<width>65</width>
+			<y>49</y>
+			<x>54</x>
+			<shape></shape>
+			<height>32</height>
+			<tool>FILE</tool>
+			<transparent>0</transparent>
+			<rotation>0</rotation>
+			<date>2006/08/21 19:21:21</date>
+			<update>2006/08/21 19:21:23</update>
+			<fname>dice.swf</fname>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155689812">
+			<x>367</x>
+			<author>admin</author>
+			<fname>crown.swf</fname>
+			<height>42</height>
+			<tool>FILE</tool>
+			<y>176</y>
+			<width>50</width>
+			<shape></shape>
+			<transparent>0</transparent>
+			<rotation>0</rotation>
+			<date>2006/08/21 19:21:30</date>
+			<update>2006/08/21 19:21:55</update>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155769546">
+			<rotation>0</rotation>
+			<x>243</x>
+			<tool>SHAPE</tool>
+			<height>50</height>
+			<shape>roundrect</shape>
+			<bgcolor>0xe01414</bgcolor>
+			<date>2006/08/21 19:22:49</date>
+			<update>2006/08/21 19:23:24</update>
+			<y>123</y>
+			<author>admin</author>
+			<width>310</width>
+		</item>
+		<item id="1156155773781">
+			<y>127</y>
+			<x>257</x>
+			<rotation>0</rotation>
+			<height>45</height>
+			<tool>TEXT</tool>
+			<date>2006/08/21 19:22:54</date>
+			<update>2006/08/21 19:23:24</update>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="36" COLOR="#FFFFFF" LETTERSPACING="0" KERNING="0">ＮＯＴＡすごろく</FONT></P>]]></text>
+			<width>300</width>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<author>admin</author>
+		</item>
+		<item id="1156155850609">
+			<width>81</width>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="14" COLOR="#FFFFFF" LETTERSPACING="0" KERNING="0">２つ進む</FONT></P>]]></text>
+			<author>admin</author>
+			<rotation>0</rotation>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<date>2006/08/21 19:24:10</date>
+			<update>2006/08/21 19:24:42</update>
+			<x>618</x>
+			<height>23</height>
+			<y>122</y>
+			<tool>TEXT</tool>
+		</item>
+		<item id="1156155860765">
+			<date>2006/08/21 19:24:21</date>
+			<update>2006/08/21 19:24:33</update>
+			<y>117</y>
+			<height>29</height>
+			<tool>SHAPE</tool>
+			<rotation>0</rotation>
+			<shape>circle</shape>
+			<bgcolor>0xe01414</bgcolor>
+			<width>98</width>
+			<author>admin</author>
+			<x>599</x>
+		</item>
+		<item id="1156155888157">
+			<x>668</x>
+			<tool>TEXT</tool>
+			<width>81</width>
+			<y>493</y>
+			<author>admin</author>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<height>42</height>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="14" COLOR="#FFFFFF" LETTERSPACING="0" KERNING="0">１回休み</FONT></P>]]></text>
+			<date>2006/08/21 19:24:48</date>
+			<update>2006/08/21 19:26:27</update>
+			<rotation>0</rotation>
+		</item>
+		<item id="1156155888140">
+			<y>488</y>
+			<bgcolor>0xe01414</bgcolor>
+			<shape>circle</shape>
+			<x>649</x>
+			<width>98</width>
+			<rotation>0</rotation>
+			<author>admin</author>
+			<date>2006/08/21 19:24:49</date>
+			<update>2006/08/21 19:26:27</update>
+			<tool>SHAPE</tool>
+			<height>29</height>
+		</item>
+		<item id="1156155903391">
+			<date>2006/08/21 19:25:04</date>
+			<update>2006/08/21 19:25:37</update>
+			<height>42</height>
+			<y>418</y>
+			<x>496</x>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<author>admin</author>
+			<tool>TEXT</tool>
+			<width>81</width>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="14" COLOR="#FFFFFF" LETTERSPACING="0" KERNING="0">２回休み</FONT></P>]]></text>
+		</item>
+		<item id="1156155903390">
+			<height>29</height>
+			<author>admin</author>
+			<bgcolor>0xe01414</bgcolor>
+			<rotation>0</rotation>
+			<y>413</y>
+			<width>98</width>
+			<tool>SHAPE</tool>
+			<date>2006/08/21 19:25:04</date>
+			<update>2006/08/21 19:25:06</update>
+			<shape>circle</shape>
+			<x>477</x>
+		</item>
+		<item id="1156155906437">
+			<author>admin</author>
+			<rotation>0</rotation>
+			<tool>SHAPE</tool>
+			<y>470</y>
+			<x>31</x>
+			<date>2006/08/21 19:25:07</date>
+			<update>2006/08/21 19:26:56</update>
+			<height>57</height>
+			<width>114</width>
+			<shape>circle</shape>
+			<bgcolor>0xe01414</bgcolor>
+		</item>
+		<item id="1156155906469">
+			<y>481</y>
+			<author>admin</author>
+			<rotation>0</rotation>
+			<height>61</height>
+			<width>104</width>
+			<date>2006/08/21 19:25:08</date>
+			<update>2006/08/21 19:26:50</update>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<x>37</x>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="14" COLOR="#FFFFFF" LETTERSPACING="0" KERNING="0">もう一度</FONT></P><P ALIGN="LEFT"><FONT SIZE="14" COLOR="#FFFFFF" LETTERSPACING="0" KERNING="0">さいころを振る</FONT></P>]]></text>
+			<tool>TEXT</tool>
+		</item>
+		<item id="1156155910734">
+			<tool>SHAPE</tool>
+			<date>2006/08/21 19:25:11</date>
+			<update>2006/08/21 19:26:36</update>
+			<y>309</y>
+			<width>103</width>
+			<author>admin</author>
+			<shape>circle</shape>
+			<height>53</height>
+			<rotation>0</rotation>
+			<x>155</x>
+			<bgcolor>0xe01414</bgcolor>
+		</item>
+		<item id="1156155910751">
+			<y>317</y>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="14" COLOR="#FFFFFF" LETTERSPACING="0" KERNING="0">ふりだしに戻る</FONT></P>]]></text>
+			<tool>TEXT</tool>
+			<x>169</x>
+			<date>2006/08/21 19:25:12</date>
+			<update>2006/08/21 19:26:45</update>
+			<author>admin</author>
+			<height>61</height>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<width>77</width>
+		</item>
+		<item id="1156156040968">
+			<y>42</y>
+			<tool>TEXT</tool>
+			<date>2006/08/21 19:27:21</date>
+			<update>2006/08/21 19:27:32</update>
+			<width>122</width>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<rotation>0</rotation>
+			<author>admin</author>
+			<height>67</height>
+			<x>591</x>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+		</item>
+		<item id="1156156055687">
+			<date>2006/08/21 19:27:36</date>
+			<update>2006/08/21 19:27:39</update>
+			<author>admin</author>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+			<width>122</width>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<y>424</y>
+			<height>67</height>
+			<tool>TEXT</tool>
+			<x>637</x>
+		</item>
+		<item id="1156156059734">
+			<rotation>0</rotation>
+			<y>347</y>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<author>admin</author>
+			<x>468</x>
+			<width>122</width>
+			<tool>TEXT</tool>
+			<height>67</height>
+			<date>2006/08/21 19:27:40</date>
+			<update>2006/08/21 19:27:42</update>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+		</item>
+		<item id="1156156063515">
+			<x>332</x>
+			<width>122</width>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<author>admin</author>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+			<rotation>0</rotation>
+			<height>67</height>
+			<date>2006/08/21 19:27:43</date>
+			<update>2006/08/21 19:27:46</update>
+			<y>254</y>
+			<tool>TEXT</tool>
+		</item>
+		<item id="1156156066953">
+			<y>260</y>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<height>67</height>
+			<tool>TEXT</tool>
+			<author>admin</author>
+			<x>147</x>
+			<rotation>0</rotation>
+			<date>2006/08/21 19:27:47</date>
+			<update>2006/08/21 19:28:01</update>
+			<width>122</width>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□</FONT></P>]]></text>
+		</item>
+		<item id="1156156070687">
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□</FONT></P>]]></text>
+			<tool>TEXT</tool>
+			<width>122</width>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<height>67</height>
+			<date>2006/08/21 19:27:51</date>
+			<update>2006/08/21 19:27:59</update>
+			<author>admin</author>
+			<rotation>0</rotation>
+			<y>429</y>
+			<x>30</x>
+		</item>
+		<item id="1156156095218">
+			<y>84</y>
+			<rotation>0</rotation>
+			<x>41</x>
+			<author>admin</author>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+			<height>67</height>
+			<date>2006/08/21 19:28:15</date>
+			<update>2006/08/21 19:28:22</update>
+			<width>122</width>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<tool>TEXT</tool>
+		</item>
+		<item id="200509397495214">
+			<tool>TEXT</tool>
+			<date>2005/08/24 13:39:04</date>
+			<update>2006/08/21 19:30:03</update>
+			<author>admin</author>
+			<x>61</x>
+			<y>10</y>
+			<width>100</width>
+			<height>23</height>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="14" COLOR="#000000" LETTERSPACING="0" KERNING="0">すごろく</FONT></P>]]></text>
+		</item>
+	</body>
+</nota>

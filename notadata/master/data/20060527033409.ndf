@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<date>2006/05/27 03:34:08</date>
+		<update>2006/09/08 05:33:14</update>
+		<author>admin</author>
+		<title>Happy Birtday!</title>
+		<width>500</width>
+		<height>338</height>
+		<version>2.0</version>
+		<id>20060527033408</id>
+		<bgcolor>0xFFFFD4</bgcolor>
+	</head>
+	<body>
+		<item id="1148668544937">
+			<rotation>0</rotation>
+			<date>2006/05/27 03:35:45</date>
+			<update>2006/09/08 05:33:14</update>
+			<tool>TEXT</tool>
+			<author>admin</author>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">Happy Birtday!</FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□</FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">%today%    %author%</FONT></P>]]></text>
+			<x>287</x>
+			<y>87</y>
+			<height>235</height>
+			<width>210</width>
+			<bgcolor>0xFFFFFF</bgcolor>
+		</item>
+		<item id="1148669236593">
+			<x>154</x>
+			<tool>FILE</tool>
+			<date>2006/05/27 03:47:17</date>
+			<update>2006/05/27 03:48:00</update>
+			<width>324</width>
+			<y>9</y>
+			<transparent>0</transparent>
+			<rotation>0</rotation>
+			<height>61</height>
+			<author>admin</author>
+			<fname>happybirthday.swf</fname>
+			<shape></shape>
+			<scale>100:100</scale>
+		</item>
+		<item id="1148669244515">
+			<shape></shape>
+			<transparent>0</transparent>
+			<fname>cracker.swf</fname>
+			<author>admin</author>
+			<date>2006/05/27 03:47:25</date>
+			<update>2006/05/27 03:47:49</update>
+			<tool>FILE</tool>
+			<height>325</height>
+			<y>7</y>
+			<width>282</width>
+			<rotation>0</rotation>
+			<x>6</x>
+			<scale>100:100</scale>
+		</item>
+		<item id="1148669255593">
+			<height>81</height>
+			<y>137</y>
+			<transparent>0</transparent>
+			<author>admin</author>
+			<width>110</width>
+			<shape></shape>
+			<date>2006/05/27 03:47:36</date>
+			<update>2006/05/27 03:47:51</update>
+			<tool>FILE</tool>
+			<fname>present.swf</fname>
+			<rotation>0</rotation>
+			<x>93</x>
+			<scale>100:100</scale>
+		</item>
+	</body>
+</nota>

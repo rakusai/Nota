@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<date>2005/08/24 13:39:04</date>
+		<update>2006/09/08 04:06:13</update>
+		<author>admin</author>
+		<title>%title%</title>
+		<width>800</width>
+		<height>1131</height>
+		<version>2.0</version>
+		<id>20050824133740</id>
+	</head>
+	<body>
+		<item id="200508241339040">
+			<tool>TEXT</tool>
+			<date>2005/08/24 13:39:04</date>
+			<update>2006/09/08 04:06:13</update>
+			<author>admin</author>
+			<x>47</x>
+			<y>43</y>
+			<width>524</width>
+			<height>45</height>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0">%title%（縦）</FONT></P>]]></text>
+		</item>
+	</body>
+</nota>

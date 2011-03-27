@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<date>2006/02/01 18:45:32</date>
+		<update>2006/08/22 05:04:08</update>
+		<author>survey</author>
+		<title>夏の北海道</title>
+		<width>800</width>
+		<height>1131</height>
+		<version>2.0</version>
+		<id>20060201184532</id>
+	</head>
+	<body>
+		<item id="200602011845320">
+			<tool>TEXT</tool>
+			<date>2006/02/01 18:45:32</date>
+			<update>2006/08/22 05:04:08</update>
+			<author>survey</author>
+			<x>20</x>
+			<y>41</y>
+			<width>458</width>
+			<height>81</height>
+			<bgcolor>0xffffff</bgcolor>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="72" COLOR="#118411" LETTERSPACING="0" KERNING="0">夏の北海道</FONT></P>]]></text>
+		</item>
+		<item id="1148627565125">
+			<tool>TEXT</tool>
+			<rotation>0</rotation>
+			<x>19</x>
+			<height>439</height>
+			<width>372</width>
+			<y>580</y>
+			<date>2006/05/26 16:12:45</date>
+			<update>2006/08/22 05:03:29</update>
+			<author>admin</author>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="30" COLOR="#000000" LETTERSPACING="0" KERNING="0">北の大地を彩る花々<FONT SIZE="16"></FONT></FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+			<bgcolor>0xFFFFFF</bgcolor>
+		</item>
+		<item id="1148642121453">
+			<x>400</x>
+			<height>565</height>
+			<bgcolor>0xd8fcd8</bgcolor>
+			<y>565</y>
+			<author>admin</author>
+			<width>400</width>
+			<rotation>0</rotation>
+			<tool>SHAPE</tool>
+			<date>2006/05/26 20:15:21</date>
+			<update>2006/08/22 05:02:55</update>
+			<shape>rectangle</shape>
+		</item>
+		<item id="1156156443406">
+			<shape></shape>
+			<height>565</height>
+			<y>0</y>
+			<date>2006/08/21 19:34:03</date>
+			<update>2006/08/22 05:02:08</update>
+			<rotation>0</rotation>
+			<transparent>0</transparent>
+			<tool>FILE</tool>
+			<author>admin</author>
+			<fname>fuji1.jpg</fname>
+			<width>800</width>
+			<x>0</x>
+		</item>
+		<item id="1156156593218">
+			<width>310</width>
+			<tool>FILE</tool>
+			<date>2006/08/21 19:36:33</date>
+			<update>2006/08/22 05:01:59</update>
+			<rotation>0</rotation>
+			<x>0</x>
+			<transparent>0</transparent>
+			<y>0</y>
+			<shape></shape>
+			<height>30</height>
+			<fname>travel_story.swf</fname>
+			<author>admin</author>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156157037937">
+			<y>565</y>
+			<tool>FILE</tool>
+			<x>600</x>
+			<height>142</height>
+			<width>200</width>
+			<date>2006/08/21 19:43:58</date>
+			<update>2006/08/22 05:02:19</update>
+			<fname>flower1.jpg</fname>
+			<transparent>0</transparent>
+			<rotation>0</rotation>
+			<author>admin</author>
+			<shape></shape>
+		</item>
+		<item id="1156157069187">
+			<height>141</height>
+			<y>707</y>
+			<fname>flower2.jpg</fname>
+			<author>admin</author>
+			<x>401</x>
+			<transparent>0</transparent>
+			<rotation>0</rotation>
+			<date>2006/08/21 19:44:29</date>
+			<update>2006/08/22 05:02:21</update>
+			<width>199</width>
+			<tool>FILE</tool>
+			<shape></shape>
+		</item>
+		<item id="1156157088718">
+			<fname>flower3.jpg</fname>
+			<author>admin</author>
+			<height>141</height>
+			<transparent>0</transparent>
+			<date>2006/08/21 19:44:49</date>
+			<update>2006/08/22 05:02:23</update>
+			<x>600</x>
+			<tool>FILE</tool>
+			<rotation>0</rotation>
+			<width>200</width>
+			<y>848</y>
+			<shape></shape>
+		</item>
+		<item id="1156157096703">
+			<fname>flower4.jpg</fname>
+			<height>141</height>
+			<rotation>0</rotation>
+			<y>989</y>
+			<author>admin</author>
+			<width>200</width>
+			<transparent>0</transparent>
+			<tool>FILE</tool>
+			<date>2006/08/21 19:44:57</date>
+			<update>2006/08/22 05:02:27</update>
+			<shape></shape>
+			<x>400</x>
+		</item>
+		<item id="1156157135609">
+			<date>2006/08/21 19:45:36</date>
+			<update>2006/08/22 05:03:05</update>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+			<x>408</x>
+			<height>130</height>
+			<tool>TEXT</tool>
+			<author>admin</author>
+			<y>573</y>
+			<rotation>0</rotation>
+			<width>187</width>
+		</item>
+		<item id="1156157147703">
+			<x>608</x>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+			<width>187</width>
+			<tool>TEXT</tool>
+			<y>714</y>
+			<date>2006/08/21 19:45:48</date>
+			<update>2006/08/22 05:03:14</update>
+			<author>admin</author>
+			<height>130</height>
+			<rotation>0</rotation>
+		</item>
+		<item id="1156157151015">
+			<tool>TEXT</tool>
+			<rotation>0</rotation>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<y>857</y>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+			<height>130</height>
+			<author>admin</author>
+			<x>408</x>
+			<width>187</width>
+			<date>2006/08/21 19:45:51</date>
+			<update>2006/08/22 05:03:09</update>
+		</item>
+		<item id="1156157155671">
+			<y>995</y>
+			<tool>TEXT</tool>
+			<height>130</height>
+			<rotation>0</rotation>
+			<x>608</x>
+			<author>admin</author>
+			<date>2006/08/21 19:45:56</date>
+			<update>2006/08/22 05:03:17</update>
+			<width>187</width>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+			<bgcolor>0xFFFFFF</bgcolor>
+		</item>
+	</body>
+</nota>

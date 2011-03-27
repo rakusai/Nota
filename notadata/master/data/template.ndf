@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ndf>
+	<head>
+		<date>%date%</date>
+		<update>%date%</update>
+		<author>%auth%</author>
+		<title>%title%</title>
+		<width>%width%</width>
+		<height>%height%</height>
+		<version>%version%</version>
+	</head>
+	<body>
+		<item id="%id%">
+			<tool>TEXT</tool>
+			<date>%date%</date>
+			<update>%date%</update>
+			<author>admin</author>
+			<x>60</x>
+			<y>60</y>
+			<width>400</width>
+			<height>36</height>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<rotation>0</rotation>
+			<text><![CDATA[<P><FONT FACE="NOTA" SIZE="36" COLOR="#000000">%title%</FONT></P>]]></text>
+		</item>
+		<item id="%id%">
+			<tool>TEXT</tool>
+			<date>%date%</date>
+			<update>%date%</update>
+			<author>admin</author>
+			<x>580</x>
+			<y>600</y>
+			<width>150</width>
+			<text><![CDATA[<P><FONT FACE="NOTA" SIZE="16" COLOR="#0000FF"><A HREF="link.cgi?url=home" TARGET="link"><U>リンク元へ戻る</U></A></FONT></P>]]></text>
+		</item>
+		<item id="%id%">
+			<tool>TEXT</tool>
+			<date>%date%</date>
+			<update>%date%</update>
+			<author>admin</author>
+			<x>580</x>
+			<y>630</y>
+			<width>150</width>
+			<text><![CDATA[<P><FONT FACE="NOTA" SIZE="16" COLOR="#0000FF"><A HREF="link.cgi?url=home" TARGET="link"><U>トップページへ</U></A></FONT></P>]]></text>
+		</item>
+	</body>
+</ndf>

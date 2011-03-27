@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<date>2006/08/21 19:00:54</date>
+		<update>2006/09/08 05:30:30</update>
+		<author>admin</author>
+		<title>便せん２</title>
+		<width>800</width>
+		<height>1131</height>
+		<version>2.0</version>
+		<id>20060821190054</id>
+	</head>
+	<body>
+		<item id="200608211900540">
+			<tool>TEXT</tool>
+			<date>2006/08/21 19:00:54</date>
+			<update>2006/08/21 19:01:02</update>
+			<author>admin</author>
+			<x>60</x>
+			<y>60</y>
+			<width>400</width>
+			<height>45</height>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0">便せん２</FONT></P>]]></text>
+		</item>
+		<item id="1156154483953">
+			<shape></shape>
+			<edit>locked</edit>
+			<fname>letter_paper2.swf</fname>
+			<tool>FILE</tool>
+			<x>0</x>
+			<author>admin</author>
+			<rotation>0</rotation>
+			<transparent>0</transparent>
+			<y>0</y>
+			<height>1131</height>
+			<date>2006/08/21 19:01:24</date>
+			<update>2006/08/21 19:01:29</update>
+			<width>800</width>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156154493453">
+			<width>627</width>
+			<x>8</x>
+			<rotation>0</rotation>
+			<y>5</y>
+			<transparent>0</transparent>
+			<date>2006/08/21 19:01:33</date>
+			<update>2006/08/22 05:09:09</update>
+			<shape></shape>
+			<height>359</height>
+			<tool>FILE</tool>
+			<author>admin</author>
+			<fname>momiji1.swf</fname>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156154503890">
+			<fname>momiji2.swf</fname>
+			<author>admin</author>
+			<width>654</width>
+			<transparent>0</transparent>
+			<height>347</height>
+			<rotation>0</rotation>
+			<y>771</y>
+			<shape></shape>
+			<tool>FILE</tool>
+			<date>2006/08/21 19:01:44</date>
+			<update>2006/08/21 19:02:58</update>
+			<x>132</x>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156154596640">
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="18" COLOR="#000000" LETTERSPACING="0" KERNING="0">洛西 能太 様<FONT SIZE="16"></FONT></FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT SIZE="18" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□<FONT SIZE="16"></FONT></FONT></P><P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0"></FONT></P><P ALIGN="LEFT"><FONT SIZE="18" COLOR="#000000" LETTERSPACING="0" KERNING="0">%today%   %author%</FONT></P>]]></text>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<tool>TEXT</tool>
+			<height>414</height>
+			<y>227</y>
+			<date>2006/08/21 19:03:17</date>
+			<update>2006/09/08 05:30:30</update>
+			<x>88</x>
+			<width>643</width>
+			<author>admin</author>
+		</item>
+	</body>
+</nota>

@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<date>2006/05/27 11:56:56</date>
+		<update>2006/09/08 04:54:48</update>
+		<author>henai</author>
+		<title>&lt;%author%&gt;の偏愛マップ</title>
+		<width>800</width>
+		<height>1131</height>
+		<version>2.0</version>
+		<id>20060527115638</id>
+	</head>
+	<body>
+		<item id="1148698616468">
+			<x>14</x>
+			<tool>TEXT</tool>
+			<date>2006/05/27 11:57:14</date>
+			<update>2006/09/08 04:54:48</update>
+			<width>556</width>
+			<height>45</height>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0">&lt;%author%&gt;の偏愛マップ</FONT></P>]]></text>
+			<rotation>0</rotation>
+			<y>20</y>
+			<author>henai</author>
+			<bgcolor>0xFFFFFF</bgcolor>
+		</item>
+		<item id="1148698699703">
+			<width>259</width>
+			<height>178</height>
+			<x>302</x>
+			<shape>circle</shape>
+			<author>henai</author>
+			<date>2006/05/27 11:58:38</date>
+			<update>2006/05/27 12:34:09</update>
+			<y>120</y>
+			<tool>SHAPE</tool>
+			<rotation>0</rotation>
+			<bgcolor>0x841184</bgcolor>
+		</item>
+		<item id="1148698724406">
+			<shape>circle</shape>
+			<tool>SHAPE</tool>
+			<date>2006/05/27 11:59:02</date>
+			<update>2006/05/27 12:34:10</update>
+			<rotation>0</rotation>
+			<height>170</height>
+			<y>125</y>
+			<x>310</x>
+			<bgcolor>0xffffff</bgcolor>
+			<width>246</width>
+			<author>henai</author>
+		</item>
+		<item id="1148698882343">
+			<rotation>0</rotation>
+			<tool>SHAPE</tool>
+			<shape>circle</shape>
+			<x>264</x>
+			<bgcolor>0x118411</bgcolor>
+			<width>259</width>
+			<height>178</height>
+			<y>370</y>
+			<date>2006/05/27 12:01:40</date>
+			<update>2006/05/27 12:33:51</update>
+			<author>henai</author>
+		</item>
+		<item id="1148698896515">
+			<width>246</width>
+			<date>2006/05/27 12:01:54</date>
+			<update>2006/05/27 12:33:49</update>
+			<tool>SHAPE</tool>
+			<height>170</height>
+			<x>273</x>
+			<shape>circle</shape>
+			<author>henai</author>
+			<y>376</y>
+			<rotation>0</rotation>
+			<bgcolor>0xffffff</bgcolor>
+		</item>
+		<item id="1148699029750">
+			<y>263</y>
+			<bgcolor>0xffffff</bgcolor>
+			<author>henai</author>
+			<x>539</x>
+			<tool>SHAPE</tool>
+			<rotation>0</rotation>
+			<date>2006/05/27 12:04:08</date>
+			<update>2006/05/27 12:33:51</update>
+			<shape>circle</shape>
+			<width>246</width>
+			<height>170</height>
+		</item>
+		<item id="1148699029766">
+			<shape>circle</shape>
+			<bgcolor>0x1717b3</bgcolor>
+			<width>259</width>
+			<y>257</y>
+			<height>178</height>
+			<rotation>0</rotation>
+			<x>530</x>
+			<author>henai</author>
+			<date>2006/05/27 12:04:08</date>
+			<update>2006/05/27 12:33:51</update>
+			<tool>SHAPE</tool>
+		</item>
+		<item id="1148699046391">
+			<rotation>0</rotation>
+			<tool>SHAPE</tool>
+			<y>500</y>
+			<author>henai</author>
+			<width>259</width>
+			<height>178</height>
+			<x>526</x>
+			<shape>circle</shape>
+			<date>2006/05/27 12:04:24</date>
+			<update>2006/05/27 12:34:56</update>
+			<bgcolor>0x116784</bgcolor>
+		</item>
+		<item id="1148699046390">
+			<rotation>0</rotation>
+			<bgcolor>0xffffff</bgcolor>
+			<tool>SHAPE</tool>
+			<y>506</y>
+			<height>170</height>
+			<x>535</x>
+			<author>henai</author>
+			<width>246</width>
+			<date>2006/05/27 12:04:25</date>
+			<update>2006/08/22 05:47:32</update>
+			<shape>circle</shape>
+		</item>
+		<item id="1148699056968">
+			<bgcolor>0xffffff</bgcolor>
+			<x>29</x>
+			<shape>circle</shape>
+			<width>246</width>
+			<y>229</y>
+			<height>170</height>
+			<rotation>0</rotation>
+			<date>2006/05/27 12:04:35</date>
+			<update>2006/05/27 12:34:26</update>
+			<author>henai</author>
+			<tool>SHAPE</tool>
+		</item>
+		<item id="1148699056985">
+			<rotation>0</rotation>
+			<y>223</y>
+			<shape>circle</shape>
+			<author>henai</author>
+			<height>178</height>
+			<width>259</width>
+			<bgcolor>0xffff00</bgcolor>
+			<date>2006/05/27 12:04:35</date>
+			<update>2006/05/27 12:34:26</update>
+			<tool>SHAPE</tool>
+			<x>20</x>
+		</item>
+		<item id="1148699076781">
+			<height>170</height>
+			<rotation>0</rotation>
+			<x>9</x>
+			<y>458</y>
+			<bgcolor>0xffffff</bgcolor>
+			<author>henai</author>
+			<width>246</width>
+			<date>2006/05/27 12:04:55</date>
+			<update>2006/05/27 12:33:53</update>
+			<shape>circle</shape>
+			<tool>SHAPE</tool>
+		</item>
+		<item id="1148699076813">
+			<y>452</y>
+			<author>henai</author>
+			<date>2006/05/27 12:04:55</date>
+			<update>2006/05/27 12:33:52</update>
+			<x>0</x>
+			<shape>circle</shape>
+			<bgcolor>0xf48700</bgcolor>
+			<rotation>0</rotation>
+			<width>259</width>
+			<tool>SHAPE</tool>
+			<height>178</height>
+		</item>
+		<item id="1148699505718">
+			<x>383</x>
+			<author>henai</author>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000">好きな匂い</FONT></P>]]></text>
+			<tool>TEXT</tool>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<y>138</y>
+			<height>23</height>
+			<width>300</width>
+			<date>2006/05/27 12:12:04</date>
+			<update>2006/05/27 12:34:09</update>
+			<rotation>0</rotation>
+		</item>
+		<item id="1148699541625">
+			<date>2006/05/27 12:12:40</date>
+			<update>2006/05/27 12:33:50</update>
+			<height>42</height>
+			<rotation>0</rotation>
+			<width>109</width>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<x>348</x>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000">好きな場所</FONT></P>]]></text>
+			<y>387</y>
+			<tool>TEXT</tool>
+			<author>henai</author>
+		</item>
+		<item id="1148699543609">
+			<height>42</height>
+			<author>henai</author>
+			<rotation>0</rotation>
+			<x>634</x>
+			<tool>TEXT</tool>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<width>109</width>
+			<y>274</y>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000">乗り物</FONT></P>]]></text>
+			<date>2006/05/27 12:12:42</date>
+			<update>2006/05/27 12:33:51</update>
+		</item>
+		<item id="1148699600437">
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000">音楽・映画・本</FONT></P>]]></text>
+			<height>42</height>
+			<y>248</y>
+			<x>92</x>
+			<author>henai</author>
+			<date>2006/05/27 12:13:38</date>
+			<update>2006/05/27 12:34:26</update>
+			<width>300</width>
+			<rotation>0</rotation>
+			<tool>TEXT</tool>
+			<bgcolor>0xFFFFFF</bgcolor>
+		</item>
+		<item id="1148699622750">
+			<y>471</y>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000">動物</FONT></P>]]></text>
+			<height>23</height>
+			<rotation>0</rotation>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<width>300</width>
+			<author>henai</author>
+			<x>107</x>
+			<tool>TEXT</tool>
+			<date>2006/05/27 12:14:01</date>
+			<update>2006/05/27 12:33:53</update>
+		</item>
+		<item id="1148699632937">
+			<y>520</y>
+			<date>2006/05/27 12:14:11</date>
+			<update>2006/05/27 12:34:57</update>
+			<rotation>0</rotation>
+			<x>629</x>
+			<author>henai</author>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000">食べ物</FONT></P>]]></text>
+			<width>174</width>
+			<tool>TEXT</tool>
+			<height>23</height>
+		</item>
+		<item id="1148699668390">
+			<tool>SHAPE</tool>
+			<shape>circle</shape>
+			<width>259</width>
+			<bgcolor>0xe01414</bgcolor>
+			<y>619</y>
+			<date>2006/05/27 12:14:46</date>
+			<update>2006/05/27 12:35:19</update>
+			<height>178</height>
+			<rotation>0</rotation>
+			<author>henai</author>
+			<x>240</x>
+		</item>
+		<item id="1148699668407">
+			<tool>SHAPE</tool>
+			<bgcolor>0xffffff</bgcolor>
+			<width>246</width>
+			<y>625</y>
+			<author>henai</author>
+			<shape>circle</shape>
+			<x>249</x>
+			<height>170</height>
+			<date>2006/05/27 12:14:47</date>
+			<update>2006/05/27 12:35:20</update>
+			<rotation>0</rotation>
+		</item>
+		<item id="1148699692968">
+			<rotation>0</rotation>
+			<height>23</height>
+			<y>641</y>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000">好きな人物</FONT></P>]]></text>
+			<width>300</width>
+			<author>henai</author>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<x>325</x>
+			<date>2006/05/27 12:15:11</date>
+			<update>2006/05/27 12:35:20</update>
+			<tool>TEXT</tool>
+		</item>
+		<item id="1148700718156">
+			<height>170</height>
+			<width>246</width>
+			<y>776</y>
+			<rotation>0</rotation>
+			<bgcolor>0xffffff</bgcolor>
+			<x>25</x>
+			<author>henai</author>
+			<tool>SHAPE</tool>
+			<shape>circle</shape>
+			<date>2006/05/27 12:32:16</date>
+			<update>2006/05/27 12:38:44</update>
+		</item>
+		<item id="1148700718188">
+			<tool>SHAPE</tool>
+			<date>2006/05/27 12:32:17</date>
+			<update>2006/05/27 12:38:45</update>
+			<rotation>0</rotation>
+			<x>16</x>
+			<bgcolor>0x787878</bgcolor>
+			<width>259</width>
+			<height>178</height>
+			<author>henai</author>
+			<y>770</y>
+			<shape>circle</shape>
+		</item>
+		<item id="1148700963937">
+			<date>2006/05/27 12:36:22</date>
+			<update>2006/05/27 12:38:59</update>
+			<width>246</width>
+			<x>502</x>
+			<y>753</y>
+			<author>henai</author>
+			<tool>SHAPE</tool>
+			<height>170</height>
+			<shape>circle</shape>
+			<bgcolor>0xffffff</bgcolor>
+			<rotation>0</rotation>
+		</item>
+		<item id="1148700963954">
+			<rotation>0</rotation>
+			<x>493</x>
+			<width>259</width>
+			<bgcolor>0x14ade0</bgcolor>
+			<shape>circle</shape>
+			<tool>SHAPE</tool>
+			<date>2006/05/27 12:36:22</date>
+			<update>2006/05/27 12:38:59</update>
+			<author>henai</author>
+			<y>747</y>
+			<height>178</height>
+		</item>
+		<item id="1148700990921">
+			<tool>TEXT</tool>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<height>23</height>
+			<author>henai</author>
+			<y>768</y>
+			<x>591</x>
+			<date>2006/05/27 12:36:49</date>
+			<update>2006/05/27 12:38:59</update>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000">スポーツ</FONT></P>]]></text>
+			<width>300</width>
+		</item>
+		<item id="200605271156562">
+			<text><![CDATA[<FONT SIZE="16" COLOR="#0000FF"><A HREF="link.cgi?url=home" TARGET="link"><U>トップページへ</U></A></FONT>]]></text>
+			<tool>TEXT</tool>
+			<y>1069</y>
+			<width>150</width>
+			<author>henai</author>
+			<date>2006/08/22 05:47:42</date>
+			<update>2006/08/22 05:47:42</update>
+			<x>634</x>
+		</item>
+	</body>
+</nota>

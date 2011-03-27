@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<date>2006/08/21 19:10:44</date>
+		<update>2006/09/08 05:30:54</update>
+		<author>admin</author>
+		<title>フリーマーケット</title>
+		<width>800</width>
+		<height>1131</height>
+		<version>2.0</version>
+		<id>20060821191043</id>
+	</head>
+	<body>
+		<item id="200608211910440">
+			<tool>TEXT</tool>
+			<date>2006/08/21 19:10:44</date>
+			<update>2006/08/22 05:12:39</update>
+			<author>admin</author>
+			<x>21</x>
+			<y>27</y>
+			<width>171</width>
+			<height>26</height>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="18" COLOR="#C6C604" LETTERSPACING="0" KERNING="0">フリーマーケット<FONT SIZE="36" COLOR="#000000"></FONT></FONT></P>]]></text>
+		</item>
+		<item id="1156155175015">
+			<tool>FILE</tool>
+			<rotation>0</rotation>
+			<fname>freemarket.swf</fname>
+			<author>admin</author>
+			<y>97</y>
+			<width>773</width>
+			<height>170</height>
+			<shape></shape>
+			<x>10</x>
+			<date>2006/08/21 19:12:55</date>
+			<update>2006/08/21 19:17:27</update>
+			<transparent>0</transparent>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155186906">
+			<shape></shape>
+			<tool>FILE</tool>
+			<date>2006/08/21 19:13:07</date>
+			<update>2006/08/21 19:16:39</update>
+			<y>599</y>
+			<rotation>0</rotation>
+			<width>165</width>
+			<transparent>0</transparent>
+			<fname>balloon_blue.swf</fname>
+			<author>admin</author>
+			<height>270</height>
+			<x>586</x>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155194343">
+			<x>310</x>
+			<fname>balloon_cyan.swf</fname>
+			<author>admin</author>
+			<y>243</y>
+			<date>2006/08/21 19:13:14</date>
+			<update>2006/08/21 19:16:48</update>
+			<rotation>0</rotation>
+			<tool>FILE</tool>
+			<height>314</height>
+			<shape></shape>
+			<width>186</width>
+			<transparent>0</transparent>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155201343">
+			<shape></shape>
+			<x>425</x>
+			<width>165</width>
+			<y>494</y>
+			<fname>balloon_green.swf</fname>
+			<date>2006/08/21 19:13:21</date>
+			<update>2006/08/21 19:16:34</update>
+			<rotation>0</rotation>
+			<height>270</height>
+			<author>admin</author>
+			<transparent>0</transparent>
+			<tool>FILE</tool>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155207484">
+			<date>2006/08/21 19:13:28</date>
+			<update>2006/08/21 19:16:32</update>
+			<height>267</height>
+			<y>612</y>
+			<width>177</width>
+			<tool>FILE</tool>
+			<transparent>0</transparent>
+			<x>63</x>
+			<author>admin</author>
+			<shape></shape>
+			<rotation>0</rotation>
+			<fname>balloon_orange.swf</fname>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155214609">
+			<author>admin</author>
+			<fname>balloon_pink.swf</fname>
+			<date>2006/08/21 19:13:35</date>
+			<update>2006/08/21 19:16:46</update>
+			<width>198</width>
+			<rotation>0</rotation>
+			<x>59</x>
+			<shape></shape>
+			<transparent>0</transparent>
+			<tool>FILE</tool>
+			<height>317</height>
+			<y>306</y>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155219968">
+			<shape></shape>
+			<rotation>0</rotation>
+			<width>153</width>
+			<transparent>0</transparent>
+			<tool>FILE</tool>
+			<height>231</height>
+			<x>248</x>
+			<author>admin</author>
+			<date>2006/08/21 19:13:40</date>
+			<update>2006/08/21 19:16:42</update>
+			<y>536</y>
+			<fname>balloon_purple.swf</fname>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155225218">
+			<rotation>0</rotation>
+			<x>551</x>
+			<shape></shape>
+			<date>2006/08/21 19:13:45</date>
+			<update>2006/08/22 05:12:34</update>
+			<width>196</width>
+			<y>293</y>
+			<fname>balloon_yellow.swf</fname>
+			<transparent>0</transparent>
+			<author>admin</author>
+			<tool>FILE</tool>
+			<height>302</height>
+			<scale>100:100</scale>
+		</item>
+		<item id="1156155302468">
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="16" COLOR="#000000" LETTERSPACING="0" KERNING="0">□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□</FONT></P>]]></text>
+			<rotation>0</rotation>
+			<height>96</height>
+			<width>658</width>
+			<y>1000</y>
+			<date>2006/08/21 19:15:02</date>
+			<update>2006/08/21 19:16:11</update>
+			<author>admin</author>
+			<tool>TEXT</tool>
+			<x>77</x>
+			<bgcolor>0xFFFFFF</bgcolor>
+		</item>
+		<item id="1156155312765">
+			<bgcolor>0xFFFFFF</bgcolor>
+			<author>admin</author>
+			<date>2006/08/21 19:15:13</date>
+			<update>2006/09/08 05:30:54</update>
+			<rotation>0</rotation>
+			<width>438</width>
+			<tool>TEXT</tool>
+			<height>127</height>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="36" COLOR="#E01414" LETTERSPACING="0" KERNING="0">と　き：<FONT COLOR="#000000">%today%<FONT SIZE="16"></FONT></FONT></FONT></P><P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000" LETTERSPACING="0" KERNING="0">　　　　午後1時～5時<FONT SIZE="16"></FONT></FONT></P><P ALIGN="LEFT"><FONT SIZE="36" COLOR="#E01414" LETTERSPACING="0" KERNING="0">ところ：<FONT COLOR="#000000">○○小学校校庭</FONT></FONT></P>]]></text>
+			<x>203</x>
+			<y>847</y>
+		</item>
+		<item id="1156155341000">
+			<bgcolor>0x1717b3</bgcolor>
+			<date>2006/08/21 19:15:41</date>
+			<update>2006/08/22 05:12:51</update>
+			<tool>SHAPE</tool>
+			<author>admin</author>
+			<height>67</height>
+			<rotation>0</rotation>
+			<x>650</x>
+			<shape>circle</shape>
+			<width>113</width>
+			<y>27</y>
+		</item>
+		<item id="1156155344875">
+			<rotation>0</rotation>
+			<date>2006/08/21 19:15:45</date>
+			<update>2006/08/22 05:09:58</update>
+			<height>32</height>
+			<x>656</x>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="24" COLOR="#FFFFFF" LETTERSPACING="0" KERNING="0">出店無料</FONT></P>]]></text>
+			<author>admin</author>
+			<tool>TEXT</tool>
+			<y>44</y>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<width>117</width>
+		</item>
+	</body>
+</nota>

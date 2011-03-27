@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+	<!--NOTA META INFO-->
+	<title><!--NOTA TITLE--></title>
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.cgi">
+	<link href="styles/main.css" rel="stylesheet" media="screen">
+	<script language="JavaScript">
+	<!--
+	function main(){
+		var editmode = "<!--NOTA EDITMODE-->";
+		if (editmode == "true"){
+			setEditMode("true","<!--NOTA USER-->","<!--NOTA POWER-->");
+		}
+	}
+	function setLang(lang) {
+		var expires = new Date();
+		expires.setTime(expires.getTime()+(30*24*60*60*1000));
+		document.cookie = "lang=" + lang + ";" + "expires=" + expires.toGMTString();
+	 	location.reload(true);
+	}
+	function setEditMode(edit,user,power){
+		if (edit == "true"){
+			window.list.stopUpload();
+		}else{
+			window.list.hideUpload();
+			//クッキーを上書き
+		 	document.cookie = "editmode=false&";
+			
+		}
+	}
+	// -->
+	</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="overflow:hidden" scroll="no" onLoad="main();">
+
+	<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	<td width="100%" valign="top">
+		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+			 codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+			 width="100%" height="100%" align="">
+			<param name="movie" value="<!--NOTA FLASH SRC-->">
+			<param name="FlashVars" value="<!--NOTA FLASHVARS-->">
+			<param name="quality" value="high"> 
+			<param name="scale" value="noscale">
+			<param name="menu" value="false">
+			<param name="wmode" value="">
+			<param name="bgcolor" value="#ffffff">
+			<param name="salign" value="LT">
+			<embed src="<!--NOTA FLASH SRC-->" FlashVars="<!--NOTA FLASHVARS-->"
+			 quality="high" bgcolor="#ffffff" wmode="" scale="noscale" salign="LT" menu="false"
+			 width="100%" height="100%" align="" type="application/x-shockwave-flash"
+			 pluginspage="http://www.macromedia.com/go/getflashplayer">
+			</embed>
+	  </object>
+	</td>
+	</tr>
+	<tr height="28">
+	<td width="100%">
+		<iframe name="list" src="sidebar.cgi?type=bottom&page=<!--NOTA PAGE-->&align=bottom" width="100%" height="28" frameborder="0" Scrolling="no"></iframe>
+		<iframe src="" class="outside" name="link" id="link" width="5" height="5" frameborder="1" scrolling="no"></iframe>
+	</td>
+	</tr>
+	</table>
+	<div class="embeddedtext">
+	<!--EMBEDDED TEXT-->
+	</div>
+</body>
+</html>

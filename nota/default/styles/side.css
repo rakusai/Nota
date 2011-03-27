@@ -1,0 +1,237 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 4px 5px 5px;
+	background-color: #EFF6E7;
+}
+a {
+	color: #204788;
+	text-decoration: none;
+}
+
+p {
+	margin: 5px;
+	font-size: 85%;
+}
+
+h3 {
+	color: #333333;
+	font-size: 100%;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #333333;
+	margin-top: 10px;
+	margin-left: 1px;
+	margin-bottom: 2px;
+	margin-right: 1px;
+	padding-left: 2px;
+}
+h4 {
+	color: #666666;
+	font-size: 75%;
+	font-weight: normal;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+	margin-left: 1px;
+	margin-top: 6px;
+	margin-right: 1px;
+	margin-bottom: 2px;
+	padding-left: 2px;
+}
+
+
+.backmenu {
+	margin-left: 3px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.templatenotes {
+	color: #666666;
+	font-weight: normal;
+	font-size: 80%;
+	border-left-width: 2px;
+	border-left-style: solid;
+	border-left-color: #666666;
+	margin-bottom: 15px;
+	padding-left: 4px;
+}
+
+.list   {
+	line-height: 150%;
+	padding-left: 8px;
+}
+
+.detailtbl {
+	font-size: 80%;
+	margin-bottom: 10px;
+}
+
+.lockimg {
+	margin-top: 5px;
+	margin-right: 6px;
+}
+
+.smallicon {
+	float:left;
+	margin-top:-2px;
+	margin-left:-20px;
+}
+
+.title {
+	font-size: 85%;
+	display: block;
+	text-decoration: none;
+	padding-top: 3px;
+	padding-right: 2px;
+	padding-bottom: 0px;
+	padding-left: 20px;
+	margin-top: 2px;
+	margin-right: 1px;
+	margin-bottom: 0px;
+	margin-left: 1px;
+	border-top: 1px solid #EFF6E7;
+	border-right: 1px solid #EFF6E7;
+	border-bottom: 1px solid #EFF6E7;
+	border-left: 4px solid #EFF6E7;
+}
+
+.selectedtitle {
+	display: block;
+	font-size: 85%;
+	text-decoration: none;
+	padding-top: 3px;
+	padding-right: 2px;
+	padding-bottom: 0px;
+	padding-left: 20px;
+	margin-top: 2px;
+	margin-right: 1px;
+	margin-bottom: 0px;
+	margin-left: 1px;
+	background-color: #99CC99;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 4px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #006633;
+	border-right-color: #006633;
+	border-bottom-color: #006633;
+	border-left-color: #006633;	
+
+}
+
+.title:hover {
+	background-color: #D3E7BE;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 4px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #A0CA73;
+	border-right-color: #A0CA73;
+	border-bottom-color: #A0CA73;
+	border-left-color: #A0CA73;/*	color: #EFF6E7;*/
+}
+
+.author {
+	font-size: 80%;
+	color: #999999;
+}
+
+.selectedtitle .author {
+	color: #333333;
+}
+
+.upload_error{
+	color: #CC3300;
+	font-size: 80%;
+}
+
+
+.displaynone {
+	display: none;
+}
+
+.imagearea {
+	display: none;
+}
+.imagelist {
+	background-color: #FFFFFF;
+	margin-top: 0px;
+	margin-right: 1px;
+	margin-bottom: 3px;
+	margin-left: 1px;
+	padding: 2px;
+	border-top: 0px solid #00CC66;
+	border-right: 1px solid #00CC66;
+	border-bottom: 1px solid #00CC66;
+	border-left: 1px solid #00CC66;
+}
+.imagelist A {
+	color: #FFFFFF;
+}
+
+.imagelist A:hover {
+	color: #404040;
+}
+
+.capacity {
+	background-color: #FF3399;
+	height: 20px;
+	width: 150px;
+	font-size: 80%;
+	text-align: right;
+	vertical-align: middle;
+	margin-bottom: 12px;
+	border-top: 1px solid #999999;
+	border-right: 1px solid #666666;
+	border-bottom: 1px solid #666666;
+	border-left: 1px solid #999999;
+}
+.usedspace {
+	background-color: #00CCFF;
+	height: 20px;
+	clear: none;
+	float: left;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.sikaku {
+	height: 12px;
+	width: 12px;
+	font-size: 1px;
+	border: 1px solid #666666;
+}
+
+.mailbody {
+	font-size:100%;
+	width: 350px;
+}
+
+.mailform {
+	background-color: #FFFFFF;
+	padding: 5px;
+	border: 3px solid #666666;
+	margin: 10px;
+	width:470px;
+
+}
+
+.uploadwainting {
+	display:none;
+	font-size:80%;
+	color:#003399;
+}
+
+.sideform {
+	margin-top:3px;
+	margin-bottom:3px;
+}

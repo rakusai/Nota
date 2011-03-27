@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nota>
+	<head>
+		<date>2005/08/24 13:39:04</date>
+		<update>2005/08/24 13:44:49</update>
+		<author>admin</author>
+		<title>NOTAへようこそ</title>
+		<width>800</width>
+		<height>1131</height>
+		<version>2.0</version>
+		<id>20050824133740</id>
+	</head>
+	<body>
+		<item id="200508241339040">
+			<tool>TEXT</tool>
+			<date>2005/08/24 13:39:04</date>
+			<update>2005/08/24 13:39:17</update>
+			<author>admin</author>
+			<x>60</x>
+			<y>60</y>
+			<width>400</width>
+			<height>45</height>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<rotation>0</rotation>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="36" COLOR="#000000">NOTAへようこそ</FONT></P>]]></text>
+		</item>
+		<item id="1124858400609">
+			<x>168</x>
+			<width>575</width>
+			<author>admin</author>
+			<bgcolor>0xFFFFFF</bgcolor>
+			<y>183</y>
+			<rotation>0</rotation>
+			<date>2005/08/24 13:41:24</date>
+			<update>2005/08/24 13:44:49</update>
+			<height>62</height>
+			<tool>TEXT</tool>
+			<text><![CDATA[<P ALIGN="LEFT"><FONT SIZE="24" COLOR="#000000">編集開始ボタンを押して、ログインしましょう。</FONT></P><P ALIGN="LEFT"><FONT SIZE="24" COLOR="#000000">それでは、NOTAの世界をお楽しみください。</FONT></P>]]></text>
+		</item>
+		<item id="1124858466781">
+			<bgcolor>0x63cef1</bgcolor>
+			<tool>SHAPE</tool>
+			<rotation>0</rotation>
+			<width>625</width>
+			<x>126</x>
+			<y>152</y>
+			<author>admin</author>
+			<shape>circle</shape>
+			<height>122</height>
+			<date>2005/08/24 13:42:31</date>
+			<update>2005/08/24 13:42:38</update>
+		</item>
+	</body>
+</nota>
