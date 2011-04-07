@@ -34,6 +34,7 @@ h1 {
 	float:left;
 	font-size: 12px;
 	color: #FFFFFF;
+	line-height:14px;
 	font-weight: bold;
 	text-decoration: none;
 	background-color: #27C825;
@@ -56,6 +57,7 @@ h1 {
 	float:left;
 	font-size: 12px;
 	color: #FFFFFF;
+	line-height:14px;
 	font-weight: bold;
 	text-decoration: none;
 	background-color: #FF6600;
@@ -78,6 +80,7 @@ h1 {
 	float:left;
 	font-size: 12px;
 	color: #000000;
+	line-height:14px;
 	text-decoration: none;
 	background-color: #EAEAEA;
 	border-top: 1px solid #E1E1E1;
