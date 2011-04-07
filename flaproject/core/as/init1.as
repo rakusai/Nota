@@ -22,18 +22,8 @@ _focusrect = false; //フォーカス矩形なし
 var flashver = getVersion();
 if (flashver != undefined){
 	var current_target = flashver.split(",");
-	flashver = current_target[0].slice(-1);
+	flashver = current_target[0].split(" ")[1];
 }
-
-//バージョン6に満たないなら
-if (flashver < 6 || flashver == undefined){
-	//ストップ
-//	return;
-}
-
-//バージョン7以上か
-_global.isNewFlash = (flashver >= 7);
-
 
 /////////////////////////////////////////////
 //ローディング表示

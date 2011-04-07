@@ -39,31 +39,16 @@ function showPrint(){
 		}
 	}
 	
-	if (isNewFlash){
-		PageStart.selectedIndex = 0;
-	}else{
-		//現在何ページ目が表示されているのか？
-		PageStart.selectedIndex = Math.round(-_root.Main._y / (PageH * _root.Main._xscale / 100));
-	}
+    PageStart.selectedIndex = 0;
+	//現在ページ	PageStart.selectedIndex = Math.round(-_root.Main._y / (PageH * _root.Main._xscale / 100));
 	PageEnd.selectedIndex = _root.Main.page_cnt-1;
-	
-	//表示
-	if (isNewFlash){
-		PrintMes.gotoAndStop(1);
-		PageEnd._visible = true;
-	}else{
-		PrintMes.gotoAndStop(2);
-		PageEnd._visible = false;
-	}
+
 }
 
 
 PrintNext.onRelease = function(){
 	//印刷開始
-	if (isNewFlash)
-		printNew();
-	else
-		printOld();
+    printNew();
 	
 };
 
@@ -172,45 +157,5 @@ function printNew2(oldscale){
 	//ダイアログを閉じる
 	gotoAndStop("close");	
 	
-	
-};
-
-function printOld(){
-	//旧バージョンの印刷
-	//印刷開始
-	//まず、１ページが収まるように
-	//Mainの幅を1010にする（すなわちスケール100）
-	//余白を少し削る
-	var sc = _root.Main._xscale;
-	var x = _root.Main._x;
-	var y = _root.Main._y;
-	
-	//現在何ページ目が表示されているのか？
-	var nPage = PageStart.selectedIndex;
-//	var nPage = Math.round(-_root.Main._y / (PageH * _root.Main._xscale / 100));
-	//選択を解除
-	_root.Main.moveFlagFocus(-1);
-	//テキストの全描画
-	_root.Main.showTextBoxInClient(true);
-	
-	_root.Main._xscale = 1000/PaperW*102;
-	_root.Main._yscale = 1000/PaperW*102;
-	_root.Main._x = -10;
-	_root.Main._y = -10 - nPage*1414*1.02;
-	//printAsBitmap("Main", "bmovie");
-	
-	function waitPrint(){
-		clearInterval(intervalID);
-		
-		if (PrintBitmap.selected)
-			printAsBitmapNum(_root.Main,"bmovie");
-		else
-			printNum(_root.Main,"bmovie");
-	};
-	var intervalID = setInterval(waitPrint,200);		
-
-	//ダイアログを閉じる
-	gotoAndStop("close");	
-
 	
 };
