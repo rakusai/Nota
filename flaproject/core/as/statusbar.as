@@ -7,7 +7,6 @@
  
 
 pageWeight._xscale = 0;
-commandtxt.restrict = "^¥u0001-¥u0008¥u000B-¥u000C¥u000E-¥u001F";//TABとLEを除く制御コードを入力させない
 
 this.useHandCursor = false;
 

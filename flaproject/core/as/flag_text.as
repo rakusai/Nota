@@ -14,7 +14,6 @@ textchange = false;
 //最初は、書き込めない
 textbox.border = false;
 textbox.type = "dynamic";
-textbox.restrict = "^¥u0001-¥u0008¥u000B-¥u000C¥u000E-¥u001F";//TABとLEを除く制御コードを入力させない
 
 //データを読み込んで表示
 _root.Main.showFlagObjectData(pFlag._name);
