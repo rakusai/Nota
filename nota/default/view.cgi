@@ -141,9 +141,9 @@ sub getMimeTypeFromExt
 	elsif($fname =~ /\.zip$/i) { $f_mime = 'application/zip'; }
 	elsif($fname =~ /\.pdf$/i) { $f_mime = 'application/pdf'; }
 	elsif($fname =~ /\.mid$/i) { $f_mime = 'audio/mid'; }
-	elsif($fname =~ /\.doc$/i) { $f_mime = 'application/msword'; }
-	elsif($fname =~ /\.xls$/i) { $f_mime = 'application/ms-excel'; }
-	elsif($fname =~ /\.ppt$/i) { $f_mime = 'application/ms-powerpoint'; }
+	elsif($fname =~ /\.docx?$/i) { $f_mime = 'application/msword'; }
+	elsif($fname =~ /\.xlsx?$/i) { $f_mime = 'application/ms-excel'; }
+	elsif($fname =~ /\.pptx?$/i) { $f_mime = 'application/ms-powerpoint'; }
 	elsif($fname =~ /\.ram$/i) { $f_mime = 'audio/realaudio'; }
 	elsif($fname =~ /\.rm$/i)  { $f_mime = 'application/realmedia'; }
 	elsif($fname =~ /\.mpg$/i) { $f_mime = 'video/mpeg'; }
