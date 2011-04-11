@@ -86,7 +86,7 @@ $m_max_imgdir_size = 100;
 $m_max_imgfile_size = 5;
 
 #テーマ選択
-$m_theme = "blue";
+$m_theme = "original";
 $m_themedir = "themes/" . $m_theme;
 
 

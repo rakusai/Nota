@@ -313,6 +313,8 @@ sub show
 		}
 		$_ =~ s/<!--NOTA USER-->/$login->{user}/;
 		$_ =~ s/<!--NOTA POWER-->/$login->{power}/;
+		$a = $login->get_anonymous;
+		$_ =~ s/<!--NOTA ANONYMOUS-->/$a/;
 		print $_;
 	}
 
