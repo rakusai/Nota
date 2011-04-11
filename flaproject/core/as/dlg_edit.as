@@ -82,34 +82,6 @@ function showDlg(){
 	//フォーカス
 	Selection.setFocus("_root.DialogBox.user");
 
-/*
-	myLoadVars = new LoadVars();
-	myLoadVars.onLoad = function(success){
-		//データが読み込まれた！
-		if (success && myLoadVars.res != "ERR"){
-			//通った
-			if (myLoadVars.user != undefined){
-				user.text  = myLoadVars.user;
-				pass.text = myLoadVars.pass;
-				autologin.selected = (myLoadVars.autologin != "false");
-				
-			}
-			//第３者に禁止なら、新規登録ボタンなしへ
-			if (myLoadVars.anonymous == "none"){
-//				dlg_edit_messagenew = "";
-//				dlg_edit_create = "";
-				createbtn._visible = false;
-	//			gotoAndStop("edit_no_create");
-			}		
-		}
-		//編集モードへ
-		//フォーカス
-		Selection.setFocus("_root.DialogBox.user");
-		
-	};
-	
-	myLoadVars.load(SERVER + "./account.cgi?action=getaccount");
-*/	
 }
 
 okbtn.onRelease = function(){
@@ -199,18 +171,7 @@ function onAccountLoad(success){
 	pDlg.gotoAndStop("close");
 	
 	//Tab更新
-//	if (MyScreen == 1){
-		//全画面表示ならupdateを再読込する
-//		getURL("javascript:location.reload();","upload");
-		
-//	}else{
-		getURL("javascript:setEditMode('true','" + myEditVars.user
-									   + "','" + myEditVars.power + "');");
-		
-//		tab_lc = new LocalConnection();
-//		tab_lc.send("tab" + SDIR + MyPage,"setEditMode",true);
-	
-//	}
+	getURL("javascript:setEditMode('true','" + myEditVars.user + "','" + myEditVars.power + "');");
 	
 	//編集モード
 	if (PageEdit != true){
@@ -220,8 +181,7 @@ function onAccountLoad(success){
 	if (myEditVars.anonymous == "none"){
 		//強制的に読み込み
 		_root.Main.LoadMapData();
-		//一覧更新
-		_root.updateSidebar();
+		//一覧更新 -> JS:setEditMode内で実行
 	}else{
 		//編集可能か
 		_global.PageLock = (PageDatEdit == "admin" && MyPower != "admin");

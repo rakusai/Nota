@@ -1967,6 +1967,19 @@ function setAutoSizeOff(isoff){
 	
 }
 
+function check_recently_updated(datestr){
+    var yd = datestr.split(" ");
+    var date = yd[0].split("/");
+    var time = yd[1].split(":");
+    var d = new Date(date[0], date[1]-1, date[2],time[0],time[1],time[2]);
+    var today = new Date();
+    if (today.getTime() - d.getTime() < 3*24*60*60*1000){
+        return true;
+    }
+    
+    return false;
+}
+
 function showFlagObjectData(num, obj){
 	//オブジェクトのデータをタイプに合わせて読み込む
 	if (obj == undefined)	//全部の変数を読み込む
@@ -1986,7 +1999,11 @@ function showFlagObjectData(num, obj){
 //		pFlag.textbox = textbox;
 		var fobject = textbox;
 		pFlag.fobject = textbox;
-//		textbox._visible = true;
+        if (check_recently_updated(obj.update)){
+            FElement.newmark.gotoAndStop(1);        
+        }else{
+            FElement.newmark.gotoAndStop(2);        
+        }
 		if (obj.width != undefined)//幅
 			textbox._width = obj.width;
 		if (obj.text != undefined && obj.text != ""){
@@ -2057,6 +2074,11 @@ function showFlagObjectData(num, obj){
 		pFlag.fileext = ext;
 		if (ext != "jpg" && ext != "swf"){
 			//ふつうのファイルである
+            if (check_recently_updated(obj.update)){
+                FElement.newmark.gotoAndStop(1);        
+            }else{
+                FElement.newmark.gotoAndStop(2);        
+            }
 			//FElement.gotoAndStop("fileicon");
 			var fileicon = FElement.fileicon;
 			//pFlag.fileicon = fileicon;
@@ -2075,10 +2097,12 @@ function showFlagObjectData(num, obj){
 				icon = "jtd";
 				break;
 			case "doc":
+			case "docx":
 			case "wtf":
 				icon = "doc";
 				break;
 			case "xls":
+			case "xlsx":
 			case "csv":
 				icon = "xls";
 				break;
@@ -2090,6 +2114,7 @@ function showFlagObjectData(num, obj){
 				icon = "pdf";
 				break;
 			case "ppt":
+			case "pptx":
 				icon = "ppt";
 				break;
 			case "zip":
@@ -2192,7 +2217,7 @@ function showFlagObjectData(num, obj){
 			//ロード
 			if (pFlag.photoloading == 0){
 				pFlag.photoloading = 1;	//読み込み中
-				plugin.loadMovie("plugins/" + obj.plugin + ".swf?id=" + num + 
+				plugin.loadMovie("plugins/" + obj.plugin + "/" + obj.plugin + ".swf?id=" + num + 
 							 "&bparam=" + obj.fname  + "&fname=" + obj.fname + "&page=" + MyPage);
 				//bparamは過去との互換性維持のため
 			}else{

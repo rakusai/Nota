@@ -61,6 +61,10 @@ _global.MyScreen = screen;
 //参加条件と公開レベル
 _global.MyAnonymous = anonymous;
 
+//ログインを外部で行うかどうか
+_global.MyCertify = certify;
+
+
 //音を読み込む
 sdSHU = new Sound;
 sdSHU.attachSound("SHU.wav");
@@ -104,21 +108,32 @@ function startEdit(commandafteredit){
 
 	commandAfterEdit = commandafteredit;
 
+    //外部ログインの利用
+    if (MyCertify == "skip"){
+        setEditMode(true,MyID,MyPower);
+    	getURL("javascript:setEditMode('true','" + MyID + "','" + MyPower + "');");
+        return;
+    }
+    
+    
+    
+    //すでにログイン済みならダイアログを表示しない
+    hidelogin = false;
+    if (MyPower != undefined){
+        hidelogin = true;
+    }
+
 	
-	if (MyPower != undefined){
+	if (hidelogin){
 		_root.DialogBox._visible = false;
 	}
-	
 	_root.DialogBox.gotoAndStop("edit");
 	_root.DialogBox.showDlg();
-	
-	//もし、すでにログインしているならば、
-	//ダイアログを出さずにそのままログインする
-	if (MyPower != undefined){
+
+	if (hidelogin){
 		_root.DialogBox.doEdit();
 		_root.DialogBox._visible = true;
 	}
-
 };
 
 
@@ -126,76 +141,14 @@ function startEdit(commandafteredit){
 function stopEdit(){
 	//閲覧へ
 
-//	//ツール選択
-//	for (var i=0;i<PluginList.length;i++) {
-//		PluginList[i].onSelectTool("editStop");		//ツールの表示を更新
-//	}	
-
 	//閲覧モード
 	if (PageEdit != false){
 		_root.setEditMode(false);
 	}
 
 	//Tab更新
-//	if (MyScreen == 1){
-		//全画面表示ならupdateを再読込する
-//		getURL("javascript:location.reload();","upload");
-//	}else{
-		getURL("javascript:setEditMode('false');");
-//	}
-	/*
-	//第3者閲覧禁止なら、データを消す
-	if (MyAnonymous == "none"){
-		_root.Main.clearMapData();
-		_root.startEdit();
-	}	
-	*/
-	/*
-	//閲覧モードへ（この処理はなくせないか？）
-	myViewVars = new LoadVars();
-	myViewVars.action = "certify";
-	myViewVars.mode = "view";
-	myViewVars.onLoad = onAccountViewLoad;
-	
-	myViewVars.sendAndLoad(SERVER + "account.cgi",myViewVars);
+    getURL("javascript:setEditMode('false');");
 
-*/
-};
-
-function onAccountViewLoad(success){
-	//ツール選択
-	
-	if (!success || myViewVars.res == "ERR"){
-		//ページが見つからない
-		if (MyLang == "en"){
-			ErrorMes("Logout failure.");
-		}else{
-			ErrorMes("閲覧モードに入れません。");
-		}
-		return;
-	}
-
-	
-	//閲覧モード
-	if (PageEdit != false){
-		_root.setEditMode(false);
-	}
-	
-	//第3者閲覧禁止なら、データを消す
-	if (myViewVars.anonymous == "none"){
-		_root.Main.clearMapData();
-		_root.startEdit();
-	}	
-
-	//Tab更新
-//	if (MyScreen == 1){
-		//全画面表示ならupdateを再読込する
-//		getURL("javascript:location.reload();","upload");
-		
-//	}else{
-		getURL("javascript:setEditMode('false');");
-
-//	}
 };
 
 
@@ -240,6 +193,8 @@ function setEditMode(edit,user,power){
 		//Toolbarがロードされていなければ、できるまでTimerで待つ
 		toolbareditid = setInterval(setToolbarEditMode,100,edit,MyID,MyPower,sound);
 	}
+
+
 	
 	//編集モードの更新
 	_global.PageEdit = edit;
