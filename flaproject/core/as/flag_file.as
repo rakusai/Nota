@@ -72,6 +72,7 @@ saveicon.onRelease = function(){
 	
 };
 
+var mdowntime = 0;
 function onFilePress(){
 	//選択せよ
 	_root.Main.moveFlagFocus(pFlag._name,"nofocus");
@@ -79,5 +80,10 @@ function onFilePress(){
     //すでに選択されているなら移動
     _root.Main.FlagSelect.movetab.onPress();
 	
-	
+    var now = new Date;
+    if (now.getTime()-mdowntime < 500){
+        //dbクリック認定
+        _root.Main.openFlagFile(pFlag._name,true);
+    }
+    mdowntime = now.getTime();
 };
