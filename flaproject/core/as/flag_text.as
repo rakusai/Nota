@@ -39,10 +39,8 @@ function onFlagLoad2(){
 	if (selected == true){
 		//選択指示あり
 		//FlagSelectを表示させる
-//		_root.Main.FlagSelect._visible = true;
 		_root.Main.FlagSelect.moveResizeTab();//このオブジェクトをセットする
 
-//		_root.Main.FlagSelect.showSelect();//このオブジェクトをセットする
 		//テキストの選択
 		setTextSelect();
 		selected = false;
@@ -51,22 +49,6 @@ function onFlagLoad2(){
 }
 
 
-/*
-this.onEnterFrame = function (){
-	if (selected == true){
-		//選択指示あり
-		//FlagSelectを表示させる
-//		_root.Main.FlagSelect._visible = true;
-		_root.Main.FlagSelect.moveResizeTab();//このオブジェクトをセットする
-
-//		_root.Main.FlagSelect.showSelect();//このオブジェクトをセットする
-		//テキストの選択
-		setTextSelect();
-		selected = false;
-	}
-	
-};
-*/
 
 //-------------------------------------------------------//
 //テキストボックス関数／イベント
@@ -132,8 +114,6 @@ function saveText(){
 		var htmltext = textbox.htmlText;
 
 		if (m_DataList[pFlag._name].text != htmltext){
-//			html = Replace(html,"+","%2B");	//「+」はエンコードで抜け落ちる
-//			html = Replace(html,",","%2C");	//「,」は区切り文字だ
 			//変更フラグを解除
 			textchange = false;
 			var obj = new Object();	//差分を代入
@@ -224,7 +204,6 @@ mdrag = false;
 
 //マウスが移動ではなく、その場で離されたかどうか
 this.onMouseDown = function(){
-//function onFlagPress(){
 	if(_root._ymouse < 25){
 		//タイトルバーだ。
 		return;
@@ -251,7 +230,6 @@ this.onMouseDown = function(){
 	oldy = this._ymouse;
 	oldsel = _root.Main.oldfnum;
 	//時間を記憶
-//	var time = new Date;
 	mdowntime = time.getTime();
 
 	if (textbox._visible){

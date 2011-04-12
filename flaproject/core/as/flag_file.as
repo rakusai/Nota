@@ -34,9 +34,7 @@ fileicon.onPress = function(){
 fileicon.onMouseMove = function(){
 	//手のカーソルを用いるか否か
 	this.useHandCursor = (!PageEdit);
-//	if (PageEdit){
-//		_root.Main.FlagSelect.movetab.onMouseMove();	
-//	}
+
 };
 
 
@@ -75,50 +73,11 @@ saveicon.onRelease = function(){
 };
 
 function onFilePress(){
-	//選択されているか？
-	var bsel = _root.Main.isFlagSelected(pFlag._name);
-//	var bsel = (pFlag._name == _root.Main.oldfnum);
-	
 	//選択せよ
 	_root.Main.moveFlagFocus(pFlag._name,"nofocus");
 	
-	//図形のクリック
-//	if (bsel){
-		//すでに選択されているなら移動
-//		_root.Main.FlagSelect.showSelect();
-		_root.Main.FlagSelect.movetab.onPress();
-//	}
+    //すでに選択されているなら移動
+    _root.Main.FlagSelect.movetab.onPress();
 	
 	
 };
-//-------------------------------------------------------//
-//プロパティーの変更を監視し、関数の代わりに使用する。
-//-------------------------------------------------------//
-/*
-clearInterval(loadid);
-loadid = setInterval(onFlagLoad2,100,null);
-
-function onFlagLoad2(){
-	pFlag._visible = true;
-	clearInterval(loadid);
-
-	if (setDepthsFlag == 1){
-		//深度を設定(0.5秒後)
-		setDepthsFlag = 0;
-		_root.Main.setFlagDepths(pFlag);
-	}	
-}
-*/
-/*
-fileicon.onEnterFrame = function (){
-
-	if (setDepthsFlag == 1){
-		//深度を設定(0.5秒後)
-		setDepthsFlag = 0;
-		_root.Main.setFlagDepths(pFlag);
-	}
-
-	
-};
-
-*/

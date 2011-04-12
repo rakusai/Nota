@@ -14,14 +14,9 @@ if (this._name == "ScrollH"){
 	horizontal  = false;
 }
 
-//なぜかここで、スクロール位置を初期化
+//ここで、スクロール位置を初期化
 _root.Main.setScrollPos();
 
-/*
-if (horizontal){
-	barback._x = -0.5;
-}
-*/
 function setPos(pos,a_size,a_all,ishorizontal){
 	//サイズと、場所を報告させる
 	thisH = a_all-34;
@@ -31,8 +26,6 @@ function setPos(pos,a_size,a_all,ishorizontal){
 		pos = 0;
 	if (pos > 100)
 		pos = 100;
-//	if (a_size > 100)
-//		a_size = 100;
 	
 	if (pos == -1 || a_size >= 99.7){
 		enable = false;
@@ -65,26 +58,8 @@ function setPos(pos,a_size,a_all,ishorizontal){
 	scDown._alpha = alpha;
 	
 	barback._height = a_all+17+1;
-/*	
-	if (ishorizontal){
-		barback._visible = enable;
-		scUp._visible = enable;
-		scDown._visible = enable;
-				
-	}
-*/	
 
-	//オスボタン
-//	scUp._y = 0.5;//16.5;//17;
-//	scUp._x = 16.5;
-	
-//	scDown._x = -0.5;
 	scDown._y = a_all-17;
-	
-	//記録
-//	horizontal = ishorizontal;
-
-	
 };
 
 dragging = false;
@@ -110,12 +85,8 @@ function moveBar(newy,movebar,scroll){
 	if (scroll != false){
 		//通知
 		var per = (newy-17)/(thisH-barH)*100;
-//		per = Math.round(per/10)*10;
 		
 		_root.Main.Scroll(per,horizontal);	
-		//場所保存
-//		_root.Main.saveMapPosition();
-	
 	}
 	
 };
@@ -132,11 +103,6 @@ bar.onPress = function(){
 	starty = _ymouse;
 	bar.gotoAndStop(3);
 	lasttime = getTimer();
-
-//	clearInterval(dragID);
-//	dragID = setInterval(onDagScrollBar ,30,null);
-
-
 	
 };
 
@@ -149,48 +115,10 @@ bar.onRollOut = function(){
 	
 	bar.gotoAndStop(1);
 };
-/*
-function movePage(){
-	if (dragging){
-		//移動
-		var type = 1;
-		if (type == 1){
-			var spantime  = (getTimer() - lasttime);		
-			if (spantime < 100){
-				var testy = startpos + (_ymouse -starty);
-				var newy = Math.round(testy/10) * 10;
-				moveBar(newy,false,true);
-				updateAfterEvent();
-			}			
-		}else{
-			//タイプ2(1秒マウスが止まったときだけ)
-				scnt++;
-			if (scnt > 3){
-				scnt = 0;
-				var testy = startpos + (_ymouse -starty);
-				var newy = Math.round(testy/10) * 10;
-				moveBar(newy,false,true);
-				updateAfterEvent();
-			}
-		}
-		
 
-//		clearInterval(moveID);
-//		moveID = undefined;
-		lasttime = getTimer();
-		oldx = _root._xmouse;
-		oldy = _root._ymouse;
-
-	}	
-};
-*/
 lasttime = 0;
 
 function onDagScrollBar(){
-	
-
-	
-	
 	
 }
 
@@ -215,9 +143,6 @@ bar.onMouseMove = function(){
 		}
 		oldnewy = newy;
 		bargrip._y = bar._y + bar._height/2 - bargrip._height/2;
-
-	
-		
 	}
 };
 
@@ -242,10 +167,6 @@ bar.onRelease = function(){
 	
 	dragging = false;
 	bar.gotoAndStop(2);
-	
-	//フォーカスを
-//	Selection.setFocus("_root." + this._parent._name + "." + this._name);
-	
 	
 	//場所保存
 	_root.Main.saveMapPosition();
@@ -314,8 +235,6 @@ scUp.onPress = function(){
 	var newy = bar._y  - 30;
 	moveBar(newy,true);
 	scID = setInterval(scPage ,150,false);
-	//フォーカスを
-//	Selection.setFocus("_root." + this._parent._name + "." + this._name);
 	
 };
 

@@ -78,28 +78,7 @@ sdCOIN = new Sound;
 sdCOIN.attachSound("be-coin.wav");	
 sdPOU = new Sound;
 sdPOU.attachSound("POU.wav");	
-/*
-//コンテキストメニュー
-var my_cm:ContextMenu = new ContextMenu();
-if (my_cm){
-	my_cm.hideBuiltInItems();
-//	my_cm.customItems.push(new ContextMenuItem("大きく",ZoomIn));
-//	my_cm.customItems.push(new ContextMenuItem("小さく",ZoomOut));
-//	my_cm.customItems.push(new ContextMenuItem("印刷...",printPage,true));
-	my_cm.customItems.push(new ContextMenuItem("ヘルプ...",showHelp));
-	_root.menu = my_cm;
-}
 
-/////////////////////////////////////////////
-//ヘルプ表示
-/////////////////////////////////////////////
-
-function showHelp(){
-	getURL("javascript:showHelp();");
-	
-//	getURL("http://nota.jp/help/","_blank");
-}
-*/
 /////////////////////////////////////////////
 //編集開始・終了
 /////////////////////////////////////////////
@@ -496,13 +475,6 @@ function newPage(afterCreateAccount){
 	//ページを作成
 	createNewPage("home","",onNewPage);
 
-/*	
-	//次にテンプレートの作成
-	_root.masterAfterCreateAccount = afterCreateAccount;
-	_root.newPageAfterMaster = true;
-	DialogBox.gotoAndStop("master");
-	DialogBox.showDlg();
-*/	
 }
 
 function copyPage(afterCreateAccount){
@@ -649,21 +621,11 @@ function dateditPage(){
 		}
 		return;
 	}	
-//	var page = _root.List.cur_selid;
-
-//	var page = MyPage;
-//	if (page == undefined){
-//		return;
-//	}
-//	vars = new LoadVars();
-//	vars.action = "record";
-//	vars.page = page;
 	nextedit;	//どちらにするのか
 	if (PageDatEdit == "admin")
 		nextedit = "default";
 	else
 		nextedit = "admin";
-//	vars["head:edit"] = nextedit;
 	
 	var obj = new Object;
 	obj.id = 'head';
@@ -708,49 +670,12 @@ function masterPage(masterid){
 	if (_root.Main.m_toolname != "view"){
 		_root.Main.setToolOption("view",false);
 	}
-//	_root.masterAfterCreateAccount = false;
-//	_root.newPageAfterMaster = false;
 
 	//ページを作成
 	createNewPage(masterid,"",onNewPage);
 
-/*
-
-	DialogBox.gotoAndStop("master");
-	DialogBox.showDlg(masterid);	
-*/	
 }
-/*
-function setMasterPage(masterpage){
 
-	//マスターページの変更
-	
-	//権限をチェック
-	SetMasterVars = new LoadVars();
-	SetMasterVars.onLoad = onSetMasterPage;
-
-	SetMasterVars.load(SERVER + "write.cgi?action=master&page="
-				 + MyPage + "&master=" + masterpage);
-
-};
-
-function onSetMasterPage(success){
-
-	if (!success || this.res == "ERR"){
-		//書き込み失敗！
-		if (MyLang == "en"){
-			ErrorMes("Set template failure.");
-		}else{
-			ErrorMes("背景の変更に失敗しました。");
-		}
-		return;
-	}
-	
-	//ページの更新
-	_root.Main.updatePage();
-
-}
-*/
 /////////////////////////////////////////////
 //マウスイベント処理
 /////////////////////////////////////////////
@@ -758,7 +683,6 @@ mouseListener = new Object();
 mouseListener.onMouseWheel = function(delta) {
 	if (ComboOpen == true || minitool.linklist._visible == true)
 		return;
-//	var p = new Object();
 	var x = _root.Main._xmouse;
 	var y = _root.Main._ymouse;
 		
@@ -843,19 +767,16 @@ keyListner.onKeyDown = function(){
 		case 'x':
 		case 'X':
 			//Cut
-//			if (noselection)
-				_root.Main.cutFlag(true);
+            _root.Main.cutFlag(true);
 			break;
 		case 67:
 			//Copy
-//			if (noselection)
-				_root.Main.cutFlag(false);
+            _root.Main.cutFlag(false);
 			break;
 		case 'V':
 			//Paste
-//			if (noselection)
-				_root.Main.pasteFlag();
-			break;
+            _root.Main.pasteFlag();
+            break;
 		}
 	}else if (!textboxsel){
 		//テキストボックスは選択されていない

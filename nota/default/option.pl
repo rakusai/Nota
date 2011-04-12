@@ -22,7 +22,7 @@ $m_master_passwd = 'test2';
 #なるべく絶対パスで指定してください
 
 #この値を適切に変更してください。
-$m_notadata_dir = "/Users/rakusai/Work/NOTA2/notadata/";
+$m_notadata_dir = "/Users/rakusai/Work/Nota/notadata/";
   #m_notadata_dirは、notadataフォルダの場所を指定します。
   #このフォルダはセキュリティ上の理由から
   #httpでアクセスできない場所においてください

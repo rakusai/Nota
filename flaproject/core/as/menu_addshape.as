@@ -125,7 +125,6 @@ function setColor(){
 			myColor.setRGB(_root.Main.pencolor);//選択（青）
 		}else{
 			myColor.setRGB(0x999999);//非選択
-//			myColor.setRGB(0xFFFFFF);//非選択
 		}
 	}		
 	

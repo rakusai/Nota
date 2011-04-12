@@ -94,7 +94,6 @@ playSound("KASHA");
 
 //書き込み変数
 WriteAccessCnt = 0;
-//_root.statusbar.writecnt = WriteAccessCnt;
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -281,9 +280,6 @@ function onLoadData(success){
 			delete _global.DataList;
 			_global.m_DataList = new Array();
 	
-			//接続待ち
-//			map_lc.connect(SDIR + "map" + MyPage);
-
 		}
 		//ページの重さ情報を消す
 		oldpageweight = null;
@@ -305,7 +301,6 @@ function onLoadData(success){
 	}
 	//手書きメモリを消去
 	canvasDef.clear();
-//	canvasMine.clear();  //今書いているものを消すな
 
 	//背景色
 	changePageBack(myLoadVars["bgcolor"]);
@@ -335,9 +330,6 @@ function onLoadData(success){
 				m_DataList[indx].edit		= myLoadVars["edit" + i];
 
 				m_DataList[indx].text 		= myLoadVars["text" + i];
-//				if (!m_DataList[indx].text){
-//					m_DataList[indx].text = "";
-//				}
 				m_DataList[indx].fname 		= myLoadVars["fname" + i];
 				m_DataList[indx].shape 		= myLoadVars["shape" + i];
 				m_DataList[indx].bgcolor 	= myLoadVars["bgcolor" + i];
@@ -497,21 +489,12 @@ function loadFlag(i){
 			//線ですね
 			//区切りを分解して配列へ
 			drawStringToList(obj);
-/*			if (obj.xline != "" && obj.xline != undefined){
-				_global.m_DataList[i].xlist = obj.xline.split(":");
-				_global.m_DataList[i].ylist = obj.yline.split(":");
-			}else{
-				_global.m_DataList[i].xlist = obj.x.split(":");
-				_global.m_DataList[i].ylist = obj.y.split(":");
-			}
-*/			
 			//そして描画
 			drawRoad(obj);
 		}
 	}else{
 		//既存オブジェクトの更新
 		_root.Main.showFlagObjectData(i);
-//		eval(i).showObjectData();
 		eval(i)._visible = true;
 	}
 	
@@ -545,7 +528,6 @@ function checkFTime(){
 	if (chatMode){
 		//チャットモード
 		//10秒に一回
-//		ErrorMes("チャットモードチェック:" + checkCount);
 		if (checkCount > 18){
 			//10秒×18 = 3分間で終了
 			chatMode = false;
@@ -555,7 +537,6 @@ function checkFTime(){
 	}else{
 		//通常モード
 		//30秒に一回
-//		ErrorMes("通常モードチェック:" + Math.floor((checkCount % 3)));
 		if (Math.floor((checkCount % 3)) != 1){
 			//3回に一度だけチェック
 			//ページを呼んだ直後の10秒後にチェックがはいるように調整
@@ -645,9 +626,6 @@ function WriteMapData(num,draw_numlist,newobj){
 	}
 	
 	//大きさ
-//	Vars.width = PaperW;
-//	Vars.height = PageH;
-
 	//一つのアイテムを書き換え（ヘッダー含む）
 	if (num != undefined){
 		var obj = newobj;
@@ -722,9 +700,7 @@ function WriteMapData(num,draw_numlist,newobj){
 
 onLoadResVars = function(success){
 	_root.statusbar.accessFlag.gotoAndStop("stop");
-//	WriteAccess = false;
 	WriteAccessCnt--;
-//	_root.statusbar.writecnt = WriteAccessCnt;
 	_root.statusbar.accessFlag._xscale = 100 + WriteAccessCnt*10;
 
 	if (!success || this.res == "ERR"){
@@ -734,14 +710,12 @@ onLoadResVars = function(success){
 			this.trycnt++;
 			Vars = this.Vars;
 			_root.statusbar.accessFlag.gotoAndPlay("start");
-//			WriteAccess = true;
 			WriteAccessCnt++;
 			_root.statusbar.writecnt = WriteAccessCnt;
 			_root.statusbar.accessFlag._xscale = 100 + WriteAccessCnt*10;
 
 			Vars.sendAndLoad(SERVER + "write.cgi",this);
 			
-//			ErrorMes("書き込みに再トライします：" + this.trycnt + "回目");
 		}else{
 			if (MyLang == "en"){
 				ErrorMes("Writing failure.");
@@ -764,7 +738,6 @@ onLoadResVars = function(success){
 				//自分で更新
 				_global.m_DataList[this.num].update   = this.update; //更新日を書き換え
 			}else{
-//				ErrorMes(this.item_last_update + "に人が更新");
 				update_byothers = true;
 			}
 			if (isFlagSelected(this.num) && m_SelList.length == 1){
@@ -881,13 +854,6 @@ function checkMapDate(date){
 
 map_lc.addImg = function(fname,date){
 	//新しい絵がアップロードされた！
-/*	
-	if (getTimer() - map_lc.startTime < 1000){
-		//一秒以内のアクセスは認めない
-		return;
-	}
-	
-*/
 	if (!checkMapDate(date)){
 		return;
 	}	
@@ -1187,7 +1153,6 @@ function getAncp(n){
 	//"num,num"で区切られた数字から最初の数字だけを取り出す
 	var na = Replace(String(n),",","^").split("^");
 	return Number(na[0]);
-//	return Number(n);
 }
 
 
@@ -1210,35 +1175,33 @@ function registerErase(){
 			if (obj.author != MyID && MyPower != "admin"){
 				able = false;
 			}
-		//	if (myLoadVars["author" + i] == myID){
-				var n=0;
-				for (n=0;n<xlist.length;n++){
-					if (xlist[n] != "#"){
-						ap = new Object();//点を絶対座標に変換してhittestを行う
-						ap.x = getAncp(xlist[n]);
-						ap.y = getAncp(ylist[n]);
-					//	ap.y += 30;
-						canvasDel.localToGlobal(ap);
-						if (canvasDel.hitTest(ap.x,ap.y,true)){
-							if (!able){
-								//権限なし
-								if (MyLang == "en"){
-									ErrorMes("You can't delete objects of others.");
-								}else{
-									ErrorMes("他人の書き込みは削除できません。");
-								}
-							}else{
-								//円の中に入っている！
-								xlist[n] = "#";
-								change = true;
-								//周囲の点を全部消せ！
-								if (n == xlist.length-2)	xlist[n+1] = "#";//最後から２番目
-								else if (n == 1)			xlist[n-1] = "#";//最初から２番目
-							}
-						}
-					}
-				}
-	//		}
+            var n=0;
+            for (n=0;n<xlist.length;n++){
+                if (xlist[n] != "#"){
+                    ap = new Object();//点を絶対座標に変換してhittestを行う
+                    ap.x = getAncp(xlist[n]);
+                    ap.y = getAncp(ylist[n]);
+                //	ap.y += 30;
+                    canvasDel.localToGlobal(ap);
+                    if (canvasDel.hitTest(ap.x,ap.y,true)){
+                        if (!able){
+                            //権限なし
+                            if (MyLang == "en"){
+                                ErrorMes("You can't delete objects of others.");
+                            }else{
+                                ErrorMes("他人の書き込みは削除できません。");
+                            }
+                        }else{
+                            //円の中に入っている！
+                            xlist[n] = "#";
+                            change = true;
+                            //周囲の点を全部消せ！
+                            if (n == xlist.length-2)	xlist[n+1] = "#";//最後から２番目
+                            else if (n == 1)			xlist[n-1] = "#";//最初から２番目
+                        }
+                    }
+                }
+            }
 			//新リストの作成（端の-とだぶった-の削除）
 			if (change){
 				var newxlist = new Array();
@@ -1731,18 +1694,10 @@ function updateFlag(num,obj,time,nosave){
 	if (nosave == undefined){
 		WriteMapData(num,null,obj);
 	}
-	//Redo無効化
-	
-	
-//	ErrorMes("UndoPos:" + UndoPos + "\nUndoCnt:" + m_UndoList.length + "\nRedoCnt:" + m_RedoList.length);
 };
 
 
 function undoFlag(isRedo){
-//	 if (Key.isDown(Key.SHIFT)){
-//		isRedo = true;
-//	}
-	
 	//オブジェクトの復活
 	var loop = true;
 	while (loop){
@@ -1775,11 +1730,6 @@ function undoFlag(isRedo){
 					flg.saveText();
 				}
 			}
-			
-/*			if (oldfnum >= 0 && m_UndoList[oldfnum].tool == "TEXT"){
-				curflag.saveText();
-			}
-*/			
 			if (UndoPos <= 0){
 				if (MyLang == "en"){
 					ErrorMes("You can't undo anymore.");
@@ -1808,7 +1758,6 @@ function undoFlag(isRedo){
 			redo.num = num;
 			redo.mem = undo.mem;
 			m_RedoList.push(redo);
-//			ErrorMes("UndoPos:" + UndoPos + "\nUndoCnt:" + m_UndoList.length + "\nRedoCnt:" + m_RedoList.length);
 		}
 		//元の状態を適用
 		var obj = m_DataList[num]; 
@@ -1843,8 +1792,6 @@ function undoFlag(isRedo){
 				{
 					//区切りを分解して配列へ
 					drawStringToList(obj);
-//					obj.xlist = obj.x.split(":");
-//					obj.ylist = obj.y.split(":");
 					drawRoad(m_DataList[i]);
 				}
 			}
@@ -1852,7 +1799,6 @@ function undoFlag(isRedo){
 
 		//保存処理
 		WriteMapData(num,null,undo);
-//		moveFlagFocus(num);
 	}
 	return true;
 };
@@ -1879,9 +1825,6 @@ function IsTextBoxInClient(num,forprint){
 	pt2.x = Stage.width;
 	pt2.y = Stage.height;
 
-//	_root.Main.globalToLocal(pt1);
-//	_root.Main.globalToLocal(pt2);
-	
 	//テキストボックスがこの中にあるか？
 	if ((((pt1.y < cb.yMin && cb.yMin < pt2.y) ||
 		(pt1.y < cb.yMax && cb.yMax < pt2.y)  ||
@@ -1892,43 +1835,23 @@ function IsTextBoxInClient(num,forprint){
 		forprint == true)
 	{
 		if (!obj.textbox.inclt){
-//			ErrorMes();
 			if (m_DataList[num].text == undefined){
 				obj.textbox.text = "";
 			}else{
 				obj.textbox.htmlText = m_DataList[num].text;
 			}
-//			obj.textbox._visible = true;
-//			obj.textbox.autoSize = "left";
-//			if (pFlag.selected != true){	//選択の指示がないなら。
-
-/*			if (obj.textbox.inclt != undefined){
-				if (obj.textbox.text == "" || obj.textbox.text == "\r"){
-					obj.textbox.text = "ここに入力して下さい。";
-				}
-			}
-*/			
 			obj.textbox.inclt = true;
 			//深度を設定
 			setFlagDepths(obj);
-		}else{
-//			obj.textbox.autoSize = "none";
-			
 		}
 	}else{
 		if (obj.textbox.inclt != false){
 			obj.textbox.inclt = false;
 			obj.textbox.text = ""; 
 		}
-	//	obj.textbox._visible = false;
 	}
 	
 	if (forprint == true){
-/*		var h = obj._height;
-		obj.autoSize = false;
-		obj._height = h+100;
-		obj._height = h;
-*/		
 		obj.autoSize = "right";
 		obj.wordWrap = true;
 		obj.border = true;
@@ -1994,9 +1917,7 @@ function showFlagObjectData(num, obj){
 	switch (m_DataList[num].tool){
 	case "TEXT":
 		//テキスト
-//		FElement.gotoAndStop("textbox");
 		var textbox = FElement.textbox;
-//		pFlag.textbox = textbox;
 		var fobject = textbox;
 		pFlag.fobject = textbox;
         if (check_recently_updated(obj.update)){
@@ -2041,12 +1962,9 @@ function showFlagObjectData(num, obj){
 		if (obj.rotation != undefined){	//回転
 			pFlag._rotation = obj.rotation;
 		}
-//		var FElement.gotoAndStop("shape");
 		shape = FElement.shape;
-//		pFlag.shape = shape;
 		var fobject = shape;
 		pFlag.fobject = shape;
-//		shape._visible = true;
 		if (obj.shape != undefined){
 			shape.clear();
 			shape.gotoAndStop(obj.shape);//形
@@ -2163,7 +2081,6 @@ function showFlagObjectData(num, obj){
 					shape.hitArea = null;
 					photo.setMask(shape);
 					//マスキング
-//					shape.gotoAndStop(obj.shape);
 					if (shape._currentframe == 1){
 						//無効な形
 						//マスキングなし(SWF含む)
@@ -2269,7 +2186,6 @@ function setFlagDepths(pFlag){
 		break;
 	case "SHAPE":
 		//図形
-//		areasize = obj.width * obj.height/10;
 		areasize = pFlag.shape._width * pFlag.shape._height/10;
 		break;
 	case "FILE":
@@ -2279,7 +2195,6 @@ function setFlagDepths(pFlag){
 			areasize = pFlag.fileicon._width * pFlag.fileicon._height/10;
 		}else{
 			areasize = pFlag.photo._width * pFlag.photo._height/10;
-//			areasize = obj.w * obj.h/100;
 		}
 		break;
 	case "PLUGIN":
@@ -2290,16 +2205,6 @@ function setFlagDepths(pFlag){
 		areasize = 90000;
 	}
 	pFlag.areasize = Math.floor(90000-areasize);
-//	if (pFlag.areasize < 10){
-//		pFlag.areasize = 10;
-//	}
-/*	var test = _root.Main.getInstanceAtDepth(pFlag.areasize);
-	while (test != undefined && test != pFlag){
-		pFlag.areasize += 0.1;
-		test = _root.Main.getInstanceAtDepth(pFlag.areasize);
-	}
-*/
-
 	var test = _root.Main.findFlagDepth(pFlag._name);
 	while (test){
 		pFlag.areasize += 1;
@@ -2350,9 +2255,6 @@ function moveFlagFocus(num,option){
 		//追加もしくは除去
 		if (isFlagSelected(num)){
 			multi = "remove";
-			if (option == "noremove"){
-//				return;
-			}
 		}else{
 			multi = "add";
 		}
@@ -2532,7 +2434,6 @@ function changeFlagBack(num,nextcolor){
 	var obj = new Object();	//差分を代入
 	obj.bgcolor = nextcolor;
 	_root.Main.showFlagObjectData(num,obj);
-//	showObjectData(obj);	//適用
 	_root.Main.updateFlag(num,obj);	
 };
 
@@ -2550,7 +2451,6 @@ function changeFlagTranslate(num){
 	var obj = new Object();	//差分を代入
 	obj.transparent = curv;
 	_root.Main.showFlagObjectData(num,obj);
-//	showObjectData(obj);	//適用
 	_root.Main.updateFlag(num,obj);	
 	
 };
@@ -2563,15 +2463,6 @@ function changeFlagTranslate(num){
 function IsFlagGuestLock(num,noalert){
 	//ゲストが変更できない動作か？
 	var author = m_DataList[num].author;
-/*	if (author != MyID && MyPower == "guest"){
-		if (MyLang == "en"){
-			ErrorMes("Guests can't edit objects of others.");
-		}else{
-			ErrorMes("ゲストは他人の部品を編集できません。");
-		}
-		return true;
-	}
-*/	
 	//管理人以外は他人のページでは、他人の部品を操作できない
 	if (PageAuthor != MyID && author != MyID && 
 		MyPower != "admin")
@@ -2738,7 +2629,6 @@ function pasteFlag(del){
 			mid.x = (Stage.width)/2-150;
 			mid.y = (Stage.height)/2-150;
 			_root.Main.globalToLocal(mid);
-//			obj.x = mid.x+obj.selx;
 			obj.y = mid.y+obj.sely; //Y位置のみ現在地に合わせる
 
 			//ファイルの場合はコピーを行う
@@ -2897,41 +2787,14 @@ function loadMapPosition(){
 		this._xscale = yokosc;
 		this._yscale = yokosc;
 	}
-	if (so.data.page == MyPage){
-		//同一ページは場所を再現
-//		moveMap(so.data.mapx,so.data.mapy);
-	}else{
-		//スケールは100でいいでしょう。とりあえず。
-	//	moveMap(ML,MT);
-	}
-		moveMap(ML,MT);
+    moveMap(ML,MT);
 	
-//　changeMapScale(100,0,0);//御所が真ん中に来る！	
 
-//	so.close();
-//	delete so;
-/*	_root.TabBox._x = Stage.width-250;
-	_root.DrawList._x = Stage.width-250;
-	_root.AboutList._x = Stage.width-250;
-	_root.List._x = Stage.width-250;
-	_root.pagetool._x = Stage.width-250;	
-*/
 };
 
 function saveMapPosition(){
 	//地図の位置情報を保存
-/*
-	var so = new SharedObject;
-	so = SharedObject.getLocal("mapdata",localpath);
-	
-	so.data.mapx = _root.Main._x;
-	so.data.mapy = _root.Main._y;
-	so.data.scale = _root.Main._xscale;
-	so.data.page = MyPage;
-	
-	so.flush();
-	delete so;
-*/	
+
 };
 
 function setPoint(){
@@ -2969,7 +2832,6 @@ function moveMap(x,y,setscroll){
 	//縦
 	if (maph < stageH){
 		//中心に
-//		y = (stageH-maph)/2+MT;
 		y = MT;
 		limit = true;
 	}else if (y > MT){
@@ -3038,14 +2900,8 @@ function changeMapScale(newscale,x,y,sound){
 	_root.Main._xscale = newscale;
 	_root.Main._yscale = newscale;
 	//切り替え後の場所を適正に保つ
-//	nextx = -x*newscale/100;
-//	nexty = -y*newscale/100;
-
-		
-	//}else{
 	nextx = stageW/2 - x*newscale/100;
 	nexty = stageH/2 - y*newscale/100;
-//	}
 	moveMap(nextx,nexty);
 
 	//旗に対して、スケール変更通知（作成者情報のサイズ変更）
@@ -3170,11 +3026,8 @@ function resizePageH(){
 		page_cnt = 1;
 	}
 	var espace = 0;
-//	if (PageEdit == true){
-		//編集モードなら、次ページ作成のためのスペースを用意
-		espace = PageH/2;
-//	}
-//	trace("もともした:"+ytop+"現在のページ数:"+page_cnt);
+    //編集モードなら、次ページ作成のためのスペースを用意
+    espace = PageH/2;
 	
 	if (PaperH != page_cnt*PageH + espace){
 		_global.PaperH = page_cnt*PageH + espace;
@@ -3183,8 +3036,6 @@ function resizePageH(){
 	
 		//もし、ページ数を減らす場合で、スクロール位置がおかしいなら
 		setScrollPos();
-		//ページ番号
-	//	setPageNumber();
 	}
 	canvasLine.clear();
 	//影
@@ -3313,7 +3164,6 @@ function changePageBack(nextcolor,save){
 	if (save){
 		var obj = new Object();	//差分を代入
 		obj.bgcolor = nextcolor;
-	//	WriteMapData("head",null,obj);
 		_root.Main.updateFlag("head",obj);	
 	}
 	
@@ -3346,10 +3196,6 @@ stageListner.onResize = function(){
 	
 	//スクロールサイズをあわせる
 	setScrollPos();
-
-	//選択コマンドツールバーの位置
-//	_root.minitool._y = stageH - 30;
-	
 	
 	//背景のリサイズ
 	_root.back._width = Stage.width;
@@ -3357,23 +3203,11 @@ stageListner.onResize = function(){
 
 	//倍率補正
 	if (PageReal){
-//		_root.ScrollReal();
 		yokosc = stageW / PaperW * 100;//幅いっぱい
 		if (yokosc > MAX_SC)
 			yokosc = MAX_SC;
-//		_global.PageReal = (newscale == yokosc);//最大倍率であることを記憶
 		changeMapScale(yokosc,null,null,false);
 	}
-	
-	//サイドバーの位置
-	
-/*				
-_root.TabBox._x = Stage.width-250;
-_root.DrawList._x = Stage.width-250;
-_root.AboutList._x = Stage.width-250;
-_root.List._x = Stage.width-250;
-_root.pagetool._x = Stage.width-250;
-*/	
 	
 };
 Stage.addListener(stageListner);
@@ -3395,35 +3229,7 @@ backboard.onPress = function(){
 	//全体の大きさ
 	var stageW = Stage.width-ML-17;
 	var stageH = Stage.height-MT-17;
-/*	
-	if (!getEditMode()){
-		//ダブルクリックの検出
-		var spantime  = (getTimer() - lasttime);
-		var distance = Math.pow((_root._xmouse-dboldx),2)+Math.pow((_root._ymouse-dboldy),2);
-		if (spantime < 700 && lasttime > 0 && distance < 10){
-			//地図の縮尺を変更
-			yokosc =stageW / PaperW * 100;//幅いっぱい
-			if (yokosc < MIN_SC) yokosc = MIN_SC;
-			if (yokosc > MAX_SC) yokosc = MAX_SC;
-			wholesc =stageH / PageH * 100;//１ページ全体
-			if (_root.Main._xscale  >= yokosc-5)
-				newsc = wholesc;
-			else
-				newsc = yokosc;
-			changeMapScale(newsc,getMouseX(),getMouseY());
-			return;
-		}
-		lasttime = getTimer();
-		dboldx = _root._xmouse;
-		dboldy = _root._ymouse;
-	}
-*/
-	//選択中なら、ページ移動しない
-/*	if (oldfnum >= 0){
-		moveFlagFocus(-1);
-		return;
-	}
-*/
+
 	if (!getEditMode()/* && oldfnum == -1*/){
 
 		
@@ -3442,8 +3248,6 @@ backboard.onPress = function(){
 
 lasttime = 0;
 backboard.onMouseMove = function(){
-//MouseMoveでなくてOnEnterを使う理由は？？
-//backboard.onEnterFrame = function(){
 	//地図を移動
 	if (PageDragging){
 		//時間が詰まり過ぎていれば、無視
@@ -3468,11 +3272,7 @@ backboard.onMouseMove = function(){
 
 	}
 };
-/*
-backboard.onMouseMove = function(){
 
-};
-*/
 backboard.onRelease = function(){
 	//ドラッグの終了
 	if (!getEditMode()){

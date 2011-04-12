@@ -19,17 +19,15 @@ if (MyLang == "en"){
 
 //入力文字制限（ (！) から（チルダ) までの文字のみを入力できます）
 url_txt.restrict = "¥u0021-¥u007E";
+
 //現在のページを見る
-			
 //ページを追加
-//setList();
 hrefList.setStyle("rollOverColor","0x6FB8DB");
 
 hrefList.setStyle("textSelectedColor","0xFFFFFF");
 hrefList.setStyle("selectionColor","0x3399CC");
 hrefList.setStyle("backgroundColor","0xD8F4FE");
 hrefList.setStyle("borderStyle","none");
-//hrefList.setStyle("backgroundColor","0xC8ECF2");
 
 //ページ一覧をコンボにセット
 function onLoadPageData(success){
@@ -98,12 +96,10 @@ listenerObject.change = function(eventObject){
   
 
 	//選択がクリックされた
-//	var LH = dammy_txt.textHeight;
 	var indx = hrefList.selectedIndex;//Math.floor(((_ymouse)/LH));
 	if (indx == null)
 		return;
 	//テキストの最初の行
-//	indx += link_txt.scroll-1;//スクロール行数を考慮
 	//表示を消す
 	menu._visible = false;
 	//呼び出しもとの関数を呼び出す
@@ -146,8 +142,6 @@ okbtn.onRelease = function(){
 	//外部URLへのリンクを貼る
 	var url = url_txt.text;
 	var enurl = url;
-//	enurl = Replace(enurl,"&","$amp;");	//特殊エンコードlink.cgi?page=urlのurlに=&があると動作しないから
-//	enurl = Replace(enurl,"=","$equal;");
 	
 	//表示を消す
 	menu._visible = false;

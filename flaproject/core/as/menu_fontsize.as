@@ -48,23 +48,7 @@ listenerObject.change = function(eventObject){
 };
 sizeList.addEventListener("change", listenerObject)
 
-/*
 
-function onSizeBtnRelease(){
-	//サイズ設定
-	var name = this._name;
-	var nsize = name.substr(1);
-	var fm = new TextFormat();
-	fm.size = nsize;
-
-
-	_parent.setFormat(fm);
-	
-	
-	//文字枠を変更
-	_root.Main.FlagSelect.moveResizeTab();
-};
-*/
 function selectSize(fontsize){
 	//リストを選択
 	var indx;

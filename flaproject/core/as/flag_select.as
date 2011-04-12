@@ -21,21 +21,9 @@ var m_AdsorbList= new Array();
 function showSelect(curpFlag){
 	//Flag登録
 	if (m_SelList.length > 0){
-/*		var id = 0;
-		var q = 100000;
-		for (var i=0;i<m_SelList.length;i++){
-			var q2 = m_DataList[m_SelList[i].num].x * m_DataList[m_SelList[i].num].y;
-			if (q2 < q){
-				q = q2;
-				id = i;
-			}
-		}
-		
-		pFlag = eval("_root.Main." + m_SelList[id].num);
-*/		pFlag = eval("_root.Main." + m_SelList[0].num);
-		}
+		pFlag = eval("_root.Main." + m_SelList[0].num);
+	}
 	//場所を移動する
-	
 	FlagSelect._x = pFlag._x;
 	FlagSelect._y = pFlag._y;
 	
@@ -105,14 +93,12 @@ function showAuth(){
 	var allText = "";
 	//作成者
 	allText += "<font color='#000000' size='12'>" + author +  "</font>";
-//	allText += "<font color='#bd362e' size='12'>" + Vars.author +  "</font>\n";
 	//作成日、更新日
 	//秒を切る
 	var re = crdate.lastIndexOf(":");
 	if (re >= 0) crdate = crdate.substr(0,re);
 	var re2 = update.lastIndexOf(":");
 	if (re2 >= 0) update = update.substr(0,re2);
-//	allText = Vars.authorname + " / ";
 	if (MyLang == "en"){
 		allText += "<BR>Create ";
 	}else{
@@ -141,7 +127,6 @@ function showAuth(){
 function setAuthHeight(){
 	//作成者情報のテキストの高さを計算
 	
-//	updateAfterEvent();//今すぐ更新
 	var isshow = (m_SelList.length <= 1);
 	FlagSelect.comment_txt._visible = isshow;
 	FlagSelect.comment_back._visible = isshow;
@@ -154,19 +139,13 @@ function setAuthHeight(){
 		if (FlagSelect.comment_txt._xscale != sc){
 			FlagSelect.comment_txt._xscale = sc;
 			FlagSelect.comment_txt._yscale = sc;
-//			FlagSelect.comment_back._xscale = sc;
-//			FlagSelect.comment_back._yscale = sc;
 		}
 		//大きさ
 		H = FlagSelect.comment_txt._height;
-//		if (H > 1*sc/100 && oldH != H){
 			FlagSelect.comment_txt._y = -H - 20;
 			FlagSelect.comment_back._height =  H + 5;
 			FlagSelect.comment_back._width =  (FlagSelect.comment_txt._width + 5);
 			FlagSelect.comment_back._y = -FlagSelect.comment_back._height-15-2;
-//			FlagSelect.comment_back._visible = true;
-//			oldH = H;
-//		}
 	}
 };
 
@@ -256,22 +235,6 @@ FlagSelect.delbtn.onRelease = function(){
 	_root.Main.deleteFlag();
 };
 
-
-//-------------------------------------------------------//
-//movetabイベントハンドラ
-//-------------------------------------------------------//
-/*FlagSelect.movetab.onRollOver = function(){
-	_root.Main.moveFlagFocus(pFlag._name);
-	
-	_parent.SetSelection();
-};
-
-FlagSelect.movetab.onRollOut = function(){
-	//カーソル変更
-	setCursor();
-
-};
-*/
 
 function startMove(bytab){
 	
@@ -430,9 +393,6 @@ function getMovePos(pt){
 		pt.ydis = ydis;
 
 	}
-	
-//	x = Math.round((x / 30))*30;
-//	y = Math.round((y / 30))*30;
 	
 	pt.x = Math.round(x);
 	pt.y = Math.round(y);
@@ -599,13 +559,6 @@ FlagSelect.resizetab.onMouseMove = function(){
 		var w = pt.x;
 		var h = pt.y;
 		
-//		ErrorMes("resize" + pt.x + "|" + pt.y + "|" + 
-//				 _root.Main._ymouse);
-/*		
-		var w = _xmouse;
-		var h = _ymouse;
-*/		
-		
 		if (pFlag.photo._visible && pFlag.fileext == "swf"){
 			//SWFなら、Flashが原点と違う場所にある場合、w,h値を修正
 			var rect = pFlag.fobject.picture.getBounds(pFlag.fobject);
@@ -622,7 +575,6 @@ FlagSelect.resizetab.onMouseMove = function(){
 		//最小値の設定
 		if (w < 10)		w = 10;
 		if (h < 10)		h = 10;
-//		if (w > 1000)	w = 1000;
 		
 		var robj;
 		if (pFlag.photo._visible){

@@ -114,11 +114,6 @@ function onPhotoLoad(){
 	//最後に width:任意　イベント2度目
 	//となる
 	//一度目のイベントは無視する
-//	if (photoloading == 0){
-//		testetxt2 += photo._width + "-" + photoloading + ":";
-//	}
-//	if (photo._width != 20.5 && photo._height != 20.5){
-		
 	if (photoloading == 1){
 		clearInterval(loadid);
 		loadid = setInterval(onPhotoLoad2,300,null);
@@ -133,7 +128,6 @@ function onPhotoLoad(){
 		photo.attachMovie("FlagBreak","picture",0);
 	}
 	
-//	test += "L" + photo._width + "-" + photo.picture.getBytesLoaded() + "/" + photo.picture.getBytesTotal() + "\r";
 }
 
 
@@ -141,13 +135,7 @@ function onPhotoLoad2(){
 
 	//この関数はなぜか2回呼ばれる。
 	//最初は、width=0 で　次に値が入るので最初の 0は無視する
-	
-//	test += "P" + photo._width + "-" + photo.picture.getBytesLoaded() + "/" + photo.picture.getBytesTotal() + "\r";
-	
-	//読み込みサイズに変化がないなら無視
-//	if (photo.picture.getBytesTotal() <= 0){
-//		return;
-//	}
+
 	
 	//回数増加
 	sizeloop++;
@@ -204,27 +192,6 @@ function onPhotoLoad2(){
 		DrawBorder();	
 	}else if (sizeloop > 20){
 		//3秒経過
-/*		if (photo._width <= 0 || photo._height <= 0){
-			//サイズ0 なら読み込み失敗
-			pFlag.breakpic = 1;
-			photo.picture.removeMovieClip()
-			photo.attachMovie("FlagBreak","picture",0);
-			//新規作成のファイルなら無効な画像とみなして削除
-			if (PageEdit == true && m_DataList[pFlag._name].newpic == 1){
-				//6秒経過
-				clearInterval(loadid);
-				if (MyLang == "en"){
-					MessageBox("You can't insert an unavailable file.");
-				}else{
-					MessageBox("中身がないファイルは貼り付けられません。");
-				}
-				_root.Main.deleteFlag();
-				return;
-			}
-
-			return;
-		}
-*/		
 		//ゆっくり待つ
 		clearInterval(loadid);
 		loadid = setInterval(onPhotoLoad2,800,null);

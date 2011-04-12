@@ -40,49 +40,15 @@ shape.onReleaseOutside = shape.onRelease;
 function onShapePress(){
 	//選択されているか？
 	var bsel = _root.Main.isFlagSelected(pFlag._name);
-//	(pFlag._name == _root.Main.oldfnum);
 	
 	//選択せよ
-//	if (!bsel){
-		_root.Main.moveFlagFocus(pFlag._name,"nofocus");
-//	}
+    _root.Main.moveFlagFocus(pFlag._name,"nofocus");
 	//図形のクリック
 	if (bsel){
 		//すでに選択されているなら移動
-//		if (!_root.Main.IsFlagGuestLock(pFlag._name,true)){
-			_root.Main.FlagSelect.startMove(false);
-//		}
+        _root.Main.FlagSelect.startMove(false);
 	}
 	
 	
 };
-
-
-
-//-------------------------------------------------------//
-//プロパティーの変更を監視し、関数の代わりに使用する。
-//-------------------------------------------------------//
-/*
-clearInterval(loadid);
-loadid = setInterval(onFlagLoad2,100,null);
-
-function onFlagLoad2(){
-	pFlag._visible = true;
-	clearInterval(loadid);
-
-	if (setDepthsFlag == 1){
-		//深度を設定(0.5秒後)
-		setDepthsFlag = 0;
-		_root.Main.setFlagDepths(pFlag);
-	}	
-}
-*/
-/*
-this.onEnterFrame = function (){
-
-
-	
-};
-
-*/
 

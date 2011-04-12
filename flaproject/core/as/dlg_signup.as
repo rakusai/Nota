@@ -107,37 +107,5 @@ function onRecordLoad(success){
 	//ダイアログを元に戻す
 	pDlg.gotoAndStop("edit");
 	
-/*	
-	//編集モード
-	if (PageEdit != true){
-		_root.setEditMode(true,myEditVars.user,myEditVars.power);
-	}
-	
-	//第3者閲覧が禁止されているなら
-	if (myEditVars.anonymous == "none"){
-		//強制的に読み込み
-		_root.Main.LoadMapData();
-		//一覧更新
-		_root.updateSidebar();
-	}else{
-		//編集可能か
-		_global.PageLock = (PageDatEdit == "admin" && MyPower != "admin");
-		
-		if (PageLock){
-			if (PageEdit){
-				//ページがロックされていることを通知
-				if (MyLang == "en"){
-					ErrorMes("This page is locked. Only administrators can edit this page.");
-				}else{
-					ErrorMes("このページは凍結されています。管理者以外は編集できません。");
-				}
-			}
-		}	
-	}
-	
-	//マスターページ作成
-	if (_root.masterAfterCertify){
-		_root.newPage(true);
-	}
-*/	
+
 }

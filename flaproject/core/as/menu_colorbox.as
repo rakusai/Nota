@@ -59,27 +59,7 @@ btnNext.onPress = function(){
 
 //カラーセットをサーバーから読み込む
 function loadColorSet(){
-/*	
-	if (myLoadVars != undefined){
-		return;
-	}
-	myLoadVars = new LoadVars();
-	myLoadVars.load("colorpalette.txt");
-	myLoadVars.onLoad = function(success){
-		if (success){
-			var i=1;
-			while(myLoadVars["n" + i] != undefined){
-				var obj = new Object();
-				obj.colorset = myLoadVars["c" + i];
-				obj.name = myLoadVars["n" + i];
-				obj.vlength = myLoadVars["v" + i];
-				obj.hlength = myLoadVars["h" + i];
-				PaletteList.push(obj);
-				i++;
-			}
-		}
-	}
-*/	
+
 }
 
 
@@ -108,9 +88,6 @@ function setDefaultPalette(){
 	//黄色のための鮮やかさ
 	LlistY = new Array(45,70,95,120,170,195,220);//明るさ
 	SlistY = new Array(220,220,230,240,240,240,240);//鮮やかさ
-	
-//	Llist.reverse();
-//	LlistY.reverse();
 	
 	//2.カラー
 	for(var r=0;r<11;r++){
@@ -198,60 +175,6 @@ function paintColor(){
 		}
 	}
 }
-//背景のサイズ
-//colorbg._width = 18*WH;
-//colorbg._height = 5*WH;
-
-/*
-//色を塗る
-for(var r=0;r<11;r++){
-	for(var g=0;g<7;g++){
-		duplicateMovieClip(colorpt,"c" + i,i);
-		var obj = eval("c" + i);
-		obj.onRollOver = onColorBtnRollOver;
-		obj.onPress = onColorBtnPress;
-		obj._x = MG + WH+r*WH;
-		obj._y = MG + g*WH;
-	
-		if (r == 2){
-			rgb = "0x" + HLStoRGB(Hlist[r],LlistY[g],SlistY[g]);//色合い,明るさ,濃度
-		}else if (r == 1){
-			rgb = "0x" + HLStoRGB(Hlist[r],Llist[g],SlistY[g]);//色合い,明るさ,濃度
-		}else{
-			rgb = "0x" + HLStoRGB(Hlist[r],Llist[g],Slist[g]);//色合い,明るさ,濃度
-		}
-		
-		ColorList.push(rgb);
-		myColor  = new Color(obj);
-		myColor.setRGB(rgb);
-		i++;
-	}
-}
-*/
-/*
-//カラー
-for(var r=0;r<cnt;r++){
-	for(var g=0;g<cnt;g++){
-		for(var b=0;b<cnt;b++){
-			duplicateMovieClip(colorpt,"c" + i,i);
-			var obj = eval("c" + i);
-			obj.onRelease = onColorBtnRelease;
-			obj.onReleaseOutside = onColorBtnRelease;
-			obj._x = 10+g*10+(r%3)*60;
-			obj._y = b*10+Math.floor(r/3)*60;
-			rgb = "0x" + vs[r] + vs[g] + vs[b];
-			myColor  = new Color(obj);
-			myColor.setRGB(rgb);
-//			obj.useHandCursor(false);
-			i++;
-		}
-	}
-}
-colorpt._visible = false;
-
-*/
-
-
 
 colorbg.onRollOver = function(){
 
@@ -298,34 +221,12 @@ colorbg.onPress = function(){
 	}
 
 }
-/*
-function onColorBtnRollOver(){
-	//通常のカーソルに戻せ！
-	showMyCursor(false);	
-
-	colorptover._x = this._x;
-	colorptover._y = this._y;
-	colorptover._visible = true;
-	
-};
-function onColorBtnPress(){
-	//ボタンが押された
-	myColor  = new Color(this);
-	var rgb = "0x" + myColor.getRGB().toString(16);
-	_root.minitool.onSetColor(rgb);
-	selectColor(rgb);
-	
-};
-colorptover.swapDepths(10004);
-colorptsel.swapDepths(10003);
-*/
 
 function selectColor(mycolor){
 	//現在選択中のカラーを選択
 	if (mycolor == undefined){
 		mycolor = myoldcolor;
 	}
-//	colorptover._visible = false;
 	colorptsel._visible = false;
 	for (var i=0;i<ColorList.length;i++){
 		if (Number("0x" + ColorList[i]) == Number(mycolor)){
@@ -334,8 +235,6 @@ function selectColor(mycolor){
 			
 			colorptsel._x = MG + xi * WH;
 			colorptsel._y = MG + yi * WH;
-//			colorptsel._x = eval("c" + i)._x;
-//			colorptsel._y = eval("c" + i)._y;
 			colorptsel._visible = true;
 		}
 	}

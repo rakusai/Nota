@@ -17,7 +17,6 @@ menu = this;
 //コマンド振り分け
 function onBtnRelease(btnname){
 	//ボタンが押された
-//	_parent.onBtnPress(this._name);
 	switch (btnname){
 	case "b1":
 		b1Release();
@@ -153,8 +152,6 @@ b3.onRelease = function(){
 function f1Release(){
 	//普通
 	fm = new TextFormat();
-//	fm.bold = false;
-//	fm.italic = false;
 	fm.font = "Arial";
 	
 	setFormat(fm);
@@ -173,20 +170,10 @@ function bdRelease(){
 			
 	var fm = new TextFormat();
 	fm.bold = !cubd;
-//	fm.font = "ゴシック";
-//	fm.bold = true;
 	
 	setFormat(fm);
 };
-/*
-f3.onRelease = function(){
-	//斜体
-	fm = new TextFormat();
-	fm.italic = true;
-	
-	setFormat(fm);
-};
-*/
+
 function onSetColor(mycolor){
 	//色を設定
 	if (toolbtntab._currentframe >= 5){
@@ -223,7 +210,6 @@ function onSetColor(mycolor){
 			_root.Main.changeFlagBack(m_SelList[i].num,mycolor);
 		}		
 		playSound("KASHA");
-//		hideSubmenu();
 		
 	}else{
 		//文字色設定
@@ -253,9 +239,6 @@ function sbOver(){
 	}
 
 	fontsizebox._visible = true;
-	
-//	fontsizeback._visible = true;
-//	fontsizeback._alpha = 1;
 
 };
 
@@ -296,12 +279,6 @@ function ccOver(){
 function bdOver(){
 	//フォント選択
 	restoreFocus();
-//	clearInterval(intervalID);
-//	intervalID = setInterval(Timer,900);	
-	
-	//ゴシックを表示
-//	f2._visible = true;
-//	tg._visible = true;
 
 };
 
@@ -338,14 +315,6 @@ function hideSubmenu(){
 	fontsizebox._visible = false;
 	strokebox._visible = false;
 	
-/*	for (i=0;i<=50;i++){
-		eval("s" + i)._visible = false;
-		eval("t" + i)._visible = false;
-	}
-*/	
-//	tg._visible = false;
-//	f2._visible = false;
-
 };
 
 function setFormat(format,select,newtext){
@@ -417,8 +386,6 @@ function Timer(){
 		target = colorbox;
 	else if (clippingbox._visible)
 		target = clippingbox;
-//	else if (f2._visible)
-//		target = f2;
 	else if (fontsizebox._visible)
 		target = fontsizebox;
 	else if (strokebox._visible)
@@ -427,11 +394,7 @@ function Timer(){
 	menu.globalToLocal(pt);
 	if (!toolbtntab.hitTest(_root._xmouse,_root._ymouse,true) && 
 		!target.hitTest(_root._xmouse,_root._ymouse,true))
-
-//	if (pt.x < 0 || pt.x > target._x + target._width || 
-//		pt.y < 0 || pt.y > target._y + target._height)
 	{
-//		if (_root.linklist)
 		if (toolbtntab._currentframe != 2 || Selection.getFocus().indexOf("url") == -1){
 			hideSubmenu();
 			clearInterval(intervalID);

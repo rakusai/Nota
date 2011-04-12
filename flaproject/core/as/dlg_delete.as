@@ -65,17 +65,6 @@ function onDeletePage(success){
 		//トップのページを開く
 		getURL(SERVER + "./");
 		
-//				var tab_lc = new LocalConnection();
-//				tab_lc.send("tab" + SDIR,"selectTab",1,"home");
-//				getURL("sidebar.cgi?page=" + "home","list");
-//		_root.Main.openPage("home");
-		//一覧からアイテムを消す(Javascriptで)
-//		var list_lc = new LocalConnection();
-//		list_lc.send("list" + SDIR,"setSelect","home",delpage);
-	
-//				getURL("link.cgi?url=home","link");
-//				_root.Main.openPage("home");
-
 	}else{
 		if (MyLang == "en"){
 			ErrorMes("You have no authority to delete this page.");
