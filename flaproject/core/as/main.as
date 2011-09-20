@@ -1527,8 +1527,18 @@ function addText(string){
 		
 		clearInterval(textselID);
 		textselID = setInterval(setTextSel,10,string.length);	
+	}else{
+		clearInterval(textselID);
+		textselID = setInterval(setTextSelNew,300,num);	
 	}
 	
+}
+
+function setTextSelNew(num){
+	//テキストのカーソル位置をセット
+	Selection.setFocus("_root.Main." + num + ".textbox");
+	clearInterval(textselID);
+		
 }
 
 function setTextSel(param){
