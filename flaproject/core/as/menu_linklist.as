@@ -17,9 +17,6 @@ if (MyLang == "en"){
 	dlg_message = "Link : select a page or enter a outside \nURL to link."
 }
 
-//入力文字制限（ (！) から（チルダ) までの文字のみを入力できます）
-url_txt.restrict = "¥u0021-¥u007E";
-
 //現在のページを見る
 //ページを追加
 hrefList.setStyle("rollOverColor","0x6FB8DB");
