@@ -1955,8 +1955,6 @@ function showFlagObjectData(num, obj){
 				textbox.background = false;				
 			}
 		}
-		if (pFlag.photoloading == 0)
-			pFlag.fillInterval = pFlag.setInterval(pFlag.fillTextBack,100,true);
 		pFlag.photoloading = 2;//ロード完了
 		
 		//テキストが空で選択中なら、フォーカスを与えよ！

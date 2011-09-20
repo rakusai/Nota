@@ -83,7 +83,6 @@ function setTextSelect(){
 		//入力可能にする
 		textbox.type = "input";
 	}
-	fillTextBack(false);	//背景色削除
 	
 };
 
@@ -94,7 +93,6 @@ function killTextSelect(){
 	//テキストボックスの調整
 	//textbox.border = false;
 	textbox.type = "dynamic"; //入力不可にする
-	fillTextBack(true);	//背景色描画
 	deleteBlankBox();	//文字が無い場合、アイテムを消す
 	
 
@@ -124,36 +122,6 @@ function saveText(){
 		}
 	}
 
-};
-
-
-
-
-function fillTextBack(fill){
-	
-	clearInterval(fillInterval);
-
-	//テキストの背景を描く
-	//印刷する時に、textboxのbgcolorが
-	//印刷されないので、手動で描いている
-	//なんとも面倒だ
-	var bgcolor = m_DataList[pFlag._name].bgcolor;
-	if (fill && textbox._visible && 
-		bgcolor.length > 2 && bgcolor != 0xFFFFFF)
-	{
-		var obj = pFlag;
-		obj.clear();
-		obj.beginFill(bgcolor,100);
-		obj.moveTo(0,0);
-		obj.lineTo(textbox._width,0);
-		obj.lineTo(textbox._width,textbox._height);
-		obj.lineTo(0,textbox._height);
-		obj.lineTo(0,0);
-		obj.endFill();
-	}else{
-		pFlag.clear();
-	}
-	
 };
 
 textbox.onSetFocus = function(){
