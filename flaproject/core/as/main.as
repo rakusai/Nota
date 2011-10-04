@@ -1529,7 +1529,7 @@ function addText(string){
 		textselID = setInterval(setTextSel,10,string.length);	
 	}else{
 		clearInterval(textselID);
-		textselID = setInterval(setTextSelNew,300,num);	
+		textselID = setInterval(setTextSelNew,500,num);	
 	}
 	
 }
