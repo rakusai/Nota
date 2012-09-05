@@ -367,96 +367,31 @@ sub saveImgData
 	
 	if ($isimage == 1){
 		#画像
-		#適当な名前でまずは保存する
-		my $uselib = 1;
-		
-		if ($uselib == 1){
-			my $i = Image::Magick->new;
-			$i->BlobToImage($img_data);
-			my ($w, $h) = $i->Get('width', 'height');
-			$i->Set(quality => '80');
-			my $max = 700;
-			if ($quality eq '1'){
-				$max = 1000;
-				$i->Set(quality => '90');
-			}
-			if ($w > $max || $h > $max){
-				$i->Scale($max . 'x' . $max);#比率を保って縮小
-			}
-			if ($w * $h < 350*350){
-				$i->Set(quality => '100');	#小さい画像はクオリティを上げる
-			}
-			$i->Opaque(color=>'silver', fill=>'white');
-			$i->Write(filename => "$imgdir/" . &encode_base64url($newfname));
-		}else{
-			#拡張子をとっておく
-			my $oldext = ".tmp";
-		
-			if( open( DATA, "> $imgdir/$newfname$oldext") ){
-				flock( DATA, 2 ) ;
-				truncate( DATA, 0 ) ;
-				seek( DATA, 0, 0 ) ;
-				binmode( DATA ) ;
-				print DATA $img_data ;
-				close( DATA ) ;
-			}
-			my $max = 700;
-			my $x=0,$h=0;
-			if ($ENV{'SERVER_SOFTWARE'} =~ /Rakusai/){
-				if( open( IDEN, "notacmd identify \"$imgdir/$newfname$oldext\"|") ){
-					close( IDEN );
-					if( open( IDEN, "< $imgdir/$newfname${oldext}.out") ){
-						my $data = <IDEN>;
-						close( IDEN );
-						if ($data =~ /\d+x\d+/){
-							($w, $h) = split(/x/, $&);
-						}
-						unlink ("$imgdir/$newfname${oldext}.out");
-					}
-				}
-			}else{
-				if( open( IDEN, "identify \"$imgdir/$newfname$oldext\"|") ){
-					my $data = <IDEN>;
-					close( IDEN );
-					if ($data =~ /\d+x\d+/){
-						($w, $h) = split(/x/, $&);
-					}
-				}
-			}
-			my $geometry = "";
-			if ($w > $max || $h > $max){
-				$geometry = "-geometry 700x700 ";
-			}
-
-			my $qparam = "";
-			if ($quality eq '1'){
-				$qparam = "-quality 90 ";
-			}
-			if ($w * $h < 350*350){
-				$qparam = "-quality 100 ";
-			}
-			if ($ENV{'SERVER_SOFTWARE'} =~ /Rakusai/){
-				if( open( CMD, "notacmd convert $geometry$qparam\"$imgdir/$newfname$oldext\" \"$imgdir/$newfname\"|") ){
-					close( CMD );
-				}
-			}else{
-				if( open( CMD, "convert $geometry$qparam\"$imgdir/$newfname$oldext\" \"$imgdir/$newfname\"|") ){
-					close( CMD );
-				}
-			}
-			#古い名前を消す
-			if ("$newfname$oldext" ne "$newfname"){
-				unlink ("$imgdir/$newfname$oldext");
-			}
+		my $i = Image::Magick->new;
+		$i->BlobToImage($img_data);
+		my ($w, $h) = $i->Get('width', 'height');
+		$i->Set(quality => '80');
+		my $max = 700;
+		if ($quality eq '1'){
+			$max = 1000;
+			$i->Set(quality => '90');
 		}
-		
+		if ($w > $max || $h > $max){
+			$i->Scale($max . 'x' . $max);#比率を保って縮小
+		}
+		if ($w * $h < 350*350){
+			$i->Set(quality => '100');	#小さい画像はクオリティを上げる
+		}
+		$i->Opaque(color=>'silver', fill=>'white');
+		$i->Write(filename => "$imgdir/" . encode_base64url($newfname));
 		
 		#分割保存されている場合は最初を採用
-		if( -e "$imgdir/$newfname.0" ){
-			rename("$imgdir/$newfname.0","$imgdir/$newfname");
+		my $path = "$imgdir/" . encode_base64url($newfname);
+		if( -e "$path.0" ){
+			rename("$path.0","$path");
 			my $n = 1;
-			while (-e "$imgdir/$newfname.$n"){	#残りは削除
-				unlink("$imgdir/$newfname.$n");
+			while (-e "$path.$n"){	#残りは削除
+				unlink("$path.$n");
 				$n++;
 			}
 		}
