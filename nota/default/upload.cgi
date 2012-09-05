@@ -11,6 +11,7 @@ require 'nota.pl';
 
 use Image::Magick;
 use utf8;
+use MIME::Base64 qw(encode_base64 decode_base64);
 use notalib::Login;
 use notalib::SimpleHttp;
 use notalib::SimpleFile;
@@ -146,9 +147,6 @@ sub regist
 	&nota_validate($title,'path');
 	&nota_validate($quality);
 	
-	#SHIFT-JISに変換
-	&nota_convert($title,'shiftjis','utf8');
-	
 	#投稿ファイルサイズチェック
 	my $fsize = length($filedata);
 	if( $fsize > $m_max_imgfile_size * 1024 * 1024 ){
@@ -186,13 +184,10 @@ sub regist
 	$fname = &saveImgData($title,$ext,$filedata,$quality);
 	
 	#ファイルは保存されたか？
-	if( -e "$imgdir/$fname" ){
+	if( -e "$imgdir/" . encode_base64url($fname) ){
 		#転送用フラッシュの表示(link.swfを呼び出す)
 #		$httpdir = 'http://' . $ENV{'HTTP_HOST'} . $ENV{'SCRIPT_NAME'};
-#		$httpdir =~ s/\/[^\/]*$//g;		#右端の/以下をカット
-		
-		#UTF8にする
-		&nota_convert($fname,'utf8','shiftjis');
+#		$httpdir =~ s/\/[^\/]*$//g;		#右端の/以下をカット	
 
 		$fname = url_encode($fname);
 #		my $date = time();	#日時を送る
@@ -275,18 +270,28 @@ sub copy
 	&nota_validate($srcpage);
 	
 	#UTF8がくるので、SHIFTJISに変換
-	&nota_convert($fname,'shiftjis','utf8');
+	my $fname_sjis = $fname;
+	&nota_convert($fname_sjis,'shiftjis','utf8');
 	
 	my $title = $fname;
 	$title =~ s/(\.[0-9a-zA-Z]+)$//;	#拡張子だけにする
 	my $ext = $1;					#ヒットした拡張子
 	
 	#元ファイルがあるか？
-	if ((!-e "$m_imgdir/$srcpage/$fname") &&
-		(!-e "$imgdir/$fname") &&
-		(!-e "$m_trashdir/$srcpage/$fname"))
-	{
-		#元ファイルがない
+	my $source_path = "";
+	if (-e "$m_imgdir/$srcpage/$fname_sjis"){
+		$source_path = "$m_imgdir/$srcpage/$fname_sjis";
+	}elsif (-e "$imgdir/$fname_sjis"){
+		$source_path = "$imgdir/$fname_sjis";
+	}elsif (-e "$m_trashdir/$srcpage/$fname_sjis"){
+		$source_path = "$m_trashdir/$srcpage/$fname_sjis";
+	}elsif (-e "$m_imgdir/$srcpage/".encode_base64url($fname)){
+		$source_path = "$m_imgdir/$srcpage/".encode_base64url($fname);
+	}elsif (-e "$imgdir/".encode_base64url($fname)){
+		$source_path = "$imgdir/".encode_base64url($fname);
+	}elsif (-e "$m_trashdir/$srcpage/".encode_base64url($fname)){
+		$source_path = "$m_trashdir/$srcpage/".encode_base64url($fname);
+	}else{
 		print "Content-type: text/plain; charset=utf-8\n\n";
 		print "res=OK";
 		return;
@@ -294,7 +299,7 @@ sub copy
 	
 	#すでに存在していないかチェック
 	my $rep = 2;
-	while( -e "$imgdir/$title$ext" ){
+	while( -e "$imgdir/".encode_base64url("$title$ext") ){
 		$title =~ s/\([0-9]+\)$//;	#最後のかっこを消して
 		$title .= "($rep)";			#番号付きのかっこをつける
 		$rep += 1;						#数を増やす
@@ -304,17 +309,12 @@ sub copy
 	my $file = NOTA::SimpleFile->new;
 
 	#画像ファイルコピー
-	if ($file->copyFile("$m_imgdir/$srcpage/$fname","$imgdir/$newfname")){
-	}elsif ($file->copyFile("$imgdir/$fname","$imgdir/$newfname")){ #バージョン1系との互換性維持
-	}elsif ($file->copyFile("$m_trashdir/$srcpage/$fname","$imgdir/$newfname")){	#ゴミ箱から戻す
-	}else{
+	if (!$file->copyFile($source_path,"$imgdir/".encode_base64url($newfname))){
 		#失敗してもOKを返す
 		print "Content-type: text/plain; charset=utf-8\n\n";
 		print "res=ERR";
 		return;
 	}
-	#UTF8にする
-	&nota_convert($newfname,'utf8','shiftjis');
 	$newfname = url_encode($newfname);
 	
 	print "Pragma: no-cache\n";
@@ -348,7 +348,7 @@ sub saveImgData
 	
 	#ファイル名決定
 	my $rep = 2;
-	while( -e "$imgdir/$title$ext" ){	#すでに存在していないかチェック
+	while( -e "$imgdir/" . encode_base64url("$title$ext") ){	#すでに存在していないかチェック
 		$title =~ s/\([0-9]+\)$//;	#最後のかっこを消して
 		$title .= "($rep)";			#番号付きのかっこをつける
 		$rep += 1;						#数を増やす
@@ -387,7 +387,7 @@ sub saveImgData
 				$i->Set(quality => '100');	#小さい画像はクオリティを上げる
 			}
 			$i->Opaque(color=>'silver', fill=>'white');
-			$i->Write(filename => "$imgdir/$newfname");
+			$i->Write(filename => "$imgdir/" . &encode_base64url($newfname));
 		}else{
 			#拡張子をとっておく
 			my $oldext = ".tmp";
@@ -462,7 +462,7 @@ sub saveImgData
 		}
 	}else{
 		#画像ではない
-		if( open( DATA, "> $imgdir/$newfname") ){
+		if( open( DATA, "> $imgdir/" . encode_base64url($newfname)) ){
 			flock( DATA, 2 ) ;
 			truncate( DATA, 0 ) ;
 			seek( DATA, 0, 0 ) ;
@@ -475,6 +475,12 @@ sub saveImgData
 	return( $newfname ) ;
 }
 
+sub encode_base64url { 
+    my $e = encode_base64(shift, ""); 
+    $e =~ s/=+\z//; 
+    $e =~ tr[+/][-_]; 
+    return $e; 
+}
 #-----------------------------------------------------------#
 #--  拡張子を求める ----------------------------------------#
 sub getExtFromMimeType

@@ -10,6 +10,7 @@ require 'option.pl';
 require 'nota.pl';
 
 use utf8;
+use MIME::Base64 qw(encode_base64 decode_base64);
 use IO::File;
 use notalib::Login;
 use notalib::SimpleFile;
@@ -313,11 +314,12 @@ sub writePage
 					#付属のファイルを削除せよ！
 					$fname = $ndf->getItem($id, 'fname');
 					if ($fname ne ''){
-						utf8::encode($fname); #utf8フラグを取る
-						&nota_convert($fname,'shiftjis','utf8');#shiftJISに変換
+						my $fname_sjis = $fname;
+						utf8::encode($fname_sjis); #utf8フラグを取る
+						&nota_convert($fname_sjis,'shiftjis','utf8');#shiftJISに変換
 						my $trashdir = "$m_trashdir/$page";
-						if ($file->deleteFile("$m_imgdir/$page",$fname,$trashdir)){
-						}
+						$file->deleteFile("$m_imgdir/$page",encode_base64url($fname),$trashdir); 
+						$file->deleteFile("$m_imgdir/$page",$fname_sjis,$trashdir);
 					}
 					$delid{$id} = 1;
 					$LOG{"$id"} = $ndf->deleteItem($id);
@@ -444,10 +446,13 @@ sub setMasterPage
 		#付属のファイルを削除せよ！
 		$fname = $ndf->getItem($id, 'fname');
 		if ($fname ne ''){
-			utf8::encode($fname); #utf8フラグを取る
-			&nota_convert($fname,'shiftjis','utf8');#shiftJISに変換
-			my $trashdir = "$m_trashdir/$page";
-			$file->deleteFile("$m_imgdir/$page",$fname,$trashdir);
+                	my $fname_sjis = $fname;
+                        utf8::encode($fname_sjis); #utf8フラグを取る
+                        &nota_convert($fname_sjis,'shiftjis','utf8');#shiftJISに変換
+                        my $trashdir = "$m_trashdir/$page";
+                        $file->deleteFile("$m_imgdir/$page",encode_base64url($fname),$trashdir);
+                        $file->deleteFile("$m_imgdir/$page",$fname_sjis,$trashdir);
+
 		}
 		$ndf->deleteItem($id);
 	}
@@ -539,7 +544,14 @@ sub error
 	print "res=ERR&errcode=$errcode&\n";
 }
 
-
+sub encode_base64url { 
+    my $e = shift;
+    utf8::encode($e); #utf8フラグを取る
+    $e = encode_base64($e, ""); 
+    $e =~ s/=+\z//; 
+    $e =~ tr[+/][-_]; 
+    return $e; 
+} 
 
 #-----------------------------------------------------------#
 #END_OF_SCRIPT

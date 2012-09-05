@@ -10,6 +10,7 @@ require 'option.pl';
 require 'nota.pl';
 
 use utf8;
+use MIME::Base64 qw(encode_base64 decode_base64);
 use notalib::Login;
 
 binmode STDIN,  ":bytes";
@@ -81,12 +82,15 @@ sub main
 	}
 	
 	#ShiftJISに変換
-	my $unifname = $fname;
-	&nota_convert($fname,'shiftjis','utf8');
+	my $fname_sjis = $fname;
+	&nota_convert($fname_sjis,'shiftjis','utf8');
 
 	#ファイルを開く
 	my $bin_buf = "";
-	if (open(DATA,"< $dir/$page/$fname") || open(DATA,"< $dir/$fname")){
+	if (open(DATA,"< $dir/$page/$fname_sjis") || open(DATA,"< $dir/$fname_sjis") || 
+	    open(DATA,"< $dir/$page/".encode_base64url($fname)) || 
+	    open(DATA,"< $dir/".encode_base64url($fname)))
+	{
 		binmode( DATA );
 		while( <DATA> ) { $bin_buf .= $_; }
 		$filesize = (stat ( DATA )) [7] ;
@@ -98,11 +102,7 @@ sub main
 	}
 	
 	#ファイル名をUnicodeで送るべきかShiftJISで送るべきか、ブラウザで判断せよ
-	my $charset = 'shift_jis';
-	if ($ENV{'HTTP_USER_AGENT'} =~ /(Firefox)/){
-		$fname = $unifname;
-		$charset = 'utf-8';
-	}
+	$charset = 'utf-8';
 	
 	#バイナリ出力
 	binmode( STDOUT );
@@ -155,6 +155,12 @@ sub getMimeTypeFromExt
 
 }
 
+sub encode_base64url { 
+    my $e = encode_base64(shift, ""); 
+    $e =~ s/=+\z//; 
+    $e =~ tr[+/][-_]; 
+    return $e; 
+} 
 
 #-----------------------------------------------------------#
 #-----------------------------------------------------------#
