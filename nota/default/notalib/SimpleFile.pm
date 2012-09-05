@@ -144,7 +144,7 @@ sub getDirectorySize
 	my $fname;
 	my @files = readdir(DH);
 	closedir(DH);
-	foreach $fname (readdir(DH)){
+	foreach $fname (@files){
 		next if ($fname eq '.');
 		next if ($fname eq '..');
 		
