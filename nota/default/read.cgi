@@ -40,6 +40,10 @@ sub main
 	if (!defined($page) || $page eq ""){
 		$page = 'home';
 	}
+
+	#バリデーション
+	&nota_validate($page);
+
 	#ログイン情報の取得
 	local $login = NOTA::Login->new;
 	$login->getlogin(\%COOKIE);

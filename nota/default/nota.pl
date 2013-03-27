@@ -259,6 +259,7 @@ sub nota_validate
 	if ($option eq "path"){
 		#ファイル名であるか（特にスラッシュの混入を防ぐ）
 		$text =~ s/(:|;|\/|\\|\r|\n)//g;
+		$text =~ s/^[\.]*//g;
 		$text =~ s/[\x00-\x08\x0B-\x1F]//g; #制御コードを消去
 	}
 	elsif ($option eq "uri" || $option eq "url"){
