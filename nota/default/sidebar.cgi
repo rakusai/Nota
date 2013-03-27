@@ -451,7 +451,7 @@ sub getFileList
 	if ($findstr && $findstr ne ""){
 		my $result = '';
 		if ($lang eq "en"){
-			$result = "\t<div class=\"subject\">Search: \"$findstr\"</div>\n";
+			$result = "\t<div class=\"subject\">Search: \"".nota_xmlescape($findstr)."\"</div>\n";
 			if ($filecnt == 0){
 				$result .= "\t<div class=\"templatenotes\">Did not match any documents.</div>\n";
 			}elsif ($filecnt == 1){
@@ -460,7 +460,7 @@ sub getFileList
 				$result .= "\t<div class=\"templatenotes\">$filecnt files have found.</div>\n";
 			}
 		}else{
-			$result = "\t<div class=\"subject\">探す： \"$findstr\"</div>\n";
+			$result = "\t<div class=\"subject\">探す： \"".nota_xmlescape($findstr)."\"</div>\n";
 			if ($filecnt == 0){
 				$result .= "\t<div class=\"templatenotes\">ファイルは見つかりませんでした。</div>\n";
 			}else{
