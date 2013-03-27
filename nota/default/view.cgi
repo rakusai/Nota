@@ -46,8 +46,9 @@ sub main
 	my $dir = $FORM{'dir'};
 	
 	#バリデーション
-	&nota_validate($page,'path');
+	&nota_validate($page);
 	&nota_validate($fname,'path');
+	&nota_validate($dir);
 	
 	if (!defined($fname)){
 		&nota_error_html("File not specified.");
