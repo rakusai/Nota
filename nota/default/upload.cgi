@@ -15,10 +15,10 @@ use MIME::Base64 qw(encode_base64 decode_base64);
 use notalib::Login;
 use notalib::SimpleHttp;
 use notalib::SimpleFile;
+use Encode qw(encode decode);
 
-
-binmode STDIN,  ":bytes"; 
-binmode STDOUT, ":encoding(utf8)"; 
+binmode STDIN,  ":bytes";
+binmode STDOUT, ":encoding(utf8)";
 
 if ($m_fastcgi == 1){
 	#FastCGI
@@ -41,23 +41,23 @@ sub main
 	$sdir = $&;
 	$sdir .= $ENV{'HTTP_USER_AGENT'};
 	$sdir =~ s/[^a-zA-Z0-9]//g;
-	
+
 	local $thisfile = 'upload.cgi';
-	
+
 	#標準入力取得
 	local %FORM = ();
 	&getForm( *FORM ) ;
 	local %COOKIE = ();
 	&nota_get_cookie(\%COOKIE);
-	
+
 	#現在ページから、イメージのディレクトリを
 	local $page = $FORM{'page'};
 	local $align = $FORM{'align'};
-	
+
 	#バリデーション
 	&nota_validate($page);
 	&nota_validate($align);
-	
+
 	if (!defined($page) || $page eq ""){
 		#頁が空白
 		if ($lang eq "en"){
@@ -67,11 +67,11 @@ sub main
 		}
 		return;
 	}
-	
+
 	#ログイン情報の取得
 	local $login = NOTA::Login->new;
 	$login->getlogin(\%COOKIE);
-	
+
 	#編集モードか
 	if ($login->get_power eq '' || $login->get_editmode ne 'true'){
 		#権限なし
@@ -82,19 +82,19 @@ sub main
 		}
 		return;
 	}
-	
+
 	#使用言語
 	local $lang = &nota_get_lang();
-	
+
 	#対象ページを含んだパスを定義
 	local $imgdir = "$m_imgdir/$page";
 
-	
+
 	my $action = $FORM{'action'};
-	if ($action  eq 'regist' ){ 
+	if ($action  eq 'regist' ){
 		#投稿
 		&regist();
-	}elsif ($action eq 'regist2' ){ 
+	}elsif ($action eq 'regist2' ){
 		#テンプレートから投稿
 		&regist2();
 	}elsif ($action eq 'copy' ){
@@ -112,9 +112,7 @@ sub main
 			#バリデーション
 			&nota_validate($fname,'path');
 			&nota_validate($date);
-			$fname = url_encode($fname);	#不可欠
-			&showFlash("fname=$fname&sdir=$sdir&page=$page");
-			&showFlash("fname=$fname&sdir=$sdir&page=$page&date=$date");
+			&showFlash($fname);
 		}else{
 			#投稿フォーム表示
 			&printForm;
@@ -130,10 +128,10 @@ sub regist
 	my $filedata = $FORM{'imgfdata'};
 	my $fname    = $FORM{'upFileName'};
 	my $quality  = $FORM{'quality'};
-	
+
 	#まず、UTF8に変換
 	&nota_convert($fname,'utf8');
-	
+
 	#ファイル名をタイトルと拡張子に分割
 	$fname =~ s/.*(\\|\/)//;		#ディレクトリ区切り / より前をカット(IEのみ)
 	my $title = $fname;
@@ -142,11 +140,11 @@ sub regist
 		$ext = $1;					#ヒットした拡張子
 		$ext =~ s/[A-Z]/lc($&)/ge;	#小文字に変換
 	}
-	
+
 	#バリデーション
 	&nota_validate($title,'path');
 	&nota_validate($quality);
-	
+
 	#投稿ファイルサイズチェック
 	my $fsize = length($filedata);
 	if( $fsize > $m_max_imgfile_size * 1024 * 1024 ){
@@ -179,21 +177,13 @@ sub regist
 		}
 		return;
 	}
-	
+
 	#イメージデータ保存
 	$fname = &saveImgData($title,$ext,$filedata,$quality);
-	
+
 	#ファイルは保存されたか？
 	if( -e "$imgdir/" . encode_base64url($fname) ){
-		#転送用フラッシュの表示(link.swfを呼び出す)
-#		$httpdir = 'http://' . $ENV{'HTTP_HOST'} . $ENV{'SCRIPT_NAME'};
-#		$httpdir =~ s/\/[^\/]*$//g;		#右端の/以下をカット	
-
-		$fname = url_encode($fname);
-#		my $date = time();	#日時を送る
-		&showFlash("fname=$fname&sdir=$sdir&page=$page");
-		#POSTで送ると戻れないので、GETでURLを変える
-#		print "Location: $httpdir/upload.cgi?fname=$fname&date=$date&page=$page\n\n";
+		&showFlash($fname);
 	}else{
 		if ($lang eq "en"){
 			&error( "File saving failure." );
@@ -211,7 +201,7 @@ sub regist2
 	my $dir   = $FORM{'dir'};
 	my $fname = $FORM{'fname'};
 	my $url = $FORM{'url'};
-	
+
 	#バリデーション
 	&nota_validate($dir,'path');
 	&nota_validate($fname,'path');
@@ -220,7 +210,7 @@ sub regist2
 	if ($url =~ /^http/){
 		#インターネット経由で貼り付け
 		my $http = NOTA::SimpleHttp->new;
-		
+
 		if (!$http->request($url)){
 			if ($lang eq "en"){
 				&error( "Can't get file from internet." );
@@ -232,7 +222,7 @@ sub regist2
 		#bodyデータとファイル名を取り出す
 		$FORM{'imgfdata'} = $http->get_body();
 		$FORM{'upFileName'} = $http->get_filename("index.html");
-		
+
 	}else{
 		#ファイルを開く
 		if( open( FROM, "< $m_templatedir/$dir/$fname") ){
@@ -253,7 +243,7 @@ sub regist2
 	}
 	#登録
 	&regist;
-	
+
 }
 
 #-----------------------------------------------------------#
@@ -264,19 +254,19 @@ sub copy
 	#()内の数字を増やして、既存のファイルと重複しないファイル名にする
 	my $fname   = $FORM{'fname'};
 	my $srcpage = $FORM{'srcpage'};
-	
+
 	#バリデーション
 	&nota_validate($fname,'path');
 	&nota_validate($srcpage);
-	
+
 	#UTF8がくるので、SHIFTJISに変換
 	my $fname_sjis = $fname;
 	&nota_convert($fname_sjis,'shiftjis','utf8');
-	
+
 	my $title = $fname;
 	$title =~ s/(\.[0-9a-zA-Z]+)$//;	#拡張子だけにする
 	my $ext = $1;					#ヒットした拡張子
-	
+
 	#元ファイルがあるか？
 	my $source_path = "";
 	if (-e "$m_imgdir/$srcpage/$fname_sjis"){
@@ -296,7 +286,7 @@ sub copy
 		print "res=OK";
 		return;
 	}
-	
+
 	#すでに存在していないかチェック
 	my $rep = 2;
 	while( -e "$imgdir/".encode_base64url("$title$ext") ){
@@ -305,7 +295,7 @@ sub copy
 		$rep += 1;						#数を増やす
 	}
 	my $newfname = "$title$ext";
-	
+
 	my $file = NOTA::SimpleFile->new;
 
 	#画像ファイルコピー
@@ -316,7 +306,7 @@ sub copy
 		return;
 	}
 	$newfname = url_encode($newfname);
-	
+
 	print "Pragma: no-cache\n";
 	print "Cache-Control: no-cache\n";
 	print "Content-type: text/plain; charset=utf-8\n\n";
@@ -331,12 +321,12 @@ sub copy
 sub saveImgData
 {
 	my ($title, $ext , $img_data , $quality) = @_ ;
-	
+
 	#ContentTypeから拡張子を取得
 	if ($ext eq ""){
 		$ext = &getExtFromMimeType($FORM{'upContentType'});
 	}
-	
+
 	#画像ファイルか
 	my $imgtype = '.jpg.gif.png.bmp.pict.tif.jpeg';
 	my $isimage = 0;
@@ -345,7 +335,7 @@ sub saveImgData
 		$isimage = 1;
 		$ext = ".jpg";#拡張子を強制的にjpgに
 	}
-	
+
 	#ファイル名決定
 	my $rep = 2;
 	while( -e "$imgdir/" . encode_base64url("$title$ext") ){	#すでに存在していないかチェック
@@ -361,10 +351,10 @@ sub saveImgData
 		$length = unpack("%N",$length);
 		$img_data = substr($img_data,128,$length);
 	}
-	
+
 	#ファイル保存
 	mkdir($imgdir,0755);	#ディレクトリの作成
-	
+
 	if ($isimage == 1){
 		#画像
 		my $i = Image::Magick->new;
@@ -384,7 +374,7 @@ sub saveImgData
 		}
 		$i->Opaque(color=>'silver', fill=>'white');
 		$i->Write(filename => "$imgdir/" . encode_base64url($newfname));
-		
+
 		#分割保存されている場合は最初を採用
 		my $path = "$imgdir/" . encode_base64url($newfname);
 		if( -e "$path.0" ){
@@ -410,11 +400,11 @@ sub saveImgData
 	return( $newfname ) ;
 }
 
-sub encode_base64url { 
-    my $e = encode_base64(shift, ""); 
-    $e =~ s/=+\z//; 
-    $e =~ tr[+/][-_]; 
-    return $e; 
+sub encode_base64url {
+    my $e = encode_base64(shift, "");
+    $e =~ s/=+\z//;
+    $e =~ tr[+/][-_];
+    return $e;
 }
 #-----------------------------------------------------------#
 #--  拡張子を求める ----------------------------------------#
@@ -439,7 +429,7 @@ sub getExtFromMimeType
 	elsif ($ctype =~ /application\/.*realmedia/i) { $ext=".rm";}
 	elsif ($ctype =~ /video\/.*mpeg/i) 	{ $ext=".mpg";}
 	elsif ($ctype =~ /audio\/.*mpeg/i) 	{ $ext=".mp3";}
-	
+
 	return $ext;
 
 }
@@ -460,7 +450,7 @@ sub getLocalDate
 	$sec   = $num[$sec]   if ( $sec<=9 );
 	$year += 1900;
 	my $temp =  "$year$month$mday\_$hour$min$sec";
-	
+
 	return ($temp);
 }
 
@@ -470,13 +460,13 @@ sub getForm
 {
 	#	パラメータ展開
 	local( *array ) = @_ ;
-	
+
 	#マルチパートデータの場合
 	if( $ENV{'CONTENT_TYPE'} =~ m#^multipart/form-data# ){
 		&getMultiPartData( array, 'imgfdata' ) ;
 		return ;
 	}
-	
+
 	#通常のデコード処理
 	my $buffer = "";
 	if ($ENV{'REQUEST_METHOD'} eq "POST") { read(STDIN,$buffer,$ENV{'CONTENT_LENGTH'}); }
@@ -490,7 +480,7 @@ sub getForm
 		#連想配列へ格納
 		$array{$name} = $value;
 	}
-	
+
 }
 
 
@@ -499,7 +489,7 @@ sub getForm
 sub getMultiPartData
 {
 	local( *array, $img_param_name ) = @_ ;
-	
+
 	#	標準入力からデータを読みだす
 	my $buf = "" ;
 	my $read_data = "" ;
@@ -509,14 +499,14 @@ sub getMultiPartData
 		$remain -= sysread( STDIN, $buf, $remain ) ;
 		$read_data .= $buf ;
 	}
-	
+
 	#	データを解釈する
 	my $p1 = 0; # ヘッダ部の先頭
 	my $p2 = 0; # ボディ部の先頭
 	my $p3 = 0; # ボディ部の終端
 	my $delimiter = "" ;
 	my $max_count = 0 ;
-	
+
 	while( 1 ){
 		#	ヘッダ処理
 		$p2 = index( $read_data, "\r\n\r\n", $p1 ) + 4 ;
@@ -536,11 +526,11 @@ sub getMultiPartData
 			}
 			#その他、ファイルの情報を取得する(ファイル一つが前提)
 			if ( /^Content-Type:([^;]*)/i){
-				 $array{'upContentType'} = $1; 
+				 $array{'upContentType'} = $1;
 			}
 			if ($_ =~ /application\/x-macbinary/i) { $array{'upMacbin'}=1; }
 		}
-		
+
 		#	ボディ処理
 		$p3 = index( $read_data, "\r\n$delimiter", $p2 ) ;
 		my $size = $p3 - $p2 ;
@@ -552,7 +542,7 @@ sub getMultiPartData
 		elsif( $name ){
 			$array{$name} = substr( $read_data, $p2, $size ) ;
 		}
-		
+
 		#	終了処理
 		$p1 = $p3 + length( "\r\n$delimiter" ) ;
 		if( substr( $read_data, $p1, 4 ) eq "--\r\n" ){
@@ -587,11 +577,9 @@ sub url_encode
 #--  転送用フラッシュファイルの表示 ------------------------#
 sub showFlash
 {
-	my( $flashvars ) = @_ ;
-	my $date = time();	#日時を送る
-	$flashvars .= "&date=$date";
+	my( $fname ) = @_ ;
+	$fname = decode("UTF-8", $fname);
 
-	my $flashsrc = &nota_print_flash("link","link.swf?ver=$m_version","$flashvars","noscale","#FFFFFF","","5","5");
 	print "Content-type: text/html; charset=utf-8\n\n" ;
 	print <<"END_OF_HTML";
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -607,12 +595,15 @@ sub showFlash
 		}
 		</style>
 	</head>
-	<body onLoad="window.parent.list.stopUpload();">
-		$flashsrc
+	<body>
+		<script type="text/javascript">
+		window.parent.list.stopUpload();
+		var player = document.all? window.parent.window["nota"] : window.parent.document["nota"];
+		player.addImage("$fname");
+		</script>
 	</body>
 </html>
 END_OF_HTML
-
 
 }
 
@@ -621,9 +612,31 @@ END_OF_HTML
 sub error
 {
 	my( $msg ) = @_ ;
-	$flashvars = "msg=$msg&sdir=$sdir&page=$page";
 
-	&showFlash($flashvars);
+	print "Content-type: text/html; charset=utf-8\n\n" ;
+	print <<"END_OF_HTML";
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>NOTA</title>
+		<style type="text/css">
+		body {
+			margin:0px;
+			padding:0px;
+			overflow:hidden;
+		}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+		window.parent.list.stopUpload();
+		var player = document.all? window.parent.window["nota"] : window.parent.document["nota"];
+		player.msgBox("$msg");
+		</script>
+	</body>
+</html>
+END_OF_HTML
 
 }
 

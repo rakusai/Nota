@@ -1,10 +1,12 @@
-﻿/*
- * 
+﻿import flash.external.*;
+
+/*
+ *
  * main
  * 編集ボード
- * 
+ *
  */
- 
+
  //グローバル変数
 localpath = "/";
 
@@ -20,8 +22,8 @@ createEmptyMovieClip("canvasDel",100002);//消しゴムの描画領域
 
 //データ記憶配列
 unloaded = true;
-_global.m_DataList = new Array();	
-_global.m_SelList = new Array();	
+_global.m_DataList = new Array();
+_global.m_SelList = new Array();
 
 
 //ページの区切りを書き込む
@@ -95,6 +97,14 @@ playSound("KASHA");
 //書き込み変数
 WriteAccessCnt = 0;
 
+function addImage(fname):Void {
+  map_lc.addImg(fname);
+}
+function msgBox(msg):Void {
+  map_lc.msgBox(msg);
+}
+ExternalInterface.addCallback("addImage", this, addImage);
+ExternalInterface.addCallback("msgBox", this, msgBox);
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -120,19 +130,19 @@ function clearMapData(){
 
 	delete _global.DataList;
 	_global.m_DataList = new Array();
-			
+
 	//Mapを消す
 	_root.Main._visible = false;
-	
+
 }
 
 function LoadMapData(forupdate){
-	
+
 	//ロード中の写真があれば、全て、停止せよ！
 	if (loadoldpage != MyPage){
 		clearMapData();
 	}
-	
+
 	if (loadoldpage == undefined){
 		//初めてなら、白紙ページを表示
 		moveMap(ML,MT);
@@ -144,7 +154,7 @@ function LoadMapData(forupdate){
 	myLoadVars = new LoadVars();
 	myLoadVars.onLoad = onLoadData;
 	myLoadVars.forupdate = forupdate; //内部の定期更新用か？
-	var myDate = new Date;	
+	var myDate = new Date;
 	if (MyPage == undefined)
 		myLoadVars.load(SERVER + "read.cgi?param=backup&date" + myDate.getTime());
 	else
@@ -152,7 +162,7 @@ function LoadMapData(forupdate){
 						+ "&date=" + myDate.getTime());
 
 
-	
+
 };
 
 loadErrorCnt = 0;
@@ -171,12 +181,12 @@ function onLoadData(success){
 		//ページが見つからない
 		if (this.anonymous == "none"){
 			//第3者への閲覧が禁止されている
-			
+
 			_root.startEdit();
 		}else if (loadErrorCnt < 2){
 			//3秒後にもう一度読み込む
 			clearInterval(updateIntervalID);
-			updateIntervalID = setInterval(updatePage,3000);	 
+			updateIntervalID = setInterval(updatePage,3000);
 		}else{
 			if (MyLang == "en"){
 				ErrorMes("Page not found.\r" + MyPage);
@@ -197,7 +207,7 @@ function onLoadData(success){
 	if (myLoadVars.forupdate == true){
 		playSound("POU");
 	}
-	
+
 	//まず、用紙のサイズをセットする
 	if (myLoadVars.width != undefined)
 		_global.PaperW = myLoadVars.width;//1000;
@@ -207,18 +217,18 @@ function onLoadData(success){
 		_global.PageH = myLoadVars.height;//1414;
 	else
 		_global.PageH = 1414;
-	
+
 	_global.PaperH = PageH;
 	backboard._width = PaperW;
 	backboard._height = PageH;
 	Canvas._width = backboard._width;
 	Canvas._height = backboard._height;
-	
-	
+
+
 	if (myLoadVars.use != "temp"){
 		//ページ番号は？
 		_global.MyPage = myLoadVars.page;
-		
+
 		//編集モードか閲覧モードか
 		if (myLoadVars.editmode == "true"){//この行かまうな
 			//編集モード
@@ -231,16 +241,16 @@ function onLoadData(success){
 				_root.setEditMode(false);
 			}
 		}
-	
+
 		//編集権限は？
 		_global.PageDatEdit = myLoadVars.edit;
 		_global.PageLock = (PageDatEdit == "admin" && MyPower != "admin");
 		for (var i=0;i<PluginList.length;i++) {
 			PluginList[i].onPageLock((PageDatEdit == "admin"));
-		}		
+		}
 		//ページの作者は？
 		_global.PageAuthor = myLoadVars.author;
-		
+
 		if (PageLock && myLoadVars.forupdate != true){
 			if (PageEdit){
 				//管理者でなければ、ツールを戻す
@@ -254,11 +264,11 @@ function onLoadData(success){
 				}
 			}
 		}
-		
-	
+
+
 		//ファイルの更新日
 		MyFTime = myLoadVars.ftime;
-	
+
 		//既存選択オブジェクトのID
 		for (var i=0;i<m_SelList.length ;i++){
 			m_SelList[i].oldid = m_DataList[m_SelList[i].num].id;
@@ -279,13 +289,13 @@ function onLoadData(success){
 			}
 			delete _global.DataList;
 			_global.m_DataList = new Array();
-	
+
 		}
 		//ページの重さ情報を消す
 		oldpageweight = null;
 		//タイトルを記憶
 		_global.MyPageTitle = myLoadVars.title;
-	
+
 		//初期位置を読み込む
 		if (unloaded){
 			unloaded = false;
@@ -304,7 +314,7 @@ function onLoadData(success){
 
 	//背景色
 	changePageBack(myLoadVars["bgcolor"]);
-	
+
 	//データ整理
 	var i=0;
 	while (myLoadVars["id" + i ]  >  0){
@@ -314,7 +324,7 @@ function onLoadData(success){
 			m_DataList[indx].del = 2; //放置フラグ
 			//更新されているか？
 			if (myLoadVars["update" + i] > m_DataList[indx].update){
-				m_DataList[indx].del 		= 3; //更新フラグ	
+				m_DataList[indx].del 		= 3; //更新フラグ
 				m_DataList[indx].id 		= myLoadVars["id" + i];
 				m_DataList[indx].author 	= myLoadVars["author" + i];
 				m_DataList[indx].tool 		= myLoadVars["tool" + i];
@@ -337,17 +347,17 @@ function onLoadData(success){
 				m_DataList[indx].fgcolor 	= myLoadVars["fgcolor" + i];
 				m_DataList[indx].thickness 	= myLoadVars["thickness" + i];
 				m_DataList[indx].plugin 	= myLoadVars["plugin" + i];
-			
+
 				m_DataList[indx].param = myLoadVars["param" + i];
 				m_DataList[indx].comment = myLoadVars["comment" + i];
-				m_DataList[indx].rotation= myLoadVars["rotation" + i];	
+				m_DataList[indx].rotation= myLoadVars["rotation" + i];
 			}else if (m_DataList[indx].tool == "DRAW"){
 				//手書き線は常に再描画
-				m_DataList[indx].del 	= 3; //更新フラグ	
+				m_DataList[indx].del 	= 3; //更新フラグ
 			}
-			
+
 		}else{
-			
+
 			//新規オブジェクトだ！
 			var obj = new Object();
 			obj.del 		= 3;
@@ -364,7 +374,7 @@ function onLoadData(success){
 			obj.height		= myLoadVars["height" + i];
 			obj.scale		= myLoadVars["scale" + i];
 			obj.edit		= myLoadVars["edit" + i];
-			
+
 			obj.text 		= myLoadVars["text" + i];
 			obj.fname 		= myLoadVars["fname" + i];
 			obj.shape 		= myLoadVars["shape" + i];
@@ -373,7 +383,7 @@ function onLoadData(success){
 			obj.fgcolor 	= myLoadVars["fgcolor" + i];
 			obj.thickness 	= myLoadVars["thickness" + i];
 			obj.plugin 		= myLoadVars["plugin" + i];
-		
+
 			obj.param = myLoadVars["param" + i];
 			obj.comment = myLoadVars["comment" + i];
 			obj.rotation= myLoadVars["rotation" + i];
@@ -381,17 +391,17 @@ function onLoadData(success){
 		}
 		i++;
 	}
-	
-	
+
+
 	//オブジェクトを読み込み
 	for (var i=0;i<m_DataList.length;i++){
 		if (myLoadVars.use == "temp"){
 			if (m_DataList[i].tool == "DRAW"){
 				if (m_DataList[i].author != "template"){
 					//手書き線は常に再描画
-					m_DataList[i].del 	= 3; //更新フラグ	
+					m_DataList[i].del 	= 3; //更新フラグ
 				}
-			}		
+			}
 		}
 		if (m_DataList[i].del == 0){
 			//削除されているので、消せ！
@@ -402,13 +412,13 @@ function onLoadData(success){
 				}
 			}else{
 				_global.m_DataList[i].del = 1;
-				eval(i)._visible = false;				
+				eval(i)._visible = false;
 			}
 		}
 		else if (m_DataList[i].del == 2){
 			//放置
 			_global.m_DataList[i].del = 0;
-			eval(i)._visible = true;			
+			eval(i)._visible = true;
 		}
 		else if (m_DataList[i].del == 3){
 			//更新せよ！
@@ -420,8 +430,8 @@ function onLoadData(success){
 	//番号がずれてしまったら選択をリセット
 	for (var i=0;i<m_SelList.length ;i++){
 		var num = m_SelList[i].num;
-		if (m_SelList[i].oldid != m_DataList[num].id || 
-			m_DataList[num].del == 1)										   
+		if (m_SelList[i].oldid != m_DataList[num].id ||
+			m_DataList[num].del == 1)
 		{
 			//選択解除
 			moveFlagFocus(-1,'nosound');
@@ -434,12 +444,12 @@ function onLoadData(success){
 	//テキストのリザイズは時間がかかるので、1秒あける
 	if (!rsintervalID)
 		rsintervalID = setInterval(resizePageH,1000);
-		
+
 	loadoldpage = MyPage;//この値は、書き込みでも使います
 	loading = false;
-	
+
 	delete this;
-	
+
 };
 
 function findID(id){
@@ -497,7 +507,7 @@ function loadFlag(i){
 		_root.Main.showFlagObjectData(i);
 		eval(i)._visible = true;
 	}
-	
+
 };
 
 ///////////////////////////////////////////////////////////////
@@ -506,14 +516,14 @@ function loadFlag(i){
 
 //一定間隔で更新をチェック
 chatMode = false;
-checkCount = 0;	
+checkCount = 0;
 startPageUpdateCheck(false);
 
 function startPageUpdateCheck(ischatmode){
 	clearInterval(ftimeIntervalID);
-	ftimeIntervalID = setInterval(checkFTime,1000*10);	 
+	ftimeIntervalID = setInterval(checkFTime,1000*10);
 	chatMode = ischatmode;
-	checkCount = 0;	
+	checkCount = 0;
 }
 
 
@@ -522,9 +532,9 @@ function checkFTime(){
 		return;
 	if (!_root.Main._visible)
 		return;
-	
+
 	checkCount++;
-		
+
 	if (chatMode){
 		//チャットモード
 		//10秒に一回
@@ -543,25 +553,25 @@ function checkFTime(){
 			return;
 		}
 	}
-	
-	
+
+
 	myFTimeVars = new LoadVars();
 	myFTimeVars.onLoad = onMyFTimeVars;
 
-	var myDate = new Date;	
+	var myDate = new Date;
 	myFTimeVars.load(SERVER + "read.cgi?action=getftime&page=" + MyPage
 					 + "&date=" + myDate.getTime());
 
 };
 
 function onMyFTimeVars(sucess){
-	
+
 	if (!sucess || this.res != "OK"){
 		return;
 	}
 	if (this.ftime > MyFTime && this.page == MyPage){
 		//更新されている！
-		
+
 		//自分の情報を書き込み中の場合は、回避する
 		if (WriteAccessCnt == 0){
 			updatePage(); //更新
@@ -576,23 +586,23 @@ function updatePage(){
 	clearInterval(updateIntervalID);
 	if (!_root.Main._visible)
 		return;
-		
+
 	if (WriteAccessCnt > 0){
 		//自分が書き込み中なら、3秒後に再度呼び出し
 		//onMyFTimeVarsで一度、チェックしているが、その後またバッティングする可能性アリ
-		updateIntervalID = setInterval(updatePage,3000);	 
+		updateIntervalID = setInterval(updatePage,3000);
 	}else if (Canvas.isUsingPen == true){
 		//手書き描画中or消しゴム使用中なら3秒後に再度呼び出し
 		//自分の手描きをWriteした後、updateされるから
-		updateIntervalID = setInterval(updatePage,3000);	 
+		updateIntervalID = setInterval(updatePage,3000);
 	}else if ((oldfnum != null && oldfnum >= 0) && m_DataList[oldfnum].tool == "TEXT"){
 		//「テキスト」を選択中なら3秒後に再度呼び出し
-		updateIntervalID = setInterval(updatePage,3000);	 
+		updateIntervalID = setInterval(updatePage,3000);
 	}else{
 		//更新
 		LoadMapData(true);
 	}
-	
+
 }
 
 ///////////////////////////////////////////////////////////////
@@ -602,7 +612,7 @@ function updatePage(){
 function WriteMapData(num,draw_numlist,newobj){
 
 	//保存
-	
+
 	var Vars = new LoadVars();
 	Vars.action = "record";//保存お願い
 	Vars.page = loadoldpage;
@@ -611,7 +621,7 @@ function WriteMapData(num,draw_numlist,newobj){
 	//ページは同一か？
 	var pageSame = (loadoldpage == MyPage);
 	var delfiles = "";
-	
+
 	var title_changed = false;
 	if (pageSame){
 		//タイトル取得
@@ -621,15 +631,15 @@ function WriteMapData(num,draw_numlist,newobj){
 		}
 		//編集モードでなければキャンセル
 		if (!PageEdit || PageLock){
-			return;	
+			return;
 		}
 	}
-	
+
 	//大きさ
 	//一つのアイテムを書き換え（ヘッダー含む）
 	if (num != undefined){
 		var obj = newobj;
-		if (obj != undefined){	
+		if (obj != undefined){
 			//差分だけ更新
 			if (num == 'head'){
 				obj.id = 'head';//差分があっても、IDだけは収納する
@@ -644,8 +654,8 @@ function WriteMapData(num,draw_numlist,newobj){
 		for (propname in obj){
 			if (propname != "xlist" && propname != "ylist" && //手書き配列は送らない
 				propname != "selx" && propname != "sely" &&  //選択位置
-				propname != "num" && propname != "mem" && 
-				propname != "newpic" &&  
+				propname != "num" && propname != "mem" &&
+				propname != "newpic" &&
 				propname != "date" && propname != "update")
 			{
 				if (obj[propname] != undefined){
@@ -667,7 +677,7 @@ function WriteMapData(num,draw_numlist,newobj){
 			Vars[obj.id + ":" + "id"] = obj.id;//差分があっても、IDだけは収納する
 			Vars[obj.id + ":" + "xline"] = obj.xline;
 			Vars[obj.id + ":" + "yline"] = obj.yline;
-			
+
 		}
 	}
 
@@ -680,15 +690,15 @@ function WriteMapData(num,draw_numlist,newobj){
 	ResVars.trycnt = 0;
 	ResVars.pageSame = pageSame;
 	ResVars.onLoad = onLoadResVars;
-	
+
 	_root.statusbar.accessFlag.gotoAndPlay("start");
 //	WriteAccess = true; //書き込み中
 	WriteAccessCnt++;
 //	_root.statusbar.writecnt = WriteAccessCnt;
 	_root.statusbar.accessFlag._xscale = 100 + WriteAccessCnt*10;
-	
+
 	Vars.sendAndLoad(SERVER + "write.cgi",ResVars);
-	
+
 	//ページの動作の重さを量る（経験値）
 	var pageweight = getPageWeight();
 
@@ -715,7 +725,7 @@ onLoadResVars = function(success){
 			_root.statusbar.accessFlag._xscale = 100 + WriteAccessCnt*10;
 
 			Vars.sendAndLoad(SERVER + "write.cgi",this);
-			
+
 		}else{
 			if (MyLang == "en"){
 				ErrorMes("Writing failure.");
@@ -732,7 +742,7 @@ onLoadResVars = function(success){
 			if (m_DataList[this.num].date == null){//新規作成時
 				_global.m_DataList[this.num].date = this.update; //作成日を書き換え
 			}
-			if (m_DataList[this.num].update == this.item_last_update || 
+			if (m_DataList[this.num].update == this.item_last_update ||
 			    this.item_last_update == undefined || this.item_last_update == "")
 			{
 				//自分で更新
@@ -754,7 +764,7 @@ onLoadResVars = function(success){
 		if (update_byothers){
 			//他人によって書き込み前に更新
 			clearInterval(updateIntervalID);
-			updateIntervalID = setInterval(updatePage,1000);	 
+			updateIntervalID = setInterval(updatePage,1000);
 			//更新間隔をあげる
 			startPageUpdateCheck(true);
 		}
@@ -782,12 +792,12 @@ onLoadResVars = function(success){
 			}
 			for (var i=0;i<PluginList.length;i++) {
 				PluginList[i].onPageLock((PageDatEdit == "admin"));
-			}		
+			}
 			//一覧の更新
 			_root.updateSidebar();
 		}
 	}
-};	
+};
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -809,15 +819,15 @@ function openPage(newpage){
 	if (oldOpenPage == newpage){//２重受信を防ぐ
 		return;
 	}
-	
+
 	oldOpenPage = newpage;
-	
+
 
 	//ページの切り替えを行え！
 	_global.MyPage = newpage;
 	//データの読み込み
-	LoadMapData();	
-	
+	LoadMapData();
+
 }
 
 function checkMapDate(date){
@@ -827,7 +837,7 @@ function checkMapDate(date){
 		//一秒以内のアクセスは認めない
 		return false;
 	}
-	
+
 	//重複していないかチェック
 	//最終アップロード画像より、日付が新しくないとだめ！
 	if (lastUptime != undefined && lastUptime >= date){
@@ -844,25 +854,21 @@ function checkMapDate(date){
 	}
 	//書き込み
 	so.data.lastUptime = date;
-	so.flush();	
+	so.flush();
 
 	lastUptime = date;
-	
+
 	return true;
-	
+
 }
 
-map_lc.addImg = function(fname,date){
+map_lc.addImg = function(fname){
 	//新しい絵がアップロードされた！
-	if (!checkMapDate(date)){
-		return;
-	}	
-	
 	if (PageEdit != true){
 		if (MyLang == "en"){
 			ErrorMes("Please login to insert images.");
 		}else{
-			ErrorMes("画像を貼り付けるには、編集モードに切り替えて下さい。");		
+			ErrorMes("画像を貼り付けるには、編集モードに切り替えて下さい。");
 		}
 		return;
 	}
@@ -873,29 +879,25 @@ map_lc.addImg = function(fname,date){
 		}else{
 			ErrorMes("このページは凍結されています。管理者以外は編集できません。");
 		}
-		return;		
+		return;
 	}
 
 	//ファイルを登録！
 	addFile(fname);
-	
+
 };
 map_lc.changeAnonymous = function(power){
 	//参加条件と公開レベルが変更された
 	//account.swfから
 	_global.MyAnonymous = power;
-	
+
 }
 
-map_lc.msgBox = function(msg,date){
+map_lc.msgBox = function(msg){
 
-	//重複していないかチェック
-	if (!checkMapDate(date)){
-		return;
-	}
 	//メッセージを表示する
 	ErrorMes(msg);
-	
+
 }
 
 map_lc.openUrl = function(surl,date){
@@ -904,7 +906,7 @@ map_lc.openUrl = function(surl,date){
 		//一秒以内のアクセスは認めない
 		return;
 	}
-	
+
 	//プラグイン命令
 	if (surl.substr(0,8) == "command:"){
 		curflag.plugin.onCommandLink(surl.substr(8));
@@ -918,7 +920,7 @@ map_lc.openUrl = function(surl,date){
 			plgparam = plgname.substr(cr+1);
 			plgname = plgname.substr(0,cr);
 		}
-		
+
 		//プラグインを追加せよ（暫定）
 		if (PageEdit != true){
 			return;
@@ -930,17 +932,17 @@ map_lc.openUrl = function(surl,date){
 			}else{
 				ErrorMes("このページは凍結されています。管理者以外は編集できません。");
 			}
-			return;		
+			return;
 		}
 		//追加
 		addPlugin(plgname,plgparam);
 
-		return;		
+		return;
 	}
 	if (surl.substr(0,7) == "master:"){
 		//マスターページの適用
 		var masterid = surl.substr(7);
-		
+
 		if (PageEdit != true){
 			return;
 		}
@@ -951,46 +953,44 @@ map_lc.openUrl = function(surl,date){
 			}else{
 				ErrorMes("このページは凍結されています。管理者以外は編集できません。");
 			}
-			return;		
+			return;
 		}
-		_root.masterPage(masterid);		
+		_root.masterPage(masterid);
 
 		return;
 	}
-	
+
 	//指定のアドレスのページを開け！
-	if (surl.substr(0,5) == "http:" || 
-		surl.substr(0,6) == "https:" || 
-		surl.substr(0,7) == "mailto:" || 
+	if (surl.substr(0,5) == "http:" ||
+		surl.substr(0,6) == "https:" ||
+		surl.substr(0,7) == "mailto:" ||
 		surl.substr(0,4) == "ftp:")
 	{
 		//外部のページ
 		surl = Replace(surl,"$amp;","&");	//特殊エンコードlink.cgi?page=urlのurlに=&があると動作しないから
-		surl = Replace(surl,"$equal;","=");	
-		
+		surl = Replace(surl,"$equal;","=");
+
 		//吹き出しを表示させ、ジャンプするか問う
 		FlagLink.jumpUrl(surl);
 
-		
+
 //			getURL(surl,"_top");//別ウィンドウで開くようにせよ！
 //			getURL(surl,"_blank");//別ウィンドウで開くようにせよ！
 	}else{
 		//内部のページ
-		
+
 		//編集中の文字がある場合は、やめる
 		//フォーカスを奪う
 		if (MyScreen == 1){
 			surl += ".screen";
 		}
-		
+
 		//吹き出しを表示させ、ジャンプするか問う
 		FlagLink.jumpUrl("./?" + surl);
 
 	}
 
 };
-
-
 
 ////////////////////////////////////////////////////////////////////////
 //点と線の読み書きを行う！
@@ -1001,7 +1001,7 @@ function getMouseX(){
 }
 
 function getMouseY(){
-	return _ymouse;	
+	return _ymouse;
 }
 
 function drawRoad(obj){
@@ -1023,21 +1023,21 @@ function drawRoad(obj){
 				canvasDef.lineTo(x[0],y[0]);
 			}
 		}
-		
+
 	}
-	
+
 };
 
 
 
 
 function selectRoad(){
-/*	
+/*
 	//現在のマウス地点の下に道があるか確かめ、あるなら、それらを
 	//強調表示せよ
 	var px = getMouseX();
 	var py = getMouseY();
-	
+
 	var i=0;
 	var mindis = 100;
 	var minnum = 0;
@@ -1065,10 +1065,10 @@ function selectRoad(){
 	eval(minnum)._y = py;
 //	eval(minnum)._x = myLoadVars["xlist"+minnum][minnumw];
 //	eval(minnum)._y = myLoadVars["yist"+minnum][minnumw];
-	
+
 	//ある！
 	moveFlagFocus(minnum,true);//フォーカスを移動。
-*/	
+*/
 }
 
 
@@ -1121,7 +1121,7 @@ function drawListToString(obj){
 		obj.yline += sp + obj.ylist[i];
 		sp = ":";
 	}
-	
+
 	//さらに、既存の道で自分が描いたもので、種類が同じ場合は、連結する
 /*	var i=0;
 	for (i=0;i<m_DataList.length;i++){
@@ -1145,7 +1145,7 @@ function drawListToString(obj){
 		}
 		i++;
 	}
-*/		
+*/
 };
 
 
@@ -1166,11 +1166,11 @@ function registerErase(){
 	for (i=0;i<m_DataList.length;i++){
 		var obj = m_DataList[i];
 		if (obj.del != 1 && obj.tool == "DRAW"){
-			//線だけ抽出		
+			//線だけ抽出
 			//かつ自分が描いた線である
 			var change = false;
 			var xlist = obj.xlist;//線だけね。
-			var ylist = obj.ylist;				
+			var ylist = obj.ylist;
 			var able = true;
 			if (obj.author != MyID && MyPower != "admin"){
 				able = false;
@@ -1217,13 +1217,13 @@ function registerErase(){
 					if (sep && v == 1){ //有効文字が一つしかないのにセパレート
 						newxlist.pop();	newxlist.pop();
 						newylist.pop();	newylist.pop();
-					}				
+					}
 					if (sep) {	v=0; }
 					else     {  v++; }
 				}
 				if (v == 0){ //最後に不要なセパレート
 					newxlist.pop();
-					newylist.pop();	
+					newylist.pop();
 				}
 				var newobj = new Object();	//保存データ
 				//ここで、変更を適用。
@@ -1237,27 +1237,27 @@ function registerErase(){
 					drawListToString(newobj);
 				}
 				//データを記憶
-				updateFlag(i,newobj,curtime,true);	//この時点では保存しない！				
+				updateFlag(i,newobj,curtime,true);	//この時点では保存しない！
 				//保存予約
 				DelReserve.push(i);
 				//残りの線を描画
 				drawRoad(obj);
-			}else{				
+			}else{
 				//残りの線を描画
 				drawRoad(obj);
 			}
 		}
-	}	
+	}
 
 	//消しゴムのクリア！
 	canvasDel.clear();
 	//削除
 	if (DelReserve.length > 0){
 		playSound("SHU");
-		WriteMapData(undefined,DelReserve);	
+		WriteMapData(undefined,DelReserve);
 	}
 
-	
+
 };
 
 ////////////////////////////////////////////////////////////////////////
@@ -1269,8 +1269,8 @@ function registerErase(){
 ////////////////////////////////////////////////////////////////////////
 
 function setCursor(){
-	
-	//カーソルをセットする必要が生じたときに呼び出される	
+
+	//カーソルをセットする必要が生じたときに呼び出される
 	 switch (m_toolname){
 		case "pen":
 			//道
@@ -1292,8 +1292,8 @@ function setCursor(){
 			//閲覧モード（ペンを消す）
 			showMyCursor(false);
 			break;
-	}	
-		
+	}
+
 
 };
 
@@ -1318,7 +1318,7 @@ function setMiniTool(){
 					if (m_DataList[m_SelList[i].num].fname.indexOf(".jpg") >= 0)
 						isFile = false;
 					else
-						isImage = false;				
+						isImage = false;
 				}else{
 					isImage = false;
 					isFile = false;
@@ -1330,13 +1330,13 @@ function setMiniTool(){
 			else if (isImage)	obj.gotoAndStop("image");
 			else if (isFile)	obj.gotoAndStop("file");
 			else				obj.gotoAndStop("etc");
-		
-		
+
+
 		}else{
-			//非選択	
+			//非選択
 			obj.gotoAndStop("normal");
 		}
-	
+
 	}else if (m_toolname == "pen"){
 		//線
 		obj._visible = true;
@@ -1350,7 +1350,7 @@ function setMiniTool(){
 		obj._visible = false;
 	}
 
-	
+
 };
 
 function getEditMode(){
@@ -1362,7 +1362,7 @@ function getEditMode(){
 
 
 function setToolOption(toolname,sound){
-	
+
 	//ページがロックされていたら、他は選択できない
 	if (PageLock && toolname != "view"){
 		if (MyLang == "en"){
@@ -1372,19 +1372,19 @@ function setToolOption(toolname,sound){
 		}
 		return false;
 	}
-	
+
 	//同じなら、終了
 	if (m_toolname == toolname){
 		return;
 	}
-	
+
 	//ペンの種類を取得
 	m_toolname = toolname;
-	//サウンド	
+	//サウンド
 	if (sound != false){
 		playSound("KON");
 	}
-	
+
 	//設定を適用せよ！
 	setMiniTool();
 	for (var i=0;i<PluginList.length;i++) {
@@ -1401,7 +1401,7 @@ function setToolOption(toolname,sound){
 		//選択の初期化
 		moveFlagFocus(-1);
 	}
-	
+
 	//ダイアログを閉じる
 	_root.DialogBox.gotoAndStop("close");
 
@@ -1409,12 +1409,12 @@ function setToolOption(toolname,sound){
 	if (m_toolname == "pen" || m_toolname == "eraser"){
 		_quality = "MEDIUM";
 	}else{
-		_quality = "HIGH";	
+		_quality = "HIGH";
 	}
 	if (newtool == "view"){
 		setCursor();
 	}
-	
+
 	return true;
 };
 
@@ -1428,7 +1428,7 @@ function setPenColor(mycolor){
 		showMyCursor(2,"pen",mycolor);
 	else
 		showMyCursor(2,"shape",mycolor);
-		
+
 
 };
 
@@ -1478,8 +1478,8 @@ function addShape(shape){
 	//表示更新
 	_root.Main.setToolOption("view",false);
 	playSound("SHU");
-	_root.Main.moveFlagFocus(num,"noselect");	
-	
+	_root.Main.moveFlagFocus(num,"noselect");
+
 }
 
 function addText(string){
@@ -1508,7 +1508,7 @@ function addText(string){
 	}
 	obj.height 	= 20;		//初期の大きさ（推定）
 	obj.rotation= 0;
-												
+
 	//保存処理
 	_root.Main.updateFlag(-1,obj);
 	//作成
@@ -1517,28 +1517,28 @@ function addText(string){
 	//表示更新
 	_root.Main.setToolOption("view",false);
 	playSound("SHU");
-	_root.Main.moveFlagFocus(num,"noselect");	
-	
+	_root.Main.moveFlagFocus(num,"noselect");
+
 	if (string != ""){
 		//この部分は、statusbarから呼ばれる
 		Selection.setFocus("_root.Main." + num + ".textbox");
 		Selection.setFocus("_root.Main." + num + ".textbox");
 		Selection.setSelection(0,0);
-		
+
 		clearInterval(textselID);
-		textselID = setInterval(setTextSel,10,string.length);	
+		textselID = setInterval(setTextSel,10,string.length);
 	}else{
 		clearInterval(textselID);
-		textselID = setInterval(setTextSelNew,500,num);	
+		textselID = setInterval(setTextSelNew,500,num);
 	}
-	
+
 }
 
 function setTextSelNew(num){
 	//テキストのカーソル位置をセット
 	Selection.setFocus("_root.Main." + num + ".textbox");
 	clearInterval(textselID);
-		
+
 }
 
 function setTextSel(param){
@@ -1546,7 +1546,7 @@ function setTextSel(param){
 	clearInterval(textselID);
 
 	Selection.setSelection(param,param);
-		
+
 }
 
 function addFile(fname){
@@ -1554,8 +1554,8 @@ function addFile(fname){
 	var mid = new Object();
 	mid.x = Stage.width/2-170;
 	mid.y = Stage.height/2-170;
-	_root.Main.globalToLocal(mid);	
-	
+	_root.Main.globalToLocal(mid);
+
 	//メンバ代入
 	var obj 	= new Object();
 	obj.id 		= getTm();
@@ -1571,7 +1571,7 @@ function addFile(fname){
 	obj.height 	= 0;
 	obj.rotation= 0;
 	obj.newpic 	= 1;	//新規作成であることをチェック
-													
+
 	//保存処理
 	updateFlag(-1,obj);
 	//作成
@@ -1580,8 +1580,8 @@ function addFile(fname){
 	//表示更新
 	_root.Main.setToolOption("view",false);
 	playSound("SHU");
-	_root.Main.moveFlagFocus(num,"noselect");	
-	
+	_root.Main.moveFlagFocus(num,"noselect");
+
 };
 
 
@@ -1590,7 +1590,7 @@ function addPlugin(pluginname,pluginparam){
 	var mid = new Object();
 	mid.x = Stage.width/2-170;
 	mid.y = Stage.height/2-170;
-	_root.Main.globalToLocal(mid);	
+	_root.Main.globalToLocal(mid);
 
 	var myDate 	= new Date;
 	var obj     = new Object();
@@ -1606,10 +1606,10 @@ function addPlugin(pluginname,pluginparam){
 	obj.height 	= 0;
 	obj.rotation= 0;
 	obj.newpic 	= 1;	//新規作成であることをチェック
-	
+
 	obj.param 	= pluginparam;
-	
-	
+
+
 	//保存処理
 	updateFlag(-1,obj);
 	//作成
@@ -1618,7 +1618,7 @@ function addPlugin(pluginname,pluginparam){
 	//表示更新
 	_root.Main.setToolOption("view",false);
 	playSound("SHU");
-	_root.Main.moveFlagFocus(num,"noselect");	
+	_root.Main.moveFlagFocus(num,"noselect");
 
 };
 
@@ -1644,15 +1644,15 @@ function findNumFromID(id){
 			return i;
 	}
 	return -1;
-	
+
 };
 
 function updateFlag(num,obj,time,nosave){
 	//オブジェクトを更新したときに呼び出す。
 	//objに差分の変数を入れる
-	
 
-	
+
+
 	//変更前のデータをアンドゥーにいれるのがポイント
 	var undo = new Object();
 /*
@@ -1664,9 +1664,9 @@ function updateFlag(num,obj,time,nosave){
 	}
 	_root.testmes.text += text1;
 	ErrorMes("書き込み開始だ20！:" + cn + ":" + cn2 + "\r" + text1);
-*/	
-	
-	
+*/
+
+
 	if (num == -1){
 		//配列に追加する
 		_global.m_DataList.push(obj);
@@ -1770,7 +1770,7 @@ function undoFlag(isRedo){
 			m_RedoList.push(redo);
 		}
 		//元の状態を適用
-		var obj = m_DataList[num]; 
+		var obj = m_DataList[num];
 		var isDraw = (obj.tool == "DRAW");
 		if (undo.del == 0){	//削除の取り消し＝復活
 			eval(num)._visible = true;
@@ -1778,17 +1778,17 @@ function undoFlag(isRedo){
 				//この場合、ファイルをゴミ箱から戻さねばならない
 				var fname = obj.fname;
 				CopyVars = new LoadVars();
-				CopyVars.load(SERVER + "upload.cgi?action=copy&fname=" + escape(fname) + 
+				CopyVars.load(SERVER + "upload.cgi?action=copy&fname=" + escape(fname) +
 										"&srcpage=" + MyPage + "&page=" + MyPage);
 			}
 			//この場合全メンバを送る
-			undo = m_DataList[num];			
+			undo = m_DataList[num];
 		}else if (undo.del == 1){	//新規作成の取り消し＝削除
 			eval(num)._visible = false;
 			if (isFlagSelected(num)){
 				moveFlagFocus(-1);
 			}
-		}else if (!isDraw){	//普通のオブジェクトの変更 
+		}else if (!isDraw){	//普通のオブジェクトの変更
 			_root.Main.showFlagObjectData(num,undo);
 		}
 		if (isDraw){
@@ -1805,7 +1805,7 @@ function undoFlag(isRedo){
 					drawRoad(m_DataList[i]);
 				}
 			}
-		}		
+		}
 
 		//保存処理
 		WriteMapData(num,null,undo);
@@ -1827,7 +1827,7 @@ function IsTextBoxInClient(num,forprint){
 	pt.x = cb.xMax;	pt.y = cb.yMax;
 	_root.Main.localToGlobal(pt);
 	cb.xMax = pt.x; cb.yMax = pt.y;
-	
+
 	var pt1 = new Object();
 	var pt2 = new Object();
 	pt1.x = 0;
@@ -1838,10 +1838,10 @@ function IsTextBoxInClient(num,forprint){
 	//テキストボックスがこの中にあるか？
 	if ((((pt1.y < cb.yMin && cb.yMin < pt2.y) ||
 		(pt1.y < cb.yMax && cb.yMax < pt2.y)  ||
-		(cb.yMin < pt1.y && pt2.y < cb.yMax)) && 
+		(cb.yMin < pt1.y && pt2.y < cb.yMax)) &&
 		((pt1.x < cb.xMin && cb.xMin < pt2.x) ||
 		(pt1.x < cb.xMax && cb.xMax < pt2.x)  ||
-		(cb.xMin < pt1.x && pt2.x < cb.xMax)) ) || 
+		(cb.xMin < pt1.x && pt2.x < cb.xMax)) ) ||
 		forprint == true)
 	{
 		if (!obj.textbox.inclt){
@@ -1857,36 +1857,36 @@ function IsTextBoxInClient(num,forprint){
 	}else{
 		if (obj.textbox.inclt != false){
 			obj.textbox.inclt = false;
-			obj.textbox.text = ""; 
+			obj.textbox.text = "";
 		}
 	}
-	
+
 	if (forprint == true){
 		obj.autoSize = "right";
 		obj.wordWrap = true;
 		obj.border = true;
 	}
-	
+
 }
 
 function showTextBoxInClient(forprint){
 	//テキストボックスの内、現在のクライアント内で表示すべき物を自動で
 	//表示させる！
-	
+
 	for (var i=0;i<m_DataList.length;i++){
-		
+
 		if (m_DataList[i].tool == "TEXT"/* && m_DataList[i].del == 0*/){
 			IsTextBoxInClient(i,forprint);
 		}
 	}
-	
+
 }
 
 function setAutoSizeOff(isoff){
-	
+
 	//テキストボックスの下が正しく印刷されないバグの回避
 	for (var i=0;i<m_DataList.length;i++){
-		
+
 		if (m_DataList[i].tool == "TEXT"/* && m_DataList[i].del == 0*/){
 			var obj = eval(i);
 			if (isoff){
@@ -1897,7 +1897,7 @@ function setAutoSizeOff(isoff){
 			}
 		}
 	}
-	
+
 }
 
 function check_recently_updated(datestr){
@@ -1909,7 +1909,7 @@ function check_recently_updated(datestr){
     if (today.getTime() - d.getTime() < 3*24*60*60*1000){
         return true;
     }
-    
+
     return false;
 }
 
@@ -1931,9 +1931,9 @@ function showFlagObjectData(num, obj){
 		var fobject = textbox;
 		pFlag.fobject = textbox;
         if (check_recently_updated(obj.update)){
-            FElement.newmark.gotoAndStop(1);        
+            FElement.newmark.gotoAndStop(1);
         }else{
-            FElement.newmark.gotoAndStop(2);        
+            FElement.newmark.gotoAndStop(2);
         }
 		if (obj.width != undefined)//幅
 			textbox._width = obj.width;
@@ -1952,11 +1952,11 @@ function showFlagObjectData(num, obj){
 				textbox.background = true;
 				textbox.backgroundColor = obj.bgcolor;
 			}else{
-				textbox.background = false;				
+				textbox.background = false;
 			}
 		}
 		pFlag.photoloading = 2;//ロード完了
-		
+
 		//テキストが空で選択中なら、フォーカスを与えよ！
 		if (obj.text == ""){
 			if (isFlagSelected(num)){
@@ -1984,7 +1984,7 @@ function showFlagObjectData(num, obj){
 		}
 		if (obj.bgcolor != undefined){
 			var myColor  = new Color(shape);
-			myColor.setRGB(obj.bgcolor);	
+			myColor.setRGB(obj.bgcolor);
 		}
 		//透過処理
 		if (obj.transparent != undefined){
@@ -2001,9 +2001,9 @@ function showFlagObjectData(num, obj){
 		if (ext != "jpg" && ext != "swf"){
 			//ふつうのファイルである
             if (check_recently_updated(obj.update)){
-                FElement.newmark.gotoAndStop(1);        
+                FElement.newmark.gotoAndStop(1);
             }else{
-                FElement.newmark.gotoAndStop(2);        
+                FElement.newmark.gotoAndStop(2);
             }
 			//FElement.gotoAndStop("fileicon");
 			var fileicon = FElement.fileicon;
@@ -2013,7 +2013,7 @@ function showFlagObjectData(num, obj){
 			fileicon.fname_txt.text = fname;
 			var myTextFormat = new TextFormat();
 			myTextFormat.align = "center";
-			myTextFormat.underline = true;				
+			myTextFormat.underline = true;
 			fileicon.fname_txt.setTextFormat(myTextFormat);
 			//拡張子によるアイコン訳
 			var icon = "all";
@@ -2072,7 +2072,7 @@ function showFlagObjectData(num, obj){
 			if (obj.rotation != undefined){	//回転
 				pFlag._rotation = obj.rotation;
 			}
-			
+
 			var photo = FElement.photo;
 			var shape = FElement.shape;
 			var fobject = photo;
@@ -2080,7 +2080,7 @@ function showFlagObjectData(num, obj){
 			//マスキング処理
 			if (obj.shape != undefined || obj.fname != undefined){
 				//変更時と、初期ロード時に呼び出される
-				if (obj.shape != undefined && obj.shape.length > 0 && 
+				if (obj.shape != undefined && obj.shape.length > 0 &&
 					obj.shape != "rectangle")
 				{
 					//マスキング
@@ -2095,12 +2095,12 @@ function showFlagObjectData(num, obj){
 						shape._width = 0;
 						shape._height = 0;
 						photo.setMask(null);
-						shape.hitArea = photo;						
+						shape.hitArea = photo;
 					}else{
 						shape.hitArea = null;
 						photo.setMask(shape);
 					}
-					
+
 				}else{
 					//マスキングなし(SWF含む)
 					shape._width = 0;
@@ -2109,23 +2109,23 @@ function showFlagObjectData(num, obj){
 					shape.hitArea = photo;
 				}
 			}
-			
+
 			//読み込み
 			if (pFlag.photoloading == 0){
 				pFlag.photoloading = 1;	//読み込み中
-				photo.picture.loadMovie(IMAGESERVER + "view.cgi?page=" + MyPage + 
+				photo.picture.loadMovie(IMAGESERVER + "view.cgi?page=" + MyPage +
 										"&fname=" + escape( obj.fname));
 			}else{
 				pFlag.setPhotoSize();//切り抜きを変えた時など
 			}
-			//透過処理			
+			//透過処理
 			if (obj.transparent != undefined){
 				if (obj.transparent > 1 && obj.transparent < 100)
 					photo._alpha = obj.transparent;
 				else
 					photo._alpha = 100;
 			}
-			
+
 		}
 		break;
 	case "PLUGIN":
@@ -2134,7 +2134,7 @@ function showFlagObjectData(num, obj){
 			//FElement.gotoAndStop("plugin");
 			var plugin = FElement.plugin;
 			//pFlag.plugin = plugin;
-			var fobject = plugin;	
+			var fobject = plugin;
 			pFlag.fobject = plugin;
 			//ver 2.0ベータから2.0正式版への互換性
 			obj.fname = Replace(obj.fname,".txt",".xml");
@@ -2142,7 +2142,7 @@ function showFlagObjectData(num, obj){
 			//ロード
 			if (pFlag.photoloading == 0){
 				pFlag.photoloading = 1;	//読み込み中
-				plugin.loadMovie("plugins/" + obj.plugin + "/" + obj.plugin + ".swf?id=" + num + 
+				plugin.loadMovie("plugins/" + obj.plugin + "/" + obj.plugin + ".swf?id=" + num +
 							 "&bparam=" + obj.fname  + "&fname=" + obj.fname + "&page=" + MyPage);
 				//bparamは過去との互換性維持のため
 			}else{
@@ -2153,7 +2153,7 @@ function showFlagObjectData(num, obj){
 	}
 	//選択オブジェクトならタブの位置調整
 	if (isFlagSelected(num)){
-		_root.Main.FlagSelect.showSelect();	
+		_root.Main.FlagSelect.showSelect();
 	}
 };
 
@@ -2175,11 +2175,11 @@ function findFlagDepth(n){
 };
 
 function setFlagDepths(pFlag){
-	
+
 	//深度を面積から求めて適用せよ！
 	var areasize = 0;
 	var obj = m_DataList[pFlag._name];
-	
+
 	switch (m_DataList[pFlag._name].tool){
 	case "TEXT":
 		//テキスト
@@ -2224,7 +2224,7 @@ function setFlagDepths(pFlag){
 };
 
 function isFlagSelected(num,id){
-	//現在選択されているか	
+	//現在選択されているか
 	for (var i=0;i<m_SelList.length;i++){
 		if (id != undefined && m_DataList[m_SelList[i].num].id == id){
 			return true;
@@ -2232,14 +2232,14 @@ function isFlagSelected(num,id){
 		if (num != undefined && m_SelList[i].num == num){
 			return true;
 		}
-	}	
-	
+	}
+
 	return false;
-	
+
 };
 
 function moveFlagFocus(num,option){
-	//選択	
+	//選択
 	if (!PageEdit || PageLock){
 		return;//編集モードじゃない
 	}
@@ -2253,7 +2253,7 @@ function moveFlagFocus(num,option){
 	if (m_DataList[num].edit == "locked"){
 		return;//ロックされている
 	}
-	
+
 	var multi = "";  //複数選択オプション
 	var added = null;
 	var mainsel = oldmainsel;
@@ -2275,7 +2275,7 @@ function moveFlagFocus(num,option){
 		FlagSelect.saveAbsorbPoint();
 	}
 
-	
+
 	//古いものの処理
 	var textdeleted = false;
 	var teststr="";
@@ -2313,7 +2313,7 @@ function moveFlagFocus(num,option){
 
 		}
 	}
-	
+
 	//新しいものの処理
 	var obj = undefined;
 	if (num >= 0 && multi != "remove"){
@@ -2322,7 +2322,7 @@ function moveFlagFocus(num,option){
 		obj = eval(num);
 		obj.selected = true;	//選択せよ！（作成時）
 		obj.setTextSelect();	//選択せよ！（既存テキスト）
-		
+
 		//今、配列になければ追加せよ
 		if (!found/* || multi != "add"*/){
 			var newsel = new Object();
@@ -2338,18 +2338,18 @@ function moveFlagFocus(num,option){
 		if (m_SelList.length <= 0){
 			//入力フォーカスの消去
 			resetFocus();
-			
+
 		}else{
 			num = m_SelList[0].num;
 			obj = eval(num);
 		}
 	}
-	
+
 	//地点情報のフォーカスが変わった。
 	if (num >= 0 && option != "nosound" && with_sound){
 		playSound("KASHA");
-	}	
-	
+	}
+
 	//選択枠の変更
 	if (m_SelList.length > 0){
 		if (option != "noselect"){
@@ -2358,34 +2358,34 @@ function moveFlagFocus(num,option){
 	}else{
 		_root.Main.FlagSelect._visible = false;
 	}
-	
+
 	//メンバの記憶
 	if (m_SelList.length > 0){
 		oldfnum = num;
 		curflag = obj;
 	}else{
 		oldfnum = -1;
-		curflag = null;		
+		curflag = null;
 	}
-	
+
 	//複数選択時にテキストボックスが含まれる場合は、フォーカス解除
 	if ((textdeleted && m_SelList.length > 0 && num >= 0 && multi == "remove") || //削除
 		(m_DataList[added].tool == "TEXT" && m_SelList.length > 1))//追加
 	{
 		resetFocus();
-		
+
 		clearInterval(waitd_id);
 		waitd_id = setInterval(waitd,300);
-		
+
 	}
-	
+
 	//ツールセット切り替え
 	setMiniTool();
 	//リンク吹き出しを消す
 	if (_root.Main.FlagLink._visible){
 		_root.Main.FlagLink._visible = false;
 	}
-	
+
 };
 
 //入力フォーカスの消去(Timer仕様)
@@ -2411,10 +2411,10 @@ function openFlagFile(num,isDownload){
 		getURL(SERVER + "view.cgi?page="+ MyPage+"&save=1&fname="+escape(fname));
 	}else{
 		getURL(SERVER + "view.cgi?page="+ MyPage+"&fname="+escape(fname));
-		
+
 	}
 
-	
+
 };
 
 //-------------------------------------------------------//
@@ -2430,7 +2430,7 @@ function changeFlagMask(num,sname){
 	obj.shape = sname;
 	_root.Main.showFlagObjectData(num,obj);
 	//showObjectData(obj);	//適用
-	_root.Main.updateFlag(num,obj);	
+	_root.Main.updateFlag(num,obj);
 };
 
 function changeFlagBack(num,nextcolor){
@@ -2442,7 +2442,7 @@ function changeFlagBack(num,nextcolor){
 	var obj = new Object();	//差分を代入
 	obj.bgcolor = nextcolor;
 	_root.Main.showFlagObjectData(num,obj);
-	_root.Main.updateFlag(num,obj);	
+	_root.Main.updateFlag(num,obj);
 };
 
 function changeFlagTranslate(num){
@@ -2459,8 +2459,8 @@ function changeFlagTranslate(num){
 	var obj = new Object();	//差分を代入
 	obj.transparent = curv;
 	_root.Main.showFlagObjectData(num,obj);
-	_root.Main.updateFlag(num,obj);	
-	
+	_root.Main.updateFlag(num,obj);
+
 };
 
 
@@ -2472,7 +2472,7 @@ function IsFlagGuestLock(num,noalert){
 	//ゲストが変更できない動作か？
 	var author = m_DataList[num].author;
 	//管理人以外は他人のページでは、他人の部品を操作できない
-	if (PageAuthor != MyID && author != MyID && 
+	if (PageAuthor != MyID && author != MyID &&
 		MyPower != "admin")
 	{
 		if (!noalert){ //アラートする
@@ -2484,7 +2484,7 @@ function IsFlagGuestLock(num,noalert){
 		}
 		return true;
 	}
-	
+
 	if (m_DataList[num].edit == "locked"){
 		if (!noalert){ //アラートする
 			if (MyLang == "en"){
@@ -2495,10 +2495,10 @@ function IsFlagGuestLock(num,noalert){
 		}
 		return true;
 	}
-	
-	
+
+
 	return false;
-	
+
 }
 
 function deleteFlag(){
@@ -2522,35 +2522,35 @@ function deleteFlag(){
 		}
 	}
 	moveFlagFocus(-1);
-	
+
 };
 
 function deleteInterFlag(num,time){
 	//オブジェクトの削除（内部呼び出し用）
 	var author = m_DataList[num].author;
-	
+
 	if (IsFlagGuestLock(num,1)){
 		//他人のページでは人のオブジェクトは削除できない
 		//ロックされている
 		return false;
 	}
-	
+
 	eval(num)._visible = false;
 
 	//保存
 	var obj = new Object();
 	obj.del = 1;
 	updateFlag(num,obj,time);
-	
+
 	return true;
-	
+
 };
 
 function cutFlag(del){
 	//オブジェクトの切り取りorコピー
 	if (m_SelList.length <= 0)
 		return;
-									
+
 	//メンバをすべて移す
 	var so = new SharedObject;
 	so = SharedObject.getLocal("NOTA",localpath);
@@ -2562,10 +2562,10 @@ function cutFlag(del){
 		}
 		if (m_SelList[i].selx < minselx){
 			minselx = m_SelList[i].selx;
-		}		
+		}
 	}
 	for (var i=0;i<m_SelList.length;i++){
-		var obj = new Object(); 
+		var obj = new Object();
 		obj = m_DataList[m_SelList[i].num];
 		obj.selx = m_SelList[i].selx-minselx; //選択されている中の相対位置
 		obj.sely = m_SelList[i].sely-minsely;
@@ -2576,7 +2576,7 @@ function cutFlag(del){
 	so.data.myid = MyID; //操作している人
 	var success = so.flush();
 	delete so;
-	
+
 	if (success == true){
 		//サウンド
 		playSound("KASHA");
@@ -2596,7 +2596,7 @@ function cutFlag(del){
 				}
 			}
 			moveFlagFocus(-1);
-			
+
 		}
 	}else{
 		if (MyLang == "en"){
@@ -2605,7 +2605,7 @@ function cutFlag(del){
 			ErrorMes("切り取り、またはコピーできませんでした。");
 		}
 	}
-	
+
 };
 
 function pasteFlag(del){
@@ -2617,9 +2617,9 @@ function pasteFlag(del){
 		}else{
 			ErrorMes("このページは凍結されています。管理者以外は編集できません。");
 		}
-		return;		
+		return;
 	}
-	
+
 	var so = new SharedObject;
 	so = SharedObject.getLocal("NOTA",localpath);
 
@@ -2646,7 +2646,7 @@ function pasteFlag(del){
 				CopyVars = new LoadVars();
 				CopyVars.obj = obj;
 				CopyVars.onLoad = onLoadCopyVars;
-				CopyVars.load(SERVER + "upload.cgi?action=copy&fname=" + escape(fname) + 
+				CopyVars.load(SERVER + "upload.cgi?action=copy&fname=" + escape(fname) +
 							"&srcpage=" + srcpage + "&page=" + MyPage);
 			}else{
 				//保存処理
@@ -2660,8 +2660,8 @@ function pasteFlag(del){
 		}
 	}
 
-	delete so;	
-	
+	delete so;
+
 };
 
 onLoadCopyVars = function(success){
@@ -2679,7 +2679,7 @@ onLoadCopyVars = function(success){
 	if (this.newfname != undefined && this.newfname != ""){
 		obj.fname = this.newfname;
 	}else{
-		var myDate = new Date;	
+		var myDate = new Date;
 		obj.fname = Math.round(myDate.getTime()) + ".xml";
 	}
 	//保存処理
@@ -2688,7 +2688,7 @@ onLoadCopyVars = function(success){
 	var num = m_DataList.length-1;
 	loadFlag(num);
 	//選択
-	moveFlagFocus(num,"shift");	
+	moveFlagFocus(num,"shift");
 };
 function getPageTitle(){
 	//頁のタイトルを取得し、変数に代入
@@ -2699,7 +2699,7 @@ function getPageTitle(){
 	var pagetitle = "";
 	for (i=0;i<m_DataList.length;i++){
 		var obj = m_DataList[i];
-		if (obj.tool == "TEXT" && obj.del != 1 && 
+		if (obj.tool == "TEXT" && obj.del != 1 &&
 			obj.text != "")
 		{
 			tt = eval(i);
@@ -2712,15 +2712,15 @@ function getPageTitle(){
 	}
 	if (num == -1){
 		//テキストが無かった
-		pagetitle = "(タイトルなし)";	
+		pagetitle = "(タイトルなし)";
 	}else{
 		//テキストをテキストボックスから代入
 		tt = eval(num);
 		IsTextBoxInClient(num,true);
 		pagetitle = tt.textbox.text;
 		if (pagetitle.length < 1){
-			pagetitle = "(タイトルなし)";	
-		}	
+			pagetitle = "(タイトルなし)";
+		}
 		//一行目のみ代入
 		var re = pagetitle.indexOf("\r");
 		if (re == -1 || re > 30){ re = 30; }
@@ -2733,10 +2733,10 @@ function getPageTitle(){
 			changed = true;
 		}
 		_global.MyPageTitle = pagetitle;
-		
+
 	}
 	return changed;
-	
+
 };
 
 
@@ -2755,11 +2755,11 @@ function getPageTitle(){
 function loadMapPosition(){
 	//地図の初期位置読み込み
 	//将来的には、SharedObjectを使って、場所を記憶する
-	
+
 	//全体の大きさ
 	var stageW = Stage.width-ML-17;
 	var stageH = Stage.height-MT-17;
-	
+
 	//地図の位置情報を読み出す
 /*	so = new SharedObject;
 	so = SharedObject.getLocal("mapdata",localpath);
@@ -2768,8 +2768,8 @@ function loadMapPosition(){
 	//初期位置
 	if (so.data.mapx == undefined || PageEdit != true){
 		//標準値
-//		changeMapScale(60,2750,1920);//御所が真ん中に来る！	
-//		changeMapScale(100,0,0);//御所が真ん中に来る！	
+//		changeMapScale(60,2750,1920);//御所が真ん中に来る！
+//		changeMapScale(100,0,0);//御所が真ん中に来る！
 
 	}else{
 		//適用（スケールだけ）
@@ -2779,24 +2779,24 @@ function loadMapPosition(){
 //		minsc = stageW / PaperW * 100;
 //		if (_root.Main._xscale < minsc){
 //				_root.Main._xscale = minsc;
-//				_root.Main._yscale = minsc;			
+//				_root.Main._yscale = minsc;
 //		}
 	}
-*/	
+*/
 	if (Stage.width != null){
 		var yokosc = stageW / PaperW * 100;//幅いっぱい
 		if (yokosc < MIN_SC)//MIN_SC以下はちょっと視認性が落ちるので、やばい。
 			yokosc = MIN_SC;
-		else 
+		else
 			_global.PageReal = true;//全幅表示
 		if (yokosc > MAX_SC)
 			yokosc = MAX_SC;
-		
+
 		this._xscale = yokosc;
 		this._yscale = yokosc;
 	}
     moveMap(ML,MT);
-	
+
 
 };
 
@@ -2811,7 +2811,7 @@ function setPoint(){
 	startm.y = _root._ymouse;
 	startp.x = _root.Main._x;
 	startp.y = _root.Main._y;
-	
+
 };
 
 function moveMap(x,y,setscroll){
@@ -2820,11 +2820,11 @@ function moveMap(x,y,setscroll){
 	var maph = PaperH * _root.Main._xscale / 100;
 
 	var limit = false;
-	
+
 	//全体の大きさ
 	var stageW = Stage.width-ML-17;
 	var stageH = Stage.height-MT-17;
-	
+
 	//横
 	if (mapw <stageW ){
 		//中心に
@@ -2835,8 +2835,8 @@ function moveMap(x,y,setscroll){
 	}else if(x < stageW+ML-mapw) {
 		x = stageW+ML-mapw;
 		limit = true;
-	}	
-	
+	}
+
 	//縦
 	if (maph < stageH){
 		//中心に
@@ -2855,14 +2855,14 @@ function moveMap(x,y,setscroll){
 	//スクロールサイズ
 	if (setscroll != false)
 		setScrollPos();
-	
+
 	//テキストオブジェクトの表示制御
 	showTextBoxInClient();
-	
+
 	//頁番号を更新
 	updatePageNum();
 
-	
+
 	return limit;//制限値を超えているか返す
 };
 
@@ -2870,19 +2870,19 @@ function updatePageNum(){
 
 	//頁番号を出力
 	var stageH = Stage.height-MT-17;
-	
+
 	//現在どのページを表示しているか？
-	
+
 	//一頁のサイズが分かればよい
 	page_num = 1+Math.floor(-(_root.Main._y-MT-stageH/2)/(PageH*_root.Main._xscale/100));
-	
+
 	if (page_num > page_cnt){
 		page_num = page_cnt;
 	}else if (page_num < 1){
 		page_num = 1;
 	}
 	_root.statusbar.pagenum = "(" + page_num + "/" + page_cnt + ")"
-	
+
 }
 
 
@@ -2918,23 +2918,23 @@ function changeMapScale(newscale,x,y,sound){
 	//ステータスバー更新
 	curscale = Math.floor(newscale);
 	_root.statusbar.scale = curscale + "%";
-	
+
 	//設定保存
 	saveMapPosition();
-	
+
 	yokosc =stageW / PaperW * 100;//幅いっぱい
 	if (yokosc > MAX_SC)
 		yokosc = MAX_SC;
 	_global.PageReal = (newscale == yokosc);//最大倍率であることを記憶
-	
-	
+
+
 };
 
 function Scroll(per,horizontal){
 	//スクロールバーがドラッグされた
 	oldx = _root.Main._x;
 	oldy = _root.Main._y;
-	
+
 	//マップの大きさ
 	var mapw = PaperW * _root.Main._xscale / 100;
 	var maph = PaperH * _root.Main._xscale / 100;
@@ -2943,49 +2943,49 @@ function Scroll(per,horizontal){
 	var stageH = Stage.height-MT-17;
 
 	//計算
-	if (horizontal)		
+	if (horizontal)
 		moveMap(ML-(mapw-stageW)*per/100,oldy,false);
 	else
 		moveMap(oldx,MT-(maph-stageH)*per/100,false);
 
 
-	
+
 }
 
 function setScrollPos(){
-	
+
 	//マップの大きさ
 	var mapw = PaperW * _root.Main._xscale / 100;
 	var maph = PaperH * _root.Main._xscale / 100;
 	//全体の大きさ
 	var stageW = Stage.width-ML-17;
 	var stageH = Stage.height-MT-17;
-	
+
 	//スクロールバーのサイズ変更
 	_root.ScrollV._x = stageW+ML;
 	_root.ScrollV._y = MT;
-	
+
 	if (maph == stageH){
 		_root.ScrollV.setPos( -1,-1,
 							  stageH+MT,false);
-		 
+
 	}else{
 		_root.ScrollV.setPos( (MT-_root.Main._y)/(maph-stageH/*+MT*/)*100,
 							  (stageH+MT)/maph*100,
 							  stageH/*+MT*/,false);
 	}
-	
+
 	_root.ScrollH._y = Stage.height;
 	_root.ScrollH._x = ML+85;
 	_root.statusbar._x = 0;
 	_root.statusbar._y = Stage.height-1-16;
-	
+
 	if (mapw == stageW){
-		_root.ScrollH.setPos(-1,-1,stageW-85,true);	
+		_root.ScrollH.setPos(-1,-1,stageW-85,true);
 	}else{
 		_root.ScrollH.setPos((ML-_root.Main._x)/(mapw-stageW)*100,
 							(stageW)/mapw*100,
-							  stageW-85,true);	
+							  stageW-85,true);
 	}
 
 
@@ -2996,7 +2996,7 @@ function resizePageH(){
 	//現在使用中のページ＋１ページが基本
 	clearInterval(rsintervalID);
 	rsintervalID = null;
-	
+
 	var i=0;
 	var ytop = -1;
 	//手書き線以外
@@ -3018,7 +3018,7 @@ function resizePageH(){
 				ytop = y-0;
 			}
 		}
-	
+
 	}
 	//手書き線の下端
 	var pen_bounds = new Object;
@@ -3028,7 +3028,7 @@ function resizePageH(){
 			ytop = pen_bounds.yMax;
 		}
 	}
-	
+
 	page_cnt = Math.floor(ytop / PageH)+1;
 	if (page_cnt < 1){
 		page_cnt = 1;
@@ -3036,12 +3036,12 @@ function resizePageH(){
 	var espace = 0;
     //編集モードなら、次ページ作成のためのスペースを用意
     espace = PageH/2;
-	
+
 	if (PaperH != page_cnt*PageH + espace){
 		_global.PaperH = page_cnt*PageH + espace;
 		backboard._height = PaperH - espace;
 		Canvas._height = PaperH;
-	
+
 		//もし、ページ数を減らす場合で、スクロール位置がおかしいなら
 		setScrollPos();
 	}
@@ -3055,21 +3055,21 @@ function resizePageH(){
 	canvasLine.lineStyle(1,0x999999,100);
 	canvasLine.moveTo(0,-1);//一番上の線
 	canvasLine.lineTo(PaperW,-1);
-	
+
 	//ページ区切り
 	for (i=1;i<=page_cnt;i++){
 		canvasLine.moveTo(0,i*PageH);//下の境界
 		canvasLine.lineTo(PaperW,i*PageH);
-		
+
 		canvasLine.moveTo(0,(i-1)*PageH);//縦線２本
 		canvasLine.lineTo(0,i*PageH);
 		canvasLine.moveTo(PaperW,(i-1)*PageH);
 		canvasLine.lineTo(PaperW,i*PageH);
 	}
-	
+
 	//頁番号を更新
 	updatePageNum();
-	
+
 };
 
 
@@ -3080,33 +3080,33 @@ function prepareForScroll(isstart){
 		clearInterval(idmh);
 		idmh = null;
 	}
-	
+
 	if (!oldpageweight){
 		oldpageweight = getPageWeight();
 	}
-	
+
 	if (isstart){
 		//スクロール開始
 		if (oldpageweight > 60){
-			_quality = "LOW";			
+			_quality = "LOW";
 		}else if (oldpageweight > 10){
 			_quality = "MEDIUM";
 		}
-		
+
 
 		_root.minitool._visible = false;
-		
+
 		mhprogress = 0;
-	
+
 	}else{
 		//スクロールストップ
 		_quality = "HIGH";
 		if (PageEdit){
 			_root.minitool._visible = true;
 		}
-		
+
 	}
-	
+
 }
 
 function getPageWeight(){
@@ -3139,15 +3139,15 @@ function getPageWeight(){
 			}
 			pageweight += wt;
 		}
-	}	
-	
+	}
+
 	if (pageweight > 100){
 		_root.statusbar.pageWeight._xscale = 100;
 	}else{
 		_root.statusbar.pageWeight._xscale = pageweight;
-		
+
 	}
-	
+
 	return pageweight;
 };
 
@@ -3164,17 +3164,17 @@ function changePageBack(nextcolor,save){
 
 	//背景色を変更
 	var myColor  = new Color(_root.Main.backboard);
-	myColor.setRGB(nextcolor);	
-	
+	myColor.setRGB(nextcolor);
+
 	_root.Main.pagebgcolor = nextcolor;
 
 	//保存
 	if (save){
 		var obj = new Object();	//差分を代入
 		obj.bgcolor = nextcolor;
-		_root.Main.updateFlag("head",obj);	
+		_root.Main.updateFlag("head",obj);
 	}
-	
+
 };
 
 ////////////////////////////////////////////////////////////////////////
@@ -3193,18 +3193,18 @@ stageListner.onResize = function(){
 
 	if (_root.Main._xscale < minsc){
 		_root.Main._xscale = minsc;
-		_root.Main._yscale = minsc;			
+		_root.Main._yscale = minsc;
 	}
 
 	//必要ならば、移動
 	var curx = _root.Main._x;
 	var cury = _root.Main._y;
 	moveMap(curx,cury);
-	//	moveMap(0,0);	
-	
+	//	moveMap(0,0);
+
 	//スクロールサイズをあわせる
 	setScrollPos();
-	
+
 	//背景のリサイズ
 	_root.back._width = Stage.width;
 	_root.back._height = Stage.height;
@@ -3216,7 +3216,7 @@ stageListner.onResize = function(){
 			yokosc = MAX_SC;
 		changeMapScale(yokosc,null,null,false);
 	}
-	
+
 };
 Stage.addListener(stageListner);
 
@@ -3240,16 +3240,16 @@ backboard.onPress = function(){
 
 	if (!getEditMode()/* && oldfnum == -1*/){
 
-		
+
 		//地図を移動開始
 		PageDragging = true;
 		if (!isMacOS){
 			showMyCursor(true,"hand");
 		}
 		setPoint();//現在地点
-	
+
 		prepareForScroll(true);//スクロール準備
-		
+
 	}
 };
 
@@ -3260,18 +3260,18 @@ backboard.onMouseMove = function(){
 	if (PageDragging){
 		//時間が詰まり過ぎていれば、無視
 		//この値をページの重さに応じて変えるのが妥当
-		var spantime  = (getTimer() - lasttime);		
+		var spantime  = (getTimer() - lasttime);
 		if (spantime < 30){
 			return;
 		}
-		
+
 		var nextx = startp.x + (Math.round((_root._xmouse- startm.x)/10)*10 );
 		var nexty = startp.y + (Math.round((_root._ymouse- startm.y)/10)*10 );
 		//制限内か検査
 		if (oldnextx != nextx || oldnexty != nexty){
 			var limit = moveMap(nextx,nexty);
 			oldnextx = nextx;
-			oldnexty = nexty;		
+			oldnexty = nexty;
 			//初期位置代入
 			if (limit)	setPoint();
 			lasttime = getTimer();
@@ -3285,17 +3285,17 @@ backboard.onRelease = function(){
 	//ドラッグの終了
 	if (!getEditMode()){
 		//選択を解除
-		
+
 		if (oldfnum >= 0){
 			moveFlagFocus(-1);
-		}	
+		}
 		if (PageDragging){
 			PageDragging = false;
-			
+
 			prepareForScroll(false); //スクロール準備終了
 			//場所保存
 			saveMapPosition();
-			
+
 			//カーソルを元に戻す
 			showMyCursor(false);
 
