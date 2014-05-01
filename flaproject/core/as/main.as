@@ -97,14 +97,6 @@ playSound("KASHA");
 //書き込み変数
 WriteAccessCnt = 0;
 
-function addImage(fname):Void {
-  map_lc.addImg(fname);
-}
-function msgBox(msg):Void {
-  map_lc.msgBox(msg);
-}
-ExternalInterface.addCallback("addImage", this, addImage);
-ExternalInterface.addCallback("msgBox", this, msgBox);
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -830,39 +822,14 @@ function openPage(newpage){
 
 }
 
-function checkMapDate(date){
-
-	if (getTimer() - map_lc.startTime < 1000){
-		//SWFがロードされてから
-		//一秒以内のアクセスは認めない
-		return false;
-	}
-
-	//重複していないかチェック
-	//最終アップロード画像より、日付が新しくないとだめ！
-	if (lastUptime != undefined && lastUptime >= date){
-		//内部メモリと比較
-		return false;
-	}
-
-	var so = new SharedObject;
-	so = SharedObject.getLocal("NOTA");
-	var ustr = so.data.lastUptime;
-	if (ustr != undefined && ustr >= date){
-		//外部シェアメモリと比較
-		return false;
-	}
-	//書き込み
-	so.data.lastUptime = date;
-	so.flush();
-
-	lastUptime = date;
-
-	return true;
+map_lc.changeAnonymous = function(power){
+	//参加条件と公開レベルが変更された
+	//account.swfから
+	_global.MyAnonymous = power;
 
 }
 
-map_lc.addImg = function(fname){
+function ex_addImg(fname){
 	//新しい絵がアップロードされた！
 	if (PageEdit != true){
 		if (MyLang == "en"){
@@ -886,26 +853,15 @@ map_lc.addImg = function(fname){
 	addFile(fname);
 
 };
-map_lc.changeAnonymous = function(power){
-	//参加条件と公開レベルが変更された
-	//account.swfから
-	_global.MyAnonymous = power;
 
-}
-
-map_lc.msgBox = function(msg){
+function ex_msgBox(msg){
 
 	//メッセージを表示する
 	ErrorMes(msg);
 
 }
 
-map_lc.openUrl = function(surl,date){
-	//同じ日付を排除する
-	if (getTimer() - map_lc.startTime < 1000){
-		//一秒以内のアクセスは認めない
-		return;
-	}
+function ex_openUrl(surl){
 
 	//プラグイン命令
 	if (surl.substr(0,8) == "command:"){
@@ -991,6 +947,11 @@ map_lc.openUrl = function(surl,date){
 	}
 
 };
+
+ExternalInterface.addCallback("addImg", this, ex_addImg);
+ExternalInterface.addCallback("msgBox", this, ex_msgBox);
+ExternalInterface.addCallback("openUrl", this, ex_openUrl);
+
 
 ////////////////////////////////////////////////////////////////////////
 //点と線の読み書きを行う！

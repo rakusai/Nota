@@ -599,7 +599,7 @@ sub showFlash
 		<script type="text/javascript">
 		window.parent.list.stopUpload();
 		var player = document.all? window.parent.window["nota"] : window.parent.document["nota"];
-		player.addImage("$fname");
+		player.addImg("$fname");
 		</script>
 	</body>
 </html>

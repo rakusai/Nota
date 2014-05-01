@@ -10,8 +10,8 @@ require 'option.pl';
 require 'nota.pl';
 
 use utf8;
-binmode STDIN,  ":bytes"; 
-binmode STDOUT, ":encoding(utf-8)"; 
+binmode STDIN,  ":bytes";
+binmode STDOUT, ":encoding(utf-8)";
 
 if ($m_fastcgi == 1){
 	#FastCGI
@@ -31,7 +31,7 @@ sub main
 {
 	local %FORM = ();
 	&nota_get_form(\%FORM);
-	
+
 	my $sdir = $ENV{'SERVER_NAME'} . $ENV{'SCRIPT_NAME'};
 	$sdir =~ /.*\//;
 	$sdir = $&;
@@ -52,7 +52,7 @@ sub main
 		$url =~ s/&/\$amp;/g;
 		$url =~ s/=/\$equal;/g;
 	}
-	
+
 	#バリデーション
 	&nota_validate($page);
 	&nota_validate($date);
@@ -63,13 +63,13 @@ sub main
 
 	if (defined($fname)){
 		#アップロードしたファイル名を指定
-		&showFlash('imgup',"link.swf","fname=$fname&sdir=$sdir&page=$page&date=$date");
+		&showFlash('addImg',$fname);
 	}elsif (defined($url)){
 		#外部URL指定フラッシュを表示
-		&showFlash('link',"link.swf","url=$url&sdir=$sdir&page=$page&delay=$delay");
+		&showFlash('openUrl',$url);
 	}elsif (defined($msg)){
 		#外部URL指定フラッシュを表示
-		&showFlash('link',"link.swf","msg=$msg&sdir=$sdir&page=$page&delay=$delay");
+		&showFlash('msgBox',$msg);
 	}else{
 		#エラー
 		&error;
@@ -80,19 +80,16 @@ sub main
 #--  転送用フラッシュファイルの表示 ------------------------#
 sub showFlash
 {
-	my ($title,$movie,$flashvars) = @_;
-	
-	my $flashsrc = &nota_print_flash("$title","$movie?ver=$m_version","$flashvars","noscale","#FFFFFF","","5","5");
+	my ($method,$params) = @_;
 
-	#転送用SWFを出力
-	print "Content-type: text/html; charset=utf-8\n\n";
+	print "Content-type: text/html; charset=utf-8\n\n" ;
 	print <<"END_OF_HTML";
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<meta http-equiv=Content-Type content="text/html; charset=utf-8">
-		<title>NOTA - $title</title>
-		<style>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>NOTA</title>
+		<style type="text/css">
 		body {
 			margin:0px;
 			padding:0px;
@@ -101,7 +98,10 @@ sub showFlash
 		</style>
 	</head>
 	<body>
-$flashsrc
+		<script type="text/javascript">
+		var player = document.all? window.parent.window["nota"] : window.parent.document["nota"];
+		player.$method("$params");
+		</script>
 	</body>
 </html>
 END_OF_HTML
