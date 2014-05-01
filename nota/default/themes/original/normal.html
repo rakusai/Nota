@@ -6,6 +6,7 @@
 	<title><!--NOTA TITLE--></title>
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.cgi">	<link rel="stylesheet" type="text/css" href="<!--THEME DIR-->/styles/main.css">
 	<script type="text/javascript" src="<!--THEME DIR-->/scripts/nota_func.js"></script>
+	<script type="text/javascript" src="<!--THEME DIR-->/scripts/swf.js"></script>
 	<script type="text/javascript">
 	<!--
 	function main(){
@@ -35,7 +36,7 @@
 			url = "<!--NOTA OPTION-->";
 		}
 		//読み込み
-		if ((tabname != current_tab && select == true) || 
+		if ((tabname != current_tab && select == true) ||
 			(tabname == current_tab && refresh == true))
 		{
 			window.list.location.href  = url;
@@ -68,7 +69,7 @@
 			optionTab.className  = "fgTab";
 		}
 	}
-	
+
 	function setEditMode(edit,user,power){
 	    log(edit + "/" + user);
 		var listTab   = document.getElementById("listTab");
@@ -79,7 +80,7 @@
 			listTab.style.display   = "block";
 			insertTab.style.display = "block";
 			optionTab.style.display  = "block";
-			
+
 			if (power == "admin"){
 				power = "Admin";
 			}else if (power == "member"){
@@ -87,26 +88,26 @@
 			}else if (power == "guest"){
 				power = "Guest";
 			}
-			
+
 			//一覧をリロード
 			var anonymous = '<!--NOTA ANONYMOUS-->';
     		var editmode = "<!--NOTA EDITMODE-->";
 			if (anonymous == 'none' && editmode != "true"){
 			    clickTab('list',false,true);
 			}
-			
+
 			//ログイン者のID
 			setNodeText("userinfo",user + "(" + power +") is Online");
-			
+
 		}else{
 			//閲覧モード
 			listTab.style.display   = "block";
 			insertTab.style.display = "none";
 			optionTab.style.display  = "none";
-			
+
 			//クッキーを上書き
 		 	document.cookie = "editmode=false";
-			
+
 			//一覧タブに戻す
 			clickTab('list',true,false);
 
@@ -159,23 +160,31 @@
 	<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
 	<tr>
 	<td width="100%" valign="top">
-		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-			 codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
-			 width="100%" height="100%" align="">
-			<param name="movie" value="<!--NOTA FLASH SRC-->">
-			<param name="FlashVars" value="<!--NOTA FLASHVARS-->">
-			<param name="quality" value="high"> 
-			<param name="scale" value="noscale">
-			<param name="menu" value="false">
-			<param name="wmode" value="">
-			<param name="bgcolor" value="#FFFFFF">
-			<param name="salign" value="LT">
-			<embed src="<!--NOTA FLASH SRC-->" FlashVars="<!--NOTA FLASHVARS-->"
-			 quality="high" bgcolor="#FFFFFF" wmode="" scale="noscale" salign="LT" menu="false"
-			 width="100%" height="100%" align="" type="application/x-shockwave-flash"
-			 pluginspage="http://www.macromedia.com/go/getflashplayer">
-			</embed>
-	  </object>
+    <script language="JavaScript" type="text/javascript">
+      AC_FL_RunContent(
+        'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0',
+        'width', '100%',
+        'height', '100%',
+        'src', '<!--NOTA FLASH SRC-->',
+        'quality', 'high',
+        'pluginspage', 'http://www.adobe.com/go/getflashplayer',
+        'align', 'middle',
+        'play', 'true',
+        'loop', 'false',
+        'scale', 'noscale',
+        'wmode', '',
+        'devicefont', 'false',
+        'id', 'nota',
+        'bgcolor', '#ffffff',
+        'name', 'nota',
+        'menu', 'false',
+        'allowFullScreen', 'false',
+        'allowScriptAccess','sameDomain',
+        'movie', '<!--NOTA FLASH SRC-->',
+        'salign', 'LT',
+        'flashvars','<!--NOTA FLASHVARS-->'
+        ); //end AC code
+    </script>
 	</td>
 	<td width="200">
 
@@ -203,14 +212,14 @@
 			<input name="findstr" type="text" id="findstr" onKeyUp="onChangeFindstr();"/>
 			<input type="submit" name="Submit" value="Search" />
 		</form>
-	
+
 		</div>
 		<div class="tabBox">
-		
+
 		<a href="javascript:;" onClick="clickTab('list',true,false);" id="listTab" class="fgTab">List&nbsp;</a>
 		<a href="javascript:;" onClick="clickTab('insert',true,false);" id="insertTab" class="bgTab">Insert&nbsp;</a>
 		<a href="javascript:;" onClick="clickTab('option',true,false);" id="optionTab" class="bgTab">Option&nbsp;</a>
-		</div>	
+		</div>
 		</td>
 		</tr>
 		<tr valign="top">
