@@ -13,8 +13,8 @@ use utf8;
 use notalib::Login;
 use notalib::NDF;
 
-binmode STDOUT, ":encoding(utf-8)"; 
-binmode STDIN, ":encoding(utf-8)"; 
+binmode STDOUT, ":encoding(utf-8)";
+binmode STDIN, ":encoding(utf-8)";
 
 if ($m_fastcgi == 1){
 	#FastCGI
@@ -37,21 +37,21 @@ sub main
 	&nota_get_form(\%FORM);
 	local %COOKIE = ();
 	&nota_get_cookie(\%COOKIE);
-	
+
 	#LocalConnetionに使うID
 	my $sdir = $ENV{'SERVER_NAME'} . $ENV{'SCRIPT_NAME'};
 	$sdir =~ /.*\//;
 	$sdir = $&;
 	$sdir .= $ENV{'HTTP_USER_AGENT'};
 	$sdir =~ s/[^a-zA-Z0-9]//g;
-	
+
 	#ログイン情報の取得
 	local $login = NOTA::Login->new;
 	$login->getlogin(\%COOKIE);
-	
+
 #	local $user,$pass,$editmode,$anonymous;
 #	local $mypower = &login_getlogin(\%COOKIE, \$user, \$pass, \$editmode, \$anonymous);
-	
+
 	#ログインを外部で行うとき
 	if ($login->get_certify eq "skip"){
 		if ($login->get_power eq ''){
@@ -61,10 +61,10 @@ sub main
 		}
 	}
 	#&nota_error_html("Failure to parse XML.","$user $pass $mypower");
-	
+
 	#使用言語
 	local $lang = &nota_get_lang();
-	
+
 	#頁番号の取得
 	my $ishtml = 0, $isscreen = 0;
 	my $page = $FORM{'page'};
@@ -81,9 +81,9 @@ sub main
 	if (!$page || $page eq ""){
 		$page = 'home';
 	}
-	
+
 	#
-	
+
 	if ($ishtml){
 		#HTML表示を行う
 		require 'htmlconv.pl';
@@ -97,10 +97,10 @@ sub main
 		my @lines = ();
 		my $ndf = NOTA::NDF->new;
 		if ($ndf->parsefile("$m_datadir/$page.ndf")){
-			
+
 			$title = "NOTA - " . $ndf->getItem('head','title');
 			&nota_xmlescape($title);	#エスケープ
-			
+
 		}else{
 			#オープンエラー
 			if ($ndf->get_errorcode == 100){
@@ -175,12 +175,12 @@ sub getPageText
 			if ($param eq "text"){
 			#IDの替わり時を捉える
 				$P{'text'} = $param;
-				
+
 				#ファイル名とテキストのエンコード
 				$value =~ s/%2B/\+/g;	#+記号過去との互換性
 				$value =~ s/%2C/,/g;	#区切り 過去との互換性
 				$value =~ s/&apos;/'/g;	#なぜか' が&apos;になる。過去との互換性
-				
+
 				#文字列
 				#リンク先の変更
 				$value =~ s/<A HREF="link\.cgi\?url=http/<a href="http/g;
@@ -210,12 +210,12 @@ sub getPageText
 sub show
 {
 	my ($sdir,$linkurl,$title,$page,$innertext) = @_;
-	
+
 	my $metarobot = '';
 	if ($m_norobot == 1){
 		$metarobot = "<meta content=NONE name=ROBOTS>\n\t<meta content=NOINDEX,NOFOLLOW name=ROBOTS>";
 	}
-	
+
 	local $sidew = $COOKIE{'sidew'};
 	if (!defined($sidew) || $sidew < 20){
 		$sidew = 190;
@@ -229,12 +229,12 @@ sub show
 	if ($isscreen == 1){
 		$toolbar = "mini_flat";
 	}
-	
-	
+
+
 	#日英表記分け
 	my %japanese = (
-		'NOTA Portal' => 'NOTAポータルへ', 
-		'Show HTML Version' => 'HTML版を表示', 
+		'NOTA Portal' => 'NOTAポータルへ',
+		'Show HTML Version' => 'HTML版を表示',
 		'Home' => 'ホーム',
 		'Help' => 'ヘルプ',
 		'FAQ' => '質問集',
@@ -256,15 +256,15 @@ sub show
 		'\'ja\'' => '\'en\''
 	);
 	my $words = join('|',keys( %japanese ));
-	
+
 	my $tabsrc = "tab.swf?ver=$m_version";
 	my $tabvars = "tabcolor=#9EDD6A&sdir=$sdir&editmode=$editmode&page=$page&lang=$lang";
 	my $tabflash = &nota_print_flash("tab",$tabsrc,$tabvars,"noscale","#FFFFFF","","200","52");
-	
-	my $flashsrc = "nota.swf?ver=$m_version";
+
+	my $flashsrc = "nota?ver=$m_version";
 	my $flashvars = "certify=" . $login->get_certify . "&sdir=$sdir&page=$page&lang=$lang&screen=$isscreen&toolbar=$toolbar&anonymous=" . $login->get_anonymous . "&";
 	my $mainflash = &nota_print_flash("mainflash",$flashsrc,$flashvars,"noscale","#F2F2EE","","100%","100%");
-	
+
 	#テンプレートの読み込み
 	my $temppath = $m_themedir  . "/normal.html";
 	if ($isscreen == 1){
@@ -277,7 +277,7 @@ sub show
 		&nota_error_html("テンプレートファイルが開けません。");
 		return;
 	}
-	
+
 	#テンプレートを置換して出力
 	print "Content-type: text/html; charset=utf-8\n\n";
 	foreach (@htmls){

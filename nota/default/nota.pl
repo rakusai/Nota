@@ -7,8 +7,8 @@
 #-----------------------------------------------------------#
 
 use utf8;
-binmode STDIN,  ":bytes"; 
-binmode STDOUT, ":encoding(utf-8)"; 
+binmode STDIN,  ":bytes";
+binmode STDOUT, ":encoding(utf-8)";
 
 use XML::Parser;
 use Encode qw/from_to/;
@@ -22,7 +22,7 @@ use File::stat;
 #-----------------------------------------------------------#
 #--  NOTAバージョン定義 ------------------------------------#
 
-$m_version = "22";
+$m_version = "24";
 
 #-----------------------------------------------------------#
 #--  フォームのPOSTとGETを取得 -----------------------------#
@@ -51,7 +51,7 @@ sub nota_get_form
 sub nota_get_cookie
 {
 	my( $array ) = @_ ;
-	
+
 	my $buffer = $ENV{'HTTP_COOKIE'};
 	my @pairs = split(/; /,$buffer);
 	foreach (@pairs)
@@ -74,7 +74,7 @@ sub nota_get_lang
 		&nota_validate($lang);
 		return $lang;
 	}
-	
+
 	#環境変数から
 	$lang = $ENV{'HTTP_ACCEPT_LANGUAGE'};
 	if ($lang =~ /^ja/){
@@ -94,20 +94,20 @@ sub nota_error_html
 
 	#日英表記分け
 	my %japanese = (
-		'Back' => '前の画面へ戻る', 
-		'Home' => 'トップページへ移動', 
+		'Back' => '前の画面へ戻る',
+		'Home' => 'トップページへ移動',
 		'Manual' => 'ノータの使い方を見る'
 	);
 	my $words = join('|',keys( %japanese ));
-	
-	
+
+
 	#テンプレートの読み込み
 	my $temppath = $m_themedir . "/error.html";
 	if (open(DATA,"<:encoding(utf-8)", "./$temppath")){
 		@htmls = <DATA>;
 		close(DATA);
 	}
-	
+
 	#テンプレートを置換して出力
 	print "Pragma: no-cache\n";
 	print "Cache-Control: no-cache\n";
@@ -135,7 +135,7 @@ sub nota_print_flash
 			 width="$width" height="$height" id="$name" align="">
 			<param name="movie" value="$movie">
 			<param name="FlashVars" value="$flashvars">
-			<param name="quality" value="high"> 
+			<param name="quality" value="high">
 			<param name="scale" value="$scale">
 			<param name="menu" value="false">
 			<param name="wmode" value="$wmode">
@@ -148,7 +148,7 @@ sub nota_print_flash
 			</embed>
 		</object>
 END_FLASH
-	
+
 }
 
 #-----------------------------------------------------------#
@@ -160,7 +160,7 @@ sub nota_get_gmt
 	my @mons = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
 	my @week = ('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 	my $dt= sprintf("%s\, %02d-%s-%04d %02d:%02d:%02d GMT", $week[$wdayg], $mdayg, $mons[$mong], $yearg+1900, $hourg, $ming, $secg);
-	
+
 	return $dt;
 
 }
@@ -188,13 +188,13 @@ sub nota_convert
 	if ($to eq 'shiftjis' && $from eq 'utf8'){
 		$data =~ s/\xEF\xBD\x9E/\xE3\x80\x9C/g; #～記号の変換バグがある(Encodeでも変わらず)
 	}
-	
+
 	from_to( $data, $from, $to );
-	
+
 	if ($to eq 'utf8' && $from eq 'shiftjis'){
 		$data =~ s/\xE3\x80\x9C/\xEF\xBD\x9E/g; #～記号の変換バグがある(Encodeでも変わらず)
 	}
-	
+
 	$_[0] = $data;
 	return $from;
 
@@ -205,17 +205,17 @@ sub nota_convert
 sub nota_xmlescape
 {
 	my $text = $_[0];
-	
+
 	if (!defined($text) || $text eq ""){
 		return;
 	}
-	
+
 	#テキストをエスケープ
 	my %escaped = ('<' => '&lt;', '>' => '&gt;', '&' => '&amp;');
 	$text =~ s/([<>&])/$escaped{$1}/go;
-	
+
 	$_[0] = $text;
-	
+
 }
 
 #-----------------------------------------------------------#
@@ -223,17 +223,17 @@ sub nota_xmlescape
 sub nota_xmlunescape
 {
 	my $text = $_[0];
-	
+
 	if (!defined($text) || $text eq ""){
 		return;
 	}
-	
+
 	#テキストをアンエスケープ
 	my %unescaped = ('lt' => '<', 'gt' => '>', 'amp' => '&');
 	$text =~ s/&(lt|gt|amp);/$unescaped{$1}/gio;
-	
+
 	$_[0] = $text;
-	
+
 }
 
 
@@ -242,20 +242,20 @@ sub nota_xmlunescape
 sub nota_validate
 {
 	my ($text,$option) = @_;
-	
+
 	if (!defined($text) || $text eq ""){
 		return;
 	}
-	
+
 	#optionの値
 	#default  アルファベットと数字、ハイフン、アンダーラインのみ
 	#path  /:などファイ名として使えない記号を取る
 	#url  0-9~!@#$%^&*()-+=a-zA-Z[];',.:"<>?\s以外の文字を削除
 	#xmltag  制御コードとタグに使えない文字<>:;\/\\\r\nを消す、
 	#text  制御コードを消す
-	
+
 	#セキュリティ上、アルファベット以外の文字の混入を防止する
-	
+
 	if ($option eq "path"){
 		#ファイル名であるか（特にスラッシュの混入を防ぐ）
 		$text =~ s/(:|;|\/|\\|\r|\n)//g;
@@ -279,9 +279,9 @@ sub nota_validate
 		#基本アルファベット以外許さない（デフォルト）
 		$text =~ s/[^0-9a-zA-Z_@\-]//g;
 	}
-	
+
 	$_[0] = $text;
-	
+
 }
 
 
